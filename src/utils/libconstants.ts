@@ -31,7 +31,11 @@ const pack = {
     '@types/ws': '^8.5.4',
     typescript: '^4.9.4'
   },
-  dependencies: { 'file-type': '^18.2.0', ws: '^8.12.0' }
+  dependencies: {
+    '@akarui/structures': 'github:akaruidevelopment/structures#v2',
+    'file-type': '^18.2.0',
+    ws: '^8.12.0'
+  }
 } as const;
 
 const userAgent =
