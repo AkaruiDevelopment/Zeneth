@@ -1,4 +1,4 @@
-export class UzumiError {
+export class AoiLunaError {
   static apiError(
     msg: string,
     url: string,
