@@ -15,7 +15,7 @@ const pack = {
     addpkg: 'node packers/addpkgjson.js',
     bundleTsFiles: 'node packers/bundle.js',
     lint: 'eslint . --ext .ts --fix --ext .js',
-    install: 'npm run build'
+    postinstall: 'npm run build'
   },
   repository: {
     type: 'git',
