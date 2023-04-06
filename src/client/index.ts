@@ -1,4 +1,3 @@
-import User from '../classes/User.js';
 import { GatewayEventNames } from '../typings/enums.js';
 import {
   ApplicationRoleConnectionMetadata,
@@ -27,11 +26,8 @@ import {
   createNullObject,
   returnMessagePayload,
 } from '../utils/helpers.js';
-import Message from '../classes/Message.js';
-import Invite from '../classes/Invite.js';
-import Channel from '../classes/Channel.js';
-import Member from '../classes/Member.js';
-import Emoji from "../classes/Emoji.js";
+
+import { Channel, Emoji, Guild, Invite, Member, Message, User } from '../classes/index.js';
 export default class Client {
   #options: ClientOptions;
   ws: Websocket;
@@ -976,5 +972,12 @@ export default class Client {
   {
     const builtApi = this.api().guilds( guildId ).get();
     
+    const req: requestOptions = createNullObject();
+    req.url = builtApi.api;
+    req.route = builtApi.route;
+    req.method = builtApi.method;
+    
+    const res = await request( req, this );
+    return new Guild( res, this );
   }
 }
