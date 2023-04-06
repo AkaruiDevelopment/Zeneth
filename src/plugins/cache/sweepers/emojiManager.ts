@@ -12,9 +12,9 @@ export default function emojiSweeper(
         Date.now() - (x.parsedSnowflake?.date?.getTime() ?? 0) >
         collection.config.sweeper.cacheTimeLimit,
     );
-    for (const m of timedMsgs) collection.delete(<Snowflake>m.id);
+    for (const [key,_] of timedMsgs) collection.delete(<Snowflake>key);
   } else {
     const msgs = collection.filter((x) => !x.__priority);
-    for (const m of msgs) collection.delete(<Snowflake>m.id);
+    for (const [key,_] of msgs) collection.delete(<Snowflake>key);
   }
 }

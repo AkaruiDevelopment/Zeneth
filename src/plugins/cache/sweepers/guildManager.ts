@@ -12,9 +12,9 @@ export default function guildSweeper(
         Date.now() - x.parsedSnowflake?.date.getTime() >
         collection.config.sweeper.cacheTimeLimit,
     );
-    for (const m of timedMsgs) collection.delete(m.id);
+    for (const [key,_] of timedMsgs) collection.delete(key);
   } else {
     const msgs = collection.filter((x) => !x.__priority);
-    for (const m of msgs) collection.delete(m.id);
+    for (const [key,_] of msgs) collection.delete(key);
   }
 }
