@@ -61,6 +61,11 @@ export default class Client {
     return this.#options;
   }
 
+  get user ()
+  {
+    return this.readyData.user;
+  }
+
   on<T extends GatewayEventNames>(event: T, callback: ClientEvents<T>) {
     if (!this.#on[event]) {
       this.#on[event] = [];
