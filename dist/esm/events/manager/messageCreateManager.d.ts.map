@@ -1,1 +1,0 @@
-{"version":3,"file":"messageCreateManager.d.ts","sourceRoot":"","sources":["../../../../src/events/manager/messageCreateManager.ts"],"names":[],"mappings":"AACA,OAAO,MAAM,MAAM,uBAAuB,CAAA;AAE1C,OAAO,EAAE,wBAAwB,EAAE,MAAM,4BAA4B,CAAA;AAErE,MAAM,CAAC,OAAO,UAAU,aAAa,CACnC,IAAI,EAAE,wBAAwB,EAC9B,MAAM,EAAE,MAAM,QAMf"}

@@ -1,1 +1,0 @@
-{"version":3,"file":"guildCreateManager.d.ts","sourceRoot":"","sources":["../../../../src/events/manager/guildCreateManager.ts"],"names":[],"mappings":"AACA,OAAO,MAAM,MAAM,uBAAuB,CAAA;AAE1C,OAAO,EAAE,sBAAsB,EAAE,MAAM,4BAA4B,CAAA;AAEnE,MAAM,CAAC,OAAO,UAAU,WAAW,CACjC,IAAI,EAAE,sBAAsB,EAC5B,MAAM,EAAE,MAAM,QAMf"}
