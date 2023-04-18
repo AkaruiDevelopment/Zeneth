@@ -34,7 +34,9 @@ export default class Websocket {
   #client: Client;
 
   constructor(client: Client) {
-    this.ws = new ws('wss://gateway.discord.gg/?v=10&encoding=json');
+    this.ws = new ws('wss://gateway.discord.gg/?v=10&encoding=json',{
+      handshakeTimeout: 30000,
+    });
     this.#handleEvents();
     this.#client = client;
   }
@@ -147,7 +149,7 @@ export default class Websocket {
     };
     this.ws = new ws(this.#client.readyData.resumeGatewayUrl);
     this.#handleEvents();
-    this.ws.once( 'open', () => this.ws.send(JSON.stringify(data)));
+    this.ws.once( 'open', () => this.ws.readyState !== this.ws.CONNECTING && this.ws.send(JSON.stringify(data)));
 
     createDebug(
       {
