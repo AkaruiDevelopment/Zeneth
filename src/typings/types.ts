@@ -61,3 +61,7 @@ export type SnakifyString<T extends PropertyKey> = T extends string
 export type Snakify<T> = { [ K in keyof T as SnakifyString<K> ]: T[ K ] };
 
 export type SweeperType = "noSweep" | "timedSweep" | "priority";
+
+export type ImageSize = 16 | 32 | 64 | 128 | 256 | 512 | 1024 | 2048 | 4096;
+
+export type ImageFormat = "jpg" | "jpeg" | "png" | "webp" | "gif";

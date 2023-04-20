@@ -16,7 +16,7 @@ import {
   StartThreadPayload,
   requestOptions, ListArchivedThreadsPayload, CreateGuildEmojiPayload, RawChannelMessageOptions,
 } from '../typings/interface.js';
-import { Camelize, ClientEvents, Snowflake } from '../typings/types.js';
+import { Camelize, ClientEvents, ImageFormat, ImageSize, Snowflake } from '../typings/types.js';
 import Websocket from '../websocket/index.js';
 import Api from '../utils/api.js';
 import QueueManager from '../request/queue.js';
@@ -984,5 +984,23 @@ export default class Client {
     
     const res = await request( req, this );
     return new Guild( res, this );
+  }
+
+  // User
+
+  async getUser(userId: Snowflake) {
+    const builtApi = this.api().users(userId).get();
+    const req: requestOptions = createNullObject();
+    req.url = builtApi.api;
+    req.route = builtApi.route;
+    req.method = builtApi.method;
+
+    const res = await request(req, this);
+    return new User(res, this);
+  }
+
+  getUrlFromHash(hash: string,type: 'avatar'|'banner'|'icon'|'splash' , size: ImageSize = 1024, format: ImageFormat = 'webp', dynamic = true) {
+    const url = `https://cdn.discordapp.com/${type}/${hash}.${dynamic ? 'gif' : format}?size=${size}`;
+    return url;
   }
 }
