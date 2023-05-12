@@ -165,6 +165,11 @@ export interface RawUserData {
   flags?: integer;
   premium_type?: PremiumTypes;
   public_flags?: integer;
+  banner_color:string;
+  global_name:string | null;
+  avatar_decoration:string | null;
+  display_name:string | null;
+  
 }
 
 export interface RawApplicationData {

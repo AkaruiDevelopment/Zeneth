@@ -20,6 +20,11 @@ export default class User {
   flags?: integer;
   premiumType?: integer;
   publicFlags?: integer;
+  bannerColor?: string;
+  globalName?: string ;
+  displayName?: string ;
+  avatarDecoration?: bigint ;
+
   #client: Client;
   constructor(data: RawUserData, client: Client) {
     this.#client = client;
@@ -38,12 +43,16 @@ export default class User {
     this.publicFlags = data.public_flags;
     this.system = data.system ?? false;
     this.verified = data.verified ?? false;
+    this.bannerColor = data.banner_color ?? undefined;
+    this.globalName = data.global_name ?? undefined;
+    this.displayName = data.display_name ?? undefined;
+    this.avatarDecoration = data.avatar_decoration ? ConvertHexToBigInt(data.avatar_decoration.split("_").slice(1).join("_")) : undefined;
     this.#clean();
   }
 
   #clean() {
     for (const key in this) {
-      if (this[key] === undefined) delete this[key];
+      if (this[key] === undefined || this[key] === null) delete this[key];
     }
   }
 

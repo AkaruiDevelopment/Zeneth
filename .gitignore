@@ -1,6 +1,5 @@
 node_modules
 /index.js
-/dist
 /debug.log
 .idea
 .vscode
