@@ -3,21 +3,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseSnowflake = exports.convertFileToBase64 = exports.convertUrlOrFileToBase64 = exports.convertUrlToBase64 = exports.createDebug = exports.returnMessagePayload = exports.getFileData = exports.isUrl = exports.Stringify = exports.createNullObject = exports.convertToSnakeCase = exports.convertToCamelCase = exports.parseDataToAoiLunaStandards = exports.ConvertBigIntToHex = exports.ConvertHexToBigInt = void 0;
+exports.isFilePath = exports.parseSnowflake = exports.convertFileToBase64 = exports.convertUrlOrFileToBase64 = exports.convertUrlToBase64 = exports.createDebug = exports.returnMessagePayload = exports.getFileData = exports.isUrl = exports.Stringify = exports.createNullObject = exports.convertToSnakeCase = exports.convertToCamelCase = exports.parseDataToAoiLunaStandards = exports.ConvertBigIntToHex = exports.ConvertHexToBigInt = void 0;
 const fs_1 = require("fs");
 const promises_1 = require("fs/promises");
 const debugManager_js_1 = __importDefault(require("../events/manager/debugManager.js"));
 const enums_js_1 = require("../typings/enums.js");
 function ConvertHexToBigInt(hash) {
-    if (hash.startsWith('a_')) {
-        return -BigInt('0x' + hash.slice(2));
+    if (hash.startsWith("a_")) {
+        return -BigInt("0x" + hash.slice(2));
     }
-    return BigInt('0x' + hash);
+    return BigInt("0x" + hash);
 }
 exports.ConvertHexToBigInt = ConvertHexToBigInt;
 function ConvertBigIntToHex(hash) {
     if (hash < 0n) {
-        return 'a_' + (-hash).toString(16);
+        return "a_" + (-hash).toString(16);
     }
     return hash.toString(16);
 }
@@ -27,9 +27,17 @@ function parseDataToAoiLunaStandards(data) {
         return null;
     if (data === undefined)
         return undefined;
-    if (!isNaN(Number(data)) && typeof data === 'string')
+    if (!isNaN(Number(data)) && typeof data === "string")
         return BigInt(data);
-    if (typeof data === 'object' && data) {
+    if (typeof data === "string") {
+        try {
+            return new Date(data);
+        }
+        catch {
+            return data;
+        }
+    }
+    if (typeof data === "object" && data) {
         if (data instanceof Array) {
             return data.map((item) => parseDataToAoiLunaStandards(item));
         }
@@ -42,7 +50,7 @@ function parseDataToAoiLunaStandards(data) {
 }
 exports.parseDataToAoiLunaStandards = parseDataToAoiLunaStandards;
 function convertToCamelCase(obj) {
-    if (typeof obj !== 'object')
+    if (typeof obj !== "object")
         return parseDataToAoiLunaStandards(obj);
     if (!obj)
         return obj;
@@ -63,7 +71,7 @@ function convertToCamelCase(obj) {
 }
 exports.convertToCamelCase = convertToCamelCase;
 function convertToSnakeCase(obj) {
-    if (typeof obj !== 'object')
+    if (typeof obj !== "object")
         return obj;
     if (!obj)
         return obj;
@@ -89,8 +97,11 @@ function createNullObject() {
 exports.createNullObject = createNullObject;
 function Stringify(obj) {
     return JSON.stringify(obj, (key, value) => {
-        if (typeof value === 'bigint') {
+        if (typeof value === "bigint") {
             return value.toString();
+        }
+        if (value instanceof Date) {
+            return value.toISOString();
         }
         return value;
     });
@@ -107,27 +118,35 @@ function isUrl(url) {
 }
 exports.isUrl = isUrl;
 //@ts-ignore
-const fileType = async (file) => await import('file-type').then(x => x.fileTypeFromBuffer(file));
+const fileType = async (file) => 
+// @ts-ignore
+await import("file-type").then((x) => x.fileTypeFromBuffer(file));
 async function getFileData(file) {
-    if (typeof file === 'string') {
+    if (typeof file === "string") {
         if (isUrl(file)) {
             const res = await fetch(file);
-            return new Blob([await res.arrayBuffer()], { type: res.headers.get('content-type') });
+            return new Blob([await res.arrayBuffer()], {
+                type: res.headers.get("content-type"),
+            });
         }
-        else if ((0, fs_1.statSync)(file).isFile()) {
+        else if (isFilePath(file)) {
             const res = await (0, promises_1.readFile)(file);
-            return new Blob([res], { type: (await fileType(res))?.mime ?? 'application/octet-stream' });
+            return new Blob([res], {
+                type: (await fileType(res))?.mime ?? "application/octet-stream",
+            });
         }
         else {
-            return new Blob([file], { type: 'text/plain' });
+            return new Blob([file], { type: "text/plain" });
         }
     }
-    return new Blob([file], { type: (await fileType(file))?.mime ?? 'application/octet-stream' });
+    return new Blob([file], {
+        type: (await fileType(file))?.mime ?? "application/octet-stream",
+    });
 }
 exports.getFileData = getFileData;
 async function returnMessagePayload(payload) {
     const object = createNullObject();
-    object.content = payload.content ?? ' ';
+    object.content = payload.content ?? " ";
     object.embeds = payload.embeds;
     object.allowedMentions = payload.allowedMentions;
     object.components = payload.components;
@@ -139,7 +158,7 @@ async function returnMessagePayload(payload) {
     object.attachments = payload.attachments?.map((a, i) => {
         return {
             id: i.toString(),
-            filename: a.spoiler ? 'SPOILER_' + a.name : a.name,
+            filename: a.spoiler ? "SPOILER_" + a.name : a.name,
             description: a.description,
         };
     });
@@ -172,10 +191,10 @@ function createDebug(data, client) {
 exports.createDebug = createDebug;
 async function convertUrlToBase64(url) {
     const resData = await fetch(url);
-    const imageType = resData.headers.get('content-type');
+    const imageType = resData.headers.get("content-type");
     const buffer = await resData.arrayBuffer();
     const base64Flag = `data:${imageType};base64,`;
-    const imageStr = Buffer.from(buffer).toString('base64');
+    const imageStr = Buffer.from(buffer).toString("base64");
     return base64Flag + imageStr;
 }
 exports.convertUrlToBase64 = convertUrlToBase64;
@@ -190,12 +209,12 @@ async function convertFileToBase64(file) {
     const bitmap = await (0, promises_1.readFile)(file);
     const fileImageType = await fileType(bitmap);
     const base64Flag = `data:${fileImageType?.mime};base64,`;
-    const imageStr = Buffer.from(bitmap).toString('base64');
+    const imageStr = Buffer.from(bitmap).toString("base64");
     return base64Flag + imageStr;
 }
 exports.convertFileToBase64 = convertFileToBase64;
 function parseSnowflake(snowflake) {
-    const binary = snowflake.toString(2).padStart(64, '0');
+    const binary = snowflake.toString(2).padStart(64, "0");
     const timestamp = Number((snowflake >> 22n) + 1420070400000n);
     const workerId = (snowflake & 0x3e0000n) >> 17n;
     const processId = (snowflake & 0x1f000n) >> 12n;
@@ -211,4 +230,13 @@ function parseSnowflake(snowflake) {
     };
 }
 exports.parseSnowflake = parseSnowflake;
+function isFilePath(path) {
+    try {
+        return (0, fs_1.statSync)(path).isFile();
+    }
+    catch {
+        return false;
+    }
+}
+exports.isFilePath = isFilePath;
 //# sourceMappingURL=helpers.js.map

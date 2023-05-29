@@ -75,7 +75,7 @@ class Client {
     }
     // AuditLogs
     async getGuildAuditLogs(guildId) {
-        const builtApi = this.api().guilds(guildId)['audit-logs']().get();
+        const builtApi = this.api().guilds(guildId)["audit-logs"]().get();
         const data = (0, helpers_js_1.createNullObject)();
         data.url = builtApi.api;
         data.route = builtApi.route;
@@ -86,7 +86,7 @@ class Client {
     // AutoModeration
     async listAutoModerationRules(guildId) {
         const builtApi = this.api()
-            .guilds(guildId)['auto-moderation']()
+            .guilds(guildId)["auto-moderation"]()
             .rules()
             .get();
         const data = (0, helpers_js_1.createNullObject)();
@@ -98,7 +98,7 @@ class Client {
     }
     async getAutoModerationRule(guildId, ruleId) {
         const builtApi = this.api()
-            .guilds(guildId)['auto-moderation']()
+            .guilds(guildId)["auto-moderation"]()
             .rules(ruleId)
             .get();
         const data = (0, helpers_js_1.createNullObject)();
@@ -110,7 +110,7 @@ class Client {
     }
     async createAutoModerationRule(guildId, data, reason) {
         const builtApi = this.api()
-            .guilds(guildId)['auto-moderation']()
+            .guilds(guildId)["auto-moderation"]()
             .rules()
             .post();
         const req = (0, helpers_js_1.createNullObject)();
@@ -124,7 +124,7 @@ class Client {
     }
     async updateAutoModerationRule(guildId, ruleId, data, reason) {
         const builtApi = this.api()
-            .guilds(guildId)['auto-moderation']()
+            .guilds(guildId)["auto-moderation"]()
             .rules(ruleId)
             .patch();
         const req = (0, helpers_js_1.createNullObject)();
@@ -138,7 +138,7 @@ class Client {
     }
     async deleteAutoModerationRule(guildId, ruleId, reason) {
         const builtApi = this.api()
-            .guilds(guildId)['auto-moderation']()
+            .guilds(guildId)["auto-moderation"]()
             .rules(ruleId)
             .delete();
         const req = (0, helpers_js_1.createNullObject)();
@@ -191,7 +191,10 @@ class Client {
         return res.map((message) => new index_js_3.Message(message, this));
     }
     async getChannelMessage(channelId, messageId) {
-        const builtApi = this.api().channels(channelId).messages(messageId).get();
+        const builtApi = this.api()
+            .channels(channelId)
+            .messages(messageId)
+            .get();
         const data = (0, helpers_js_1.createNullObject)();
         data.url = builtApi.api;
         data.route = builtApi.route;
@@ -211,7 +214,7 @@ class Client {
         let res;
         if (payload instanceof FormData)
             res = await (0, index_js_2.default)(req, this, {
-                'Content-Type': undefined,
+                "Content-Type": undefined,
             });
         else
             res = await (0, index_js_2.default)(req, this);
@@ -244,11 +247,11 @@ class Client {
         const res = await (0, index_js_2.default)(req, this);
         return (0, helpers_js_1.convertToCamelCase)(res);
     }
-    async createReaction({ channelId, messageId, emoji, }) {
+    async createReaction(channelId, messageId, emoji) {
         const builtApi = this.api()
             .channels(channelId)
             .messages(messageId)
-            .reactions(encodeURIComponent(emoji))['@me']()
+            .reactions(encodeURIComponent(emoji))["@me"]()
             .put();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
@@ -257,7 +260,7 @@ class Client {
         const res = await (0, index_js_2.default)(req, this);
         return (0, helpers_js_1.convertToCamelCase)(res);
     }
-    async deleteOwnReaction({ channelId, messageId, emoji, }) {
+    async deleteOwnReaction(channelId, messageId, emoji) {
         const builtApi = this.api()
             .channels(channelId)
             .messages(messageId)
@@ -271,7 +274,7 @@ class Client {
         const res = await (0, index_js_2.default)(req, this);
         return (0, helpers_js_1.convertToCamelCase)(res);
     }
-    async deleteReaction({ channelId, messageId, emoji, userId, }) {
+    async deleteReaction(channelId, messageId, userId, emoji) {
         const builtApi = this.api()
             .channels(channelId)
             .messages(messageId)
@@ -285,7 +288,7 @@ class Client {
         const res = await (0, index_js_2.default)(req, this);
         return (0, helpers_js_1.convertToCamelCase)(res);
     }
-    async getReactions({ channelId, messageId, emoji, options, }) {
+    async getReactions(channelId, messageId, emoji, options) {
         const builtApi = this.api()
             .channels(channelId)
             .messages(messageId)
@@ -312,7 +315,7 @@ class Client {
         const res = await (0, index_js_2.default)(req, this);
         return (0, helpers_js_1.convertToCamelCase)(res);
     }
-    async deleteAllReactionsForEmoji({ channelId, messageId, emoji, }) {
+    async deleteAllReactionsForEmoji(channelId, messageId, emoji) {
         const builtApi = this.api()
             .channels(channelId)
             .messages(messageId)
@@ -326,7 +329,10 @@ class Client {
         return (0, helpers_js_1.convertToCamelCase)(res);
     }
     async editMessage(channelId, messageId, data) {
-        const builtApi = this.api().channels(channelId).messages(messageId).patch();
+        const builtApi = this.api()
+            .channels(channelId)
+            .messages(messageId)
+            .patch();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -337,7 +343,7 @@ class Client {
         let res;
         if (payload instanceof FormData)
             res = await (0, index_js_2.default)(req, this, {
-                'Content-Type': undefined,
+                "Content-Type": undefined,
             });
         else
             res = await (0, index_js_2.default)(req, this);
@@ -442,7 +448,10 @@ class Client {
         return (0, helpers_js_1.convertToCamelCase)(res);
     }
     async unpinMessage(channelId, messageId, reason) {
-        const builtApi = this.api().channels(channelId).pins(messageId).delete();
+        const builtApi = this.api()
+            .channels(channelId)
+            .pins(messageId)
+            .delete();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -452,7 +461,10 @@ class Client {
         return (0, helpers_js_1.convertToCamelCase)(res);
     }
     async groupDMAddRecipient(channelId, userId, data) {
-        const builtApi = this.api().channels(channelId).recipients(userId).put();
+        const builtApi = this.api()
+            .channels(channelId)
+            .recipients(userId)
+            .put();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -462,7 +474,10 @@ class Client {
         return (0, helpers_js_1.convertToCamelCase)(res);
     }
     async groupDMRemoveRecipient(channelId, userId) {
-        const builtApi = this.api().channels(channelId).recipients(userId).delete();
+        const builtApi = this.api()
+            .channels(channelId)
+            .recipients(userId)
+            .delete();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -509,7 +524,7 @@ class Client {
     }
     async joinThread(channelId) {
         const builtApi = this.api()
-            .channels(channelId)['thread-members']('@me')
+            .channels(channelId)["thread-members"]("@me")
             .put();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
@@ -520,7 +535,7 @@ class Client {
     }
     async addThreadMember(channelId, userId) {
         const builtApi = this.api()
-            .channels(channelId)['thread-members'](userId)
+            .channels(channelId)["thread-members"](userId)
             .put();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
@@ -531,7 +546,7 @@ class Client {
     }
     async leaveThread(channelId) {
         const builtApi = this.api()
-            .channels(channelId)['thread-members']('@me')
+            .channels(channelId)["thread-members"]("@me")
             .delete();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
@@ -542,7 +557,7 @@ class Client {
     }
     async removeThreadMember(channelId, userId) {
         const builtApi = this.api()
-            .channels(channelId)['thread-members'](userId)
+            .channels(channelId)["thread-members"](userId)
             .delete();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
@@ -553,7 +568,7 @@ class Client {
     }
     async getThreadMember(channelId, userId, withMember = true) {
         const builtApi = this.api()
-            .channels(channelId)['thread-members'](userId)
+            .channels(channelId)["thread-members"](userId)
             .get();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
@@ -570,7 +585,9 @@ class Client {
         };
     }
     async listThreadMembers(channelId, includeGuildMember) {
-        const builtApi = this.api().channels(channelId)['thread-members']().get();
+        const builtApi = this.api()
+            .channels(channelId)["thread-members"]()
+            .get();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -587,7 +604,11 @@ class Client {
         }));
     }
     async listPublicArchivedThreads(channelId, data) {
-        const builtApi = this.api().channels(channelId).threads().archived('public').get();
+        const builtApi = this.api()
+            .channels(channelId)
+            .threads()
+            .archived("public")
+            .get();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -600,16 +621,24 @@ class Client {
                 return {
                     id: member.id ? BigInt(member.id) : undefined,
                     userId: member.user_id ? BigInt(member.user_id) : undefined,
-                    joinTimestamp: member.join_timestamp ? new Date(member.join_timestamp) : undefined,
+                    joinTimestamp: member.join_timestamp
+                        ? new Date(member.join_timestamp)
+                        : undefined,
                     flags: member.flags,
-                    member: member.member ? new index_js_3.Member(member.member, this) : undefined,
+                    member: member.member
+                        ? new index_js_3.Member(member.member, this)
+                        : undefined,
                 };
             }),
             hasMore: res.has_more,
         };
     }
     async listPrivateArchivedThreads(channelId, data) {
-        const builtApi = this.api().channels(channelId).threads().archived('private').get();
+        const builtApi = this.api()
+            .channels(channelId)
+            .threads()
+            .archived("private")
+            .get();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -622,16 +651,25 @@ class Client {
                 return {
                     id: member.id ? BigInt(member.id) : undefined,
                     userId: member.user_id ? BigInt(member.user_id) : undefined,
-                    joinTimestamp: member.join_timestamp ? new Date(member.join_timestamp) : undefined,
+                    joinTimestamp: member.join_timestamp
+                        ? new Date(member.join_timestamp)
+                        : undefined,
                     flags: member.flags,
-                    member: member.member ? new index_js_3.Member(member.member, this) : undefined,
+                    member: member.member
+                        ? new index_js_3.Member(member.member, this)
+                        : undefined,
                 };
             }),
             hasMore: res.has_more,
         };
     }
     async listJoinedPrivateArchivedThreads(channelId, data) {
-        const builtApi = this.api().channels(channelId).users('@me').threads().archived('private').get();
+        const builtApi = this.api()
+            .channels(channelId)
+            .users("@me")
+            .threads()
+            .archived("private")
+            .get();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -644,9 +682,13 @@ class Client {
                 return {
                     id: member.id ? BigInt(member.id) : undefined,
                     userId: member.user_id ? BigInt(member.user_id) : undefined,
-                    joinTimestamp: member.join_timestamp ? new Date(member.join_timestamp) : undefined,
+                    joinTimestamp: member.join_timestamp
+                        ? new Date(member.join_timestamp)
+                        : undefined,
                     flags: member.flags,
-                    member: member.member ? new index_js_3.Member(member.member, this) : undefined,
+                    member: member.member
+                        ? new index_js_3.Member(member.member, this)
+                        : undefined,
                 };
             }),
             hasMore: res.has_more,
@@ -701,9 +743,51 @@ class Client {
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
-        return await (0, index_js_2.default)(req, this).catch((e) => false).then(e => true);
+        return await (0, index_js_2.default)(req, this)
+            .catch((e) => false)
+            .then((e) => true);
     }
     // Guild
+    async createGuild(data) {
+        const builtApi = this.api().guilds().post();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await (0, index_js_2.default)(req, this);
+        return new index_js_3.Guild(res, this);
+    }
+    async getGuildPreview(guildId) {
+        const builtApi = this.api().guilds(guildId).preview().get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        const res = await (0, index_js_2.default)(req, this);
+        return (0, helpers_js_1.parseDataToAoiLunaStandards)((0, helpers_js_1.convertToCamelCase)(res));
+    }
+    async modifyGuild(guildId, data, reason) {
+        const builtApi = this.api().guilds(guildId).patch();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        req.auditLogReason = reason;
+        const res = await (0, index_js_2.default)(req, this);
+        return new index_js_3.Guild(res, this);
+    }
+    async deleteGuild(guildId) {
+        const builtApi = this.api().guilds(guildId).delete();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        return await (0, index_js_2.default)(req, this)
+            .catch((e) => false)
+            .then((e) => true);
+    }
     async getGuild(guildId) {
         const builtApi = this.api().guilds(guildId).get();
         const req = (0, helpers_js_1.createNullObject)();
@@ -712,6 +796,422 @@ class Client {
         req.method = builtApi.method;
         const res = await (0, index_js_2.default)(req, this);
         return new index_js_3.Guild(res, this);
+    }
+    async getGuildChannels(guildId) {
+        const builtApi = this.api().guilds(guildId).channels().get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        const res = await (0, index_js_2.default)(req, this);
+        return res.map((channel) => new index_js_3.Channel(channel, this));
+    }
+    async createGuildChannel(guildId, data) {
+        const builtApi = this.api().guilds(guildId).channels().post();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await (0, index_js_2.default)(req, this);
+        return new index_js_3.Channel(res, this);
+    }
+    async modifyGuildChannelPositions(guildId, data) {
+        const builtApi = this.api().guilds(guildId).channels().patch();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await (0, index_js_2.default)(req, this);
+    }
+    async listActiveGuildThreads(guildId) {
+        const builtApi = this.api().guilds(guildId).threads().active().get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        const res = await (0, index_js_2.default)(req, this);
+        res.threads = res.threads.map((thread) => new index_js_3.Channel(thread, this));
+        res.members = res.members.map((threadMember) => {
+            return {
+                id: threadMember.id ? BigInt(threadMember.id) : undefined,
+                userId: threadMember.user_id
+                    ? BigInt(threadMember.user_id)
+                    : undefined,
+                joinTimestamp: threadMember.join_timestamp
+                    ? new Date(threadMember.join_timestamp)
+                    : undefined,
+                flags: threadMember.flags,
+                member: threadMember.member
+                    ? new index_js_3.Member(threadMember.member, this)
+                    : undefined,
+            };
+        });
+        return res;
+    }
+    async getGuildMember(guildId, userId) {
+        const builtApi = this.api().guilds(guildId).members(userId).get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        const res = await (0, index_js_2.default)(req, this);
+        return new index_js_3.Member(res, this);
+    }
+    async listGuildMembers(guildId, data) {
+        const builtApi = this.api().guilds(guildId).members().get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await (0, index_js_2.default)(req, this);
+        return res.map((member) => new index_js_3.Member(member, this));
+    }
+    async searchGuildMembers(guildId, data) {
+        const builtApi = this.api().guilds(guildId).members().search().get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await (0, index_js_2.default)(req, this);
+        return res.map((member) => new index_js_3.Member(member, this));
+    }
+    async addGuildMember(guildId, userId, data) {
+        const builtApi = this.api().guilds(guildId).members(userId).put();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await (0, index_js_2.default)(req, this);
+        return res ? new index_js_3.Member(res, this) : null;
+    }
+    async modifyGuildMember(guildId, userId, data) {
+        const builtApi = this.api().guilds(guildId).members(userId).patch();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await (0, index_js_2.default)(req, this);
+        return res ? new index_js_3.Member(res, this) : null;
+    }
+    async modifyCurrentUserNick(guildId, nick, reason) {
+        const builtApi = this.api().guilds(guildId).members("@me").patch();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = { nick };
+        req.auditLogReason = reason;
+        const res = await (0, index_js_2.default)(req, this);
+        return res ? new index_js_3.Member(res, this) : null;
+    }
+    async addGuildMemberRole(guildId, userId, roleId, reason) {
+        const builtApi = this.api()
+            .guilds(guildId)
+            .members(userId)
+            .roles(roleId)
+            .put();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.auditLogReason = reason;
+        const res = await (0, index_js_2.default)(req, this);
+        return res ? new index_js_3.Member(res, this) : null;
+    }
+    async removeGuildMemberRole(guildId, userId, roleId, reason) {
+        const builtApi = this.api()
+            .guilds(guildId)
+            .members(userId)
+            .roles(roleId)
+            .delete();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.auditLogReason = reason;
+        const res = await (0, index_js_2.default)(req, this);
+        return res ? new index_js_3.Member(res, this) : null;
+    }
+    async removeGuildMember(guildId, userId, reason) {
+        const builtApi = this.api().guilds(guildId).members(userId).delete();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.auditLogReason = reason;
+        return await (0, index_js_2.default)(req, this)
+            .catch((e) => false)
+            .then((e) => true);
+    }
+    async getGuildBans(guildId) {
+        const builtApi = this.api().guilds(guildId).bans().get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        const res = await (0, index_js_2.default)(req, this);
+        return res.map((ban) => {
+            return {
+                reason: ban.reason,
+                user: new index_js_3.User(ban.user, this),
+            };
+        });
+    }
+    async getGuildBan(guildId, userId) {
+        const builtApi = this.api().guilds(guildId).bans(userId).get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        const res = await (0, index_js_2.default)(req, this)
+            .then((e) => {
+            return {
+                reason: e.reason,
+                user: new index_js_3.User(e.user, this),
+            };
+        })
+            .catch((e) => null);
+        return res;
+    }
+    async createGuildBan(guildId, userId, data, reason) {
+        const builtApi = this.api().guilds(guildId).bans(userId).put();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.auditLogReason = reason;
+        req.params = data;
+        return await (0, index_js_2.default)(req, this)
+            .catch((e) => false)
+            .then((e) => true);
+    }
+    async removeGuildBan(guildId, userId, reason) {
+        const builtApi = this.api().guilds(guildId).bans(userId).delete();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.auditLogReason = reason;
+        return await (0, index_js_2.default)(req, this)
+            .catch((e) => false)
+            .then((e) => true);
+    }
+    async getGuildRoles(guildId) {
+        const builtApi = this.api().guilds(guildId).roles().get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        const res = await (0, index_js_2.default)(req, this);
+        return res.map((role) => new index_js_3.Role(role, this));
+    }
+    async createGuildRole(guildId, data) {
+        const builtApi = this.api().guilds(guildId).roles().post();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        if (data)
+            req.params = data;
+        const res = await (0, index_js_2.default)(req, this);
+        return new index_js_3.Role(res, this);
+    }
+    async modifyGuildRolePositions(guildId, roleId, position, reason) {
+        const builtApi = this.api().guilds(guildId).roles().patch();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = { id: roleId, position };
+        req.auditLogReason = reason;
+        const res = await (0, index_js_2.default)(req, this);
+        return new index_js_3.Role(res, this);
+    }
+    async modifyGuildRole(guildId, roleId, data, reason) {
+        const builtApi = this.api().guilds(guildId).roles(roleId).patch();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        if (data)
+            req.params = data;
+        req.auditLogReason = reason;
+        const res = await (0, index_js_2.default)(req, this);
+        return new index_js_3.Role(res, this);
+    }
+    async deleteGuildRole(guildId, roleId, reason) {
+        const builtApi = this.api().guilds(guildId).roles(roleId).delete();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.auditLogReason = reason;
+        req.method = builtApi.method;
+        return await (0, index_js_2.default)(req, this)
+            .catch((e) => false)
+            .then((e) => true);
+    }
+    async modifyGuildMFALevel(guildId, level, reason) {
+        const builtApi = this.api().guilds(guildId).mfa().patch();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.auditLogReason = reason;
+        req.method = builtApi.method;
+        req.params = { level };
+        const res = await (0, index_js_2.default)(req, this);
+        return new index_js_3.Guild(res, this);
+    }
+    async getGuildPruneCount(guildId, data) {
+        const builtApi = this.api().guilds(guildId).prune().get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        if (data)
+            req.params = data;
+        const res = await (0, index_js_2.default)(req, this);
+        return res.pruned;
+    }
+    async beginGuildPrune(guildId, data, reason) {
+        const builtApi = this.api().guilds(guildId).prune().post();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.auditLogReason = reason;
+        req.method = builtApi.method;
+        if (data)
+            req.params = data;
+        const res = await (0, index_js_2.default)(req, this);
+        return res.pruned;
+    }
+    async getGuildVoiceRegions(guildId) {
+        const builtApi = this.api().guilds(guildId).regions().get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        return await (0, index_js_2.default)(req, this);
+    }
+    async getGuildInvites(guildId) {
+        const builtApi = this.api().guilds(guildId).invites().get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        const res = await (0, index_js_2.default)(req, this);
+        return res.map((invite) => new index_js_3.Invite(invite, this));
+    }
+    async getGuildIntegrations(guildId) {
+        const builtApi = this.api().guilds(guildId).integrations().get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        return (0, helpers_js_1.convertToCamelCase)(await (0, index_js_2.default)(req, this));
+    }
+    async deleteGuildIntegration(guildId, integrationId, reason) {
+        const builtApi = this.api().guilds(guildId).integrations(integrationId).delete();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.auditLogReason = reason;
+        req.method = builtApi.method;
+        return await (0, index_js_2.default)(req, this)
+            .catch((e) => false)
+            .then((e) => true);
+    }
+    async getGuildWidgetSettings(guildId) {
+        const builtApi = this.api().guilds(guildId).widget().get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        return (0, helpers_js_1.convertToCamelCase)(await (0, index_js_2.default)(req, this));
+    }
+    async modifyGuildWidget(guildId, data, reason) {
+        const builtApi = this.api().guilds(guildId).widget().patch();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.auditLogReason = reason;
+        req.method = builtApi.method;
+        req.params = data;
+        return (0, helpers_js_1.convertToCamelCase)(await (0, index_js_2.default)(req, this));
+    }
+    async getGuildWidget(guildId) {
+        const builtApi = this.api().guilds(guildId)["widget.json"]().get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        return await (0, index_js_2.default)(req, this);
+    }
+    async getGuildVanityUrl(guildId) {
+        const builtApi = this.api().guilds(guildId)["vanity-url"]().get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        return await (0, index_js_2.default)(req, this);
+    }
+    async getGuildWidgetImage(guildId, style) {
+        const builtApi = this.api().guilds(guildId)["widget.png"]().get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.params = { style };
+        req.method = builtApi.method;
+        return await (0, index_js_2.default)(req, this);
+    }
+    async getGuildWelcomeScreen(guildId) {
+        const builtApi = this.api().guilds(guildId)["welcome-screen"]().get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        return (0, helpers_js_1.parseDataToAoiLunaStandards)((0, helpers_js_1.convertToCamelCase)(await (0, index_js_2.default)(req, this)));
+    }
+    async modifyGuildWelcomeScreen(guildId, data, reason) {
+        const builtApi = this.api().guilds(guildId)["welcome-screen"]().patch();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.auditLogReason = reason;
+        req.method = builtApi.method;
+        req.params = data;
+        return (0, helpers_js_1.parseDataToAoiLunaStandards)((0, helpers_js_1.convertToCamelCase)(await (0, index_js_2.default)(req, this)));
+    }
+    async getGuildOnBoarding(guildId) {
+        const builtApi = this.api().guilds(guildId)["onboarding-application"]().get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        return (0, helpers_js_1.parseDataToAoiLunaStandards)((0, helpers_js_1.convertToCamelCase)(await (0, index_js_2.default)(req, this)));
+    }
+    async modifyCurrentUserVoiceState(guildId, data) {
+        const builtApi = this.api().guilds(guildId)["voice-states"]("@me").patch();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        return (0, helpers_js_1.parseDataToAoiLunaStandards)((0, helpers_js_1.convertToCamelCase)(await (0, index_js_2.default)(req, this)));
+    }
+    async modifyUserVoiceState(guildId, userId, data) {
+        const builtApi = this.api().guilds(guildId)["voice-states"](userId).patch();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        return (0, helpers_js_1.parseDataToAoiLunaStandards)((0, helpers_js_1.convertToCamelCase)(await (0, index_js_2.default)(req, this)));
     }
     // User
     async getUser(userId) {
@@ -723,8 +1223,8 @@ class Client {
         const res = await (0, index_js_2.default)(req, this);
         return new index_js_3.User(res, this);
     }
-    getUrlFromHash(hash, type, size = 1024, format = 'webp', dynamic = true) {
-        const url = `https://cdn.discordapp.com/${type}/${hash}.${dynamic ? 'gif' : format}?size=${size}`;
+    getUrlFromHash(hash, type, size = 1024, format = "webp", dynamic = true) {
+        const url = `https://cdn.discordapp.com/${type}/${hash}.${dynamic ? "gif" : format}?size=${size}`;
         return url;
     }
 }

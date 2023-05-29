@@ -51,12 +51,20 @@ class Channel {
         this.defaultThreadRateLimitPerUser =
             data.default_thread_rate_limit_per_user;
         this.flags = data.flags;
-        this.guildId = data.guild_id ? BigInt(data.guild_id) : guildId ? BigInt(guildId) : undefined;
+        this.guildId = data.guild_id
+            ? BigInt(data.guild_id)
+            : guildId
+                ? BigInt(guildId)
+                : undefined;
         this.icon = data.icon ? (0, helpers_js_1.ConvertHexToBigInt)(data.icon) : undefined;
         this.id = BigInt(data.id);
-        this.lastMessageId = data.last_message_id ? BigInt(data.last_message_id) : undefined;
+        this.lastMessageId = data.last_message_id
+            ? BigInt(data.last_message_id)
+            : undefined;
         this.lastPinTimestamp = data.last_pin_timestamp;
-        this.member = data.member ? (0, helpers_js_1.convertToCamelCase)(data.member) : undefined;
+        this.member = data.member
+            ? (0, helpers_js_1.convertToCamelCase)(data.member)
+            : undefined;
         this.memberCount = data.member_count;
         this.messageCount = data.message_count;
         this.name = data.name;
@@ -95,14 +103,16 @@ class Channel {
     }
     iconUrl(options = {
         size: 4096,
-        format: 'png',
+        format: "png",
         dynamic: true,
     }) {
         if (!this.icon)
             return null;
         const { size, format, dynamic } = options;
         const hash = (0, helpers_js_1.ConvertBigIntToHex)(this.icon);
-        const ext = dynamic && format === 'png' && hash.startsWith('a_') ? 'gif' : format;
+        const ext = dynamic && format === "png" && hash.startsWith("a_")
+            ? "gif"
+            : format;
         return `https://cdn.discordapp.com/avatars/${this.id}/${hash}.${ext}?size=${size}`;
     }
     createMessage(message) {
@@ -136,44 +146,22 @@ class Channel {
         return this.#client.editMessage(this.id, messageId, data);
     }
     createReaction(messageId, emoji) {
-        return this.#client.createReaction({
-            channelId: this.id,
-            messageId,
-            emoji,
-        });
+        return this.#client.createReaction(this.id, messageId, emoji);
     }
     deleteOwnReaction(messageId, emoji) {
-        return this.#client.deleteOwnReaction({
-            channelId: this.id,
-            messageId,
-            emoji,
-        });
+        return this.#client.deleteOwnReaction(this.id, messageId, emoji);
     }
     deleteReaction(messageId, userId, emoji) {
-        return this.#client.deleteReaction({
-            channelId: this.id,
-            messageId,
-            emoji,
-            userId,
-        });
+        return this.#client.deleteReaction(this.id, messageId, userId, emoji);
     }
     getReactions(messageId, emoji, options) {
-        return this.#client.getReactions({
-            channelId: this.id,
-            messageId,
-            emoji,
-            options,
-        });
+        return this.#client.getReactions(this.id, messageId, emoji, options);
     }
     deleteAllReactions(messageId) {
         return this.#client.deleteAllReactions(this.id, messageId);
     }
     deleteAllReactionsForEmoji(messageId, emoji) {
-        return this.#client.deleteAllReactionsForEmoji({
-            channelId: this.id,
-            messageId,
-            emoji,
-        });
+        return this.#client.deleteAllReactionsForEmoji(this.id, messageId, emoji);
     }
     editPermissions(overwriteId, data, reason) {
         return this.#client.editChannelPermissions(this.id, overwriteId, data, reason);

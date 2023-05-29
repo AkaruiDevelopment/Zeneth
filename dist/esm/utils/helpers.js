@@ -1,16 +1,16 @@
-import { statSync } from 'fs';
-import { readFile } from 'fs/promises';
-import DebugManager from '../events/manager/debugManager.js';
-import { GatewayEventNames, GatewayOpCodes } from '../typings/enums.js';
+import { statSync } from "fs";
+import { readFile } from "fs/promises";
+import DebugManager from "../events/manager/debugManager.js";
+import { GatewayEventNames, GatewayOpCodes } from "../typings/enums.js";
 export function ConvertHexToBigInt(hash) {
-    if (hash.startsWith('a_')) {
-        return -BigInt('0x' + hash.slice(2));
+    if (hash.startsWith("a_")) {
+        return -BigInt("0x" + hash.slice(2));
     }
-    return BigInt('0x' + hash);
+    return BigInt("0x" + hash);
 }
 export function ConvertBigIntToHex(hash) {
     if (hash < 0n) {
-        return 'a_' + (-hash).toString(16);
+        return "a_" + (-hash).toString(16);
     }
     return hash.toString(16);
 }
@@ -19,9 +19,17 @@ export function parseDataToAoiLunaStandards(data) {
         return null;
     if (data === undefined)
         return undefined;
-    if (!isNaN(Number(data)) && typeof data === 'string')
+    if (!isNaN(Number(data)) && typeof data === "string")
         return BigInt(data);
-    if (typeof data === 'object' && data) {
+    if (typeof data === "string") {
+        try {
+            return new Date(data);
+        }
+        catch {
+            return data;
+        }
+    }
+    if (typeof data === "object" && data) {
         if (data instanceof Array) {
             return data.map((item) => parseDataToAoiLunaStandards(item));
         }
@@ -33,7 +41,7 @@ export function parseDataToAoiLunaStandards(data) {
     return data;
 }
 export function convertToCamelCase(obj) {
-    if (typeof obj !== 'object')
+    if (typeof obj !== "object")
         return parseDataToAoiLunaStandards(obj);
     if (!obj)
         return obj;
@@ -53,7 +61,7 @@ export function convertToCamelCase(obj) {
     }
 }
 export function convertToSnakeCase(obj) {
-    if (typeof obj !== 'object')
+    if (typeof obj !== "object")
         return obj;
     if (!obj)
         return obj;
@@ -77,8 +85,11 @@ export function createNullObject() {
 }
 export function Stringify(obj) {
     return JSON.stringify(obj, (key, value) => {
-        if (typeof value === 'bigint') {
+        if (typeof value === "bigint") {
             return value.toString();
+        }
+        if (value instanceof Date) {
+            return value.toISOString();
         }
         return value;
     });
@@ -93,26 +104,34 @@ export function isUrl(url) {
     }
 }
 //@ts-ignore
-const fileType = async (file) => await import('file-type').then(x => x.fileTypeFromBuffer(file));
+const fileType = async (file) => 
+// @ts-ignore
+await import("file-type").then((x) => x.fileTypeFromBuffer(file));
 export async function getFileData(file) {
-    if (typeof file === 'string') {
+    if (typeof file === "string") {
         if (isUrl(file)) {
             const res = await fetch(file);
-            return new Blob([await res.arrayBuffer()], { type: res.headers.get('content-type') });
+            return new Blob([await res.arrayBuffer()], {
+                type: res.headers.get("content-type"),
+            });
         }
-        else if (statSync(file).isFile()) {
+        else if (isFilePath(file)) {
             const res = await readFile(file);
-            return new Blob([res], { type: (await fileType(res))?.mime ?? 'application/octet-stream' });
+            return new Blob([res], {
+                type: (await fileType(res))?.mime ?? "application/octet-stream",
+            });
         }
         else {
-            return new Blob([file], { type: 'text/plain' });
+            return new Blob([file], { type: "text/plain" });
         }
     }
-    return new Blob([file], { type: (await fileType(file))?.mime ?? 'application/octet-stream' });
+    return new Blob([file], {
+        type: (await fileType(file))?.mime ?? "application/octet-stream",
+    });
 }
 export async function returnMessagePayload(payload) {
     const object = createNullObject();
-    object.content = payload.content ?? ' ';
+    object.content = payload.content ?? " ";
     object.embeds = payload.embeds;
     object.allowedMentions = payload.allowedMentions;
     object.components = payload.components;
@@ -124,7 +143,7 @@ export async function returnMessagePayload(payload) {
     object.attachments = payload.attachments?.map((a, i) => {
         return {
             id: i.toString(),
-            filename: a.spoiler ? 'SPOILER_' + a.name : a.name,
+            filename: a.spoiler ? "SPOILER_" + a.name : a.name,
             description: a.description,
         };
     });
@@ -155,10 +174,10 @@ export function createDebug(data, client) {
 }
 export async function convertUrlToBase64(url) {
     const resData = await fetch(url);
-    const imageType = resData.headers.get('content-type');
+    const imageType = resData.headers.get("content-type");
     const buffer = await resData.arrayBuffer();
     const base64Flag = `data:${imageType};base64,`;
-    const imageStr = Buffer.from(buffer).toString('base64');
+    const imageStr = Buffer.from(buffer).toString("base64");
     return base64Flag + imageStr;
 }
 export async function convertUrlOrFileToBase64(urlOrFile) {
@@ -171,11 +190,11 @@ export async function convertFileToBase64(file) {
     const bitmap = await readFile(file);
     const fileImageType = await fileType(bitmap);
     const base64Flag = `data:${fileImageType?.mime};base64,`;
-    const imageStr = Buffer.from(bitmap).toString('base64');
+    const imageStr = Buffer.from(bitmap).toString("base64");
     return base64Flag + imageStr;
 }
 export function parseSnowflake(snowflake) {
-    const binary = snowflake.toString(2).padStart(64, '0');
+    const binary = snowflake.toString(2).padStart(64, "0");
     const timestamp = Number((snowflake >> 22n) + 1420070400000n);
     const workerId = (snowflake & 0x3e0000n) >> 17n;
     const processId = (snowflake & 0x1f000n) >> 12n;
@@ -189,5 +208,13 @@ export function parseSnowflake(snowflake) {
         increment,
         binary,
     };
+}
+export function isFilePath(path) {
+    try {
+        return statSync(path).isFile();
+    }
+    catch {
+        return false;
+    }
 }
 //# sourceMappingURL=helpers.js.map

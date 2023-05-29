@@ -785,4 +785,82 @@ export interface RawChannelMessageOptions {
     after?: Snowflake;
     limit?: integer;
 }
+export interface CreateGuildPayload {
+    name: string;
+    icon?: string;
+    verificationLevel?: VerificationLevel;
+    defaultMessageNotifications?: DefaultMessageNotifications;
+    explicitContentFilter?: ExplicitContentFilterLevel;
+    roles?: Camelize<RawRoleData>[];
+    channels?: Camelize<RawChannelData>[];
+    afkChannelId?: Snowflake;
+    afkTimeout?: integer;
+    systemChannelId?: Snowflake;
+    systemChannelFlags?: SystemChannelFlags;
+}
+export interface ModifyGuildChannelPositionsPayload {
+    id: Snowflake;
+    position?: integer;
+    lockPermissions?: boolean;
+    parentId?: Snowflake | null;
+}
+export interface ListGuildMembersPayload {
+    limit?: integer;
+    after?: Snowflake;
+}
+export interface SearchGuildMembersPayLoad {
+    query: string;
+    limit?: integer;
+}
+export interface AddGuildMemberPayload {
+    accessToken: string;
+    nick?: string;
+    roles?: Snowflake[];
+    mute?: boolean;
+    deaf?: boolean;
+}
+export interface ModifyGuildMemberPayload {
+    nick?: string | null;
+    roles?: Snowflake[];
+    mute?: boolean;
+    deaf?: boolean;
+    channelId?: Snowflake | null;
+    communicationDisabledUntil?: Date;
+    flags?: integer;
+}
+export interface CreateGuildBanPayload {
+    deleteMessageSeconds?: integer;
+}
+export interface GuildRolePayload {
+    name?: string;
+    permissions?: string;
+    color?: integer | `#${string}` | `0x${string}` | `rgb(${integer},${integer},${integer})`;
+    hoist?: boolean;
+    mentionable?: boolean;
+    icon?: string;
+    unicodeEmoji?: string;
+}
+export interface GetGuildPruneCountPayload {
+    days?: integer;
+    includeRoles?: Snowflake[];
+}
+export interface BeginGuildPrunePayload extends GetGuildPruneCountPayload {
+    computePruneCount?: boolean;
+}
+export interface ModifyGuildWidgetPayload {
+    enabled?: boolean;
+    channelId?: Snowflake | null;
+}
+export interface ModifyGuildWelcomeScreenPayload {
+    enabled?: boolean;
+    welcomeChannels?: Camelize<RawWelcomeScreenChannelData>[];
+    description?: string | null;
+}
+export interface ModifyUserVoiceStatePayload {
+    channelId: Snowflake | null;
+    suppress?: boolean;
+}
+export interface ModifyCurrentUserVoiceStatePayload extends ModifyUserVoiceStatePayload {
+    requestToSpeakTimestamp?: Date | null;
+}
 //# sourceMappingURL=interface.d.ts.map

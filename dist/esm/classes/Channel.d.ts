@@ -1,7 +1,7 @@
-import Client from '../client/index.js';
-import { ChannelTypes } from '../typings/enums.js';
-import { CreateChannelInvitePayload, GroupDMAddRecipientPayload, ListArchivedThreadsPayload, MessagePayload, RawChannelData, RawChannelMessageOptions, RawDefaultReactionData, RawOverwriteData, RawTagData, RawThreadMemberData, RawThreadMetadataData, RawUserData, StartThreadInForumPayload, StartThreadPayload } from '../typings/interface.js';
-import { Camelize, Snowflake, snowflake } from '../typings/types.js';
+import Client from "../client/index.js";
+import { ChannelTypes } from "../typings/enums.js";
+import { CreateChannelInvitePayload, GroupDMAddRecipientPayload, ListArchivedThreadsPayload, MessagePayload, RawChannelData, RawChannelMessageOptions, RawDefaultReactionData, RawOverwriteData, RawTagData, RawThreadMemberData, RawThreadMetadataData, RawUserData, StartThreadInForumPayload, StartThreadPayload } from "../typings/interface.js";
+import { Camelize, Snowflake, snowflake } from "../typings/types.js";
 export default class Channel {
     #private;
     videoQualityMode: number | undefined;

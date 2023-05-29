@@ -26,4 +26,5 @@ export type Snakify<T> = {
 export type SweeperType = "noSweep" | "timedSweep" | "priority";
 export type ImageSize = 16 | 32 | 64 | 128 | 256 | 512 | 1024 | 2048 | 4096;
 export type ImageFormat = "jpg" | "jpeg" | "png" | "webp" | "gif";
+export type WidgetImageStyle = "shield" | "banner1" | "banner2" | "banner3" | "banner4";
 //# sourceMappingURL=types.d.ts.map
