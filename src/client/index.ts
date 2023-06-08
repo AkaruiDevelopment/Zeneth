@@ -1,4 +1,4 @@
-import { GatewayEventNames, MFALevel } from "../typings/enums.js";
+import { GatewayEventNames, InteractionTypes, MFALevel } from "../typings/enums.js";
 import {
     ApplicationRoleConnectionMetadata,
     AutoModerationRule,
@@ -36,6 +36,7 @@ import {
     ModifyGuildWelcomeScreenPayload,
     ModifyCurrentUserVoiceStatePayload,
     ModifyUserVoiceStatePayload,
+    InteractionResponsePayload,
 } from "../typings/interface.js";
 import {
     Camelize,
@@ -1750,5 +1751,86 @@ export default class Client {
         return url;
     }
 
-    
+    // Interaction
+    async createInteractionResponse(
+        id:Snowflake,
+        token:string,
+        type:InteractionTypes,
+        data:InteractionResponsePayload,
+    ) {
+        const builtApi = this.api().interactions(id,token).callback().post();
+        const req: requestOptions = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = {
+            type,
+            data
+        }
+        await request(req, this);
+    }
+    async getOriginalInteractionResponse(token:string) {
+        const builtApi = this.api().webhooks(this.user.id,token).messages("@original").get();
+        const req: requestOptions = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        const res = await request(req, this);
+        return new Message(res, this);
+    }
+    async editOriginalInteractionResponse(token:string,data:InteractionResponsePayload) {
+        const builtApi = this.api().webhooks(this.user.id,token).messages("@original").patch();
+        const req: requestOptions = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await request(req, this);
+        return new Message(res, this);
+    }
+    async deleteOriginalInteractionResponse(token:string) {
+        const builtApi = this.api().webhooks(this.user.id,token).messages("@original").delete();
+        const req: requestOptions = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        await request(req, this);
+    }
+    async createFollowupMessage(token:string,data:InteractionResponsePayload) {
+        const builtApi = this.api().webhooks(this.user.id,token).post();
+        const req: requestOptions = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await request(req, this);
+        return res && new Message(res, this);
+    }
+    async getFollowupMessage(token:string,messageId:Snowflake) {
+        const builtApi = this.api().webhooks(this.user.id,token).messages(messageId).get();
+        const req: requestOptions = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        const res = await request(req, this);
+        return res && new Message(res, this);
+    }
+    async editFollowupMessage(token:string,messageId:Snowflake,data:InteractionResponsePayload) {
+        const builtApi = this.api().webhooks(this.user.id,token).messages(messageId).patch();
+        const req: requestOptions = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await request(req, this);
+        return res && new Message(res, this);
+    }
+    async deleteFollowupMessage(token:string,messageId:Snowflake) {
+        const builtApi = this.api().webhooks(this.user.id,token).messages(messageId).delete();
+        const req: requestOptions = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        await request(req, this);
+    }
 }

@@ -372,3 +372,31 @@ export enum StickerFormatType
     GIF,
 }
 
+export enum ApplicationCommandTypes {
+    ChatInput = 1,
+    User,
+    Message,
+}
+
+export enum ApplicationCommandOptionTypes {
+    SubCommand = 1,
+    SubCommandGroup,
+    String,
+    Integer,
+    Boolean,
+    User,
+    Channel,
+    Role,
+    Mentionable,
+    Number,
+}
+
+export enum InteractionResponseTypes {
+    Pong = 1,
+    ChannelMessageWithSource = 4,
+    DeferredChannelMessageWithSource,
+    DeferredUpdateMessage,
+    UpdateMessage,
+    ApplicationCommandAutocompleteResult,
+    Modal,
+}

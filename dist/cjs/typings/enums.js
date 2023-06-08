@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StickerFormatType = exports.ThreadAutoArchiveDuration = exports.GuildScheduledEventEntityType = exports.GuildScheduledEventStatus = exports.GuildScheduledEventPrivacyLevel = exports.InviteTargetTypes = exports.GuildFeatures = exports.SystemChannelFlags = exports.GuildNSFWLevel = exports.PremiumTier = exports.MFALevel = exports.ExplicitContentFilterLevel = exports.DefaultMessageNotifications = exports.VerificationLevel = exports.OverwriteType = exports.Intents = exports.MessageFlags = exports.AllowedMentionTypes = exports.ActionTypes = exports.KeywordPresetTypes = exports.ApplicationRoleConnectionMetadataType = exports.TextInputStyles = exports.ButtonStyles = exports.ChannelTypes = exports.InteractionTypes = exports.PremiumTypes = exports.Locales = exports.Status = exports.GatewayEventNames = exports.GatewayOpCodes = void 0;
+exports.InteractionResponseTypes = exports.ApplicationCommandOptionTypes = exports.ApplicationCommandTypes = exports.StickerFormatType = exports.ThreadAutoArchiveDuration = exports.GuildScheduledEventEntityType = exports.GuildScheduledEventStatus = exports.GuildScheduledEventPrivacyLevel = exports.InviteTargetTypes = exports.GuildFeatures = exports.SystemChannelFlags = exports.GuildNSFWLevel = exports.PremiumTier = exports.MFALevel = exports.ExplicitContentFilterLevel = exports.DefaultMessageNotifications = exports.VerificationLevel = exports.OverwriteType = exports.Intents = exports.MessageFlags = exports.AllowedMentionTypes = exports.ActionTypes = exports.KeywordPresetTypes = exports.ApplicationRoleConnectionMetadataType = exports.TextInputStyles = exports.ButtonStyles = exports.ChannelTypes = exports.InteractionTypes = exports.PremiumTypes = exports.Locales = exports.Status = exports.GatewayEventNames = exports.GatewayOpCodes = void 0;
 var GatewayOpCodes;
 (function (GatewayOpCodes) {
     GatewayOpCodes[GatewayOpCodes["Dispatch"] = 0] = "Dispatch";
@@ -344,4 +344,33 @@ var StickerFormatType;
     StickerFormatType[StickerFormatType["LOTTIE"] = 3] = "LOTTIE";
     StickerFormatType[StickerFormatType["GIF"] = 4] = "GIF";
 })(StickerFormatType = exports.StickerFormatType || (exports.StickerFormatType = {}));
+var ApplicationCommandTypes;
+(function (ApplicationCommandTypes) {
+    ApplicationCommandTypes[ApplicationCommandTypes["ChatInput"] = 1] = "ChatInput";
+    ApplicationCommandTypes[ApplicationCommandTypes["User"] = 2] = "User";
+    ApplicationCommandTypes[ApplicationCommandTypes["Message"] = 3] = "Message";
+})(ApplicationCommandTypes = exports.ApplicationCommandTypes || (exports.ApplicationCommandTypes = {}));
+var ApplicationCommandOptionTypes;
+(function (ApplicationCommandOptionTypes) {
+    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["SubCommand"] = 1] = "SubCommand";
+    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["SubCommandGroup"] = 2] = "SubCommandGroup";
+    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["String"] = 3] = "String";
+    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["Integer"] = 4] = "Integer";
+    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["Boolean"] = 5] = "Boolean";
+    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["User"] = 6] = "User";
+    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["Channel"] = 7] = "Channel";
+    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["Role"] = 8] = "Role";
+    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["Mentionable"] = 9] = "Mentionable";
+    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["Number"] = 10] = "Number";
+})(ApplicationCommandOptionTypes = exports.ApplicationCommandOptionTypes || (exports.ApplicationCommandOptionTypes = {}));
+var InteractionResponseTypes;
+(function (InteractionResponseTypes) {
+    InteractionResponseTypes[InteractionResponseTypes["Pong"] = 1] = "Pong";
+    InteractionResponseTypes[InteractionResponseTypes["ChannelMessageWithSource"] = 4] = "ChannelMessageWithSource";
+    InteractionResponseTypes[InteractionResponseTypes["DeferredChannelMessageWithSource"] = 5] = "DeferredChannelMessageWithSource";
+    InteractionResponseTypes[InteractionResponseTypes["DeferredUpdateMessage"] = 6] = "DeferredUpdateMessage";
+    InteractionResponseTypes[InteractionResponseTypes["UpdateMessage"] = 7] = "UpdateMessage";
+    InteractionResponseTypes[InteractionResponseTypes["ApplicationCommandAutocompleteResult"] = 8] = "ApplicationCommandAutocompleteResult";
+    InteractionResponseTypes[InteractionResponseTypes["Modal"] = 9] = "Modal";
+})(InteractionResponseTypes = exports.InteractionResponseTypes || (exports.InteractionResponseTypes = {}));
 //# sourceMappingURL=enums.js.map

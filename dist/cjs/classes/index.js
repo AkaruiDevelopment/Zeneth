@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = exports.Sticker = exports.Role = exports.Message = exports.Member = exports.Invite = exports.Guild = exports.Emoji = exports.Channel = void 0;
+exports.Interaction = exports.User = exports.Sticker = exports.Role = exports.Message = exports.Member = exports.Invite = exports.Guild = exports.Emoji = exports.Channel = void 0;
 const Channel_js_1 = __importDefault(require("./Channel.js"));
 exports.Channel = Channel_js_1.default;
 const Emoji_js_1 = __importDefault(require("./Emoji.js"));
@@ -22,4 +22,6 @@ const Sticker_js_1 = __importDefault(require("./Sticker.js"));
 exports.Sticker = Sticker_js_1.default;
 const User_js_1 = __importDefault(require("./User.js"));
 exports.User = User_js_1.default;
+const Interaction_js_1 = __importDefault(require("./Interaction.js"));
+exports.Interaction = Interaction_js_1.default;
 //# sourceMappingURL=index.js.map

@@ -1,7 +1,7 @@
 export class AoiLunaError {
     static apiError(msg, url, route, status, method) {
         const error = new Error(msg);
-        error.name = 'UzumiError -> [DAPIError]';
+        error.name = 'AoiLunaError -> [DAPIError]';
         //@ts-ignore
         error.url = url;
         //@ts-ignore

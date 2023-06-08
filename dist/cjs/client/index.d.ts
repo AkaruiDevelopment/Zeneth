@@ -1,5 +1,5 @@
-import { GatewayEventNames, MFALevel } from "../typings/enums.js";
-import { ApplicationRoleConnectionMetadata, AutoModerationRule, ClientOptions, CreateChannelInvitePayload, EditChannelPermissionsPayload, GroupDMAddRecipientPayload, MessagePayload, RawApplicationData, RawChannelData, StartThreadInForumPayload, StartThreadPayload, ListArchivedThreadsPayload, CreateGuildEmojiPayload, RawChannelMessageOptions, CreateGuildPayload, RawGuildData, ModifyGuildChannelPositionsPayload, ListGuildMembersPayload, SearchGuildMembersPayLoad, AddGuildMemberPayload, ModifyGuildMemberPayload, CreateGuildBanPayload, GuildRolePayload, GetGuildPruneCountPayload, BeginGuildPrunePayload, ModifyGuildWidgetPayload, ModifyGuildWelcomeScreenPayload, ModifyCurrentUserVoiceStatePayload, ModifyUserVoiceStatePayload } from "../typings/interface.js";
+import { GatewayEventNames, InteractionTypes, MFALevel } from "../typings/enums.js";
+import { ApplicationRoleConnectionMetadata, AutoModerationRule, ClientOptions, CreateChannelInvitePayload, EditChannelPermissionsPayload, GroupDMAddRecipientPayload, MessagePayload, RawApplicationData, RawChannelData, StartThreadInForumPayload, StartThreadPayload, ListArchivedThreadsPayload, CreateGuildEmojiPayload, RawChannelMessageOptions, CreateGuildPayload, RawGuildData, ModifyGuildChannelPositionsPayload, ListGuildMembersPayload, SearchGuildMembersPayLoad, AddGuildMemberPayload, ModifyGuildMemberPayload, CreateGuildBanPayload, GuildRolePayload, GetGuildPruneCountPayload, BeginGuildPrunePayload, ModifyGuildWidgetPayload, ModifyGuildWelcomeScreenPayload, ModifyCurrentUserVoiceStatePayload, ModifyUserVoiceStatePayload, InteractionResponsePayload } from "../typings/interface.js";
 import { Camelize, ClientEvents, ImageFormat, ImageSize, Snowflake, WidgetImageStyle, integer } from "../typings/types.js";
 import Websocket from "../websocket/index.js";
 import Api from "../utils/api.js";
@@ -151,5 +151,13 @@ export default class Client {
     modifyUserVoiceState(guildId: Snowflake, userId: Snowflake, data: ModifyUserVoiceStatePayload): Promise<any>;
     getUser(userId: Snowflake): Promise<User>;
     getUrlFromHash(hash: string, type: "avatar" | "banner" | "icon" | "splash", size?: ImageSize, format?: ImageFormat, dynamic?: boolean): string;
+    createInteractionResponse(id: Snowflake, token: string, type: InteractionTypes, data: InteractionResponsePayload): Promise<void>;
+    getOriginalInteractionResponse(token: string): Promise<Message>;
+    editOriginalInteractionResponse(token: string, data: InteractionResponsePayload): Promise<Message>;
+    deleteOriginalInteractionResponse(token: string): Promise<void>;
+    createFollowupMessage(token: string, data: InteractionResponsePayload): Promise<any>;
+    getFollowupMessage(token: string, messageId: Snowflake): Promise<any>;
+    editFollowupMessage(token: string, messageId: Snowflake, data: InteractionResponsePayload): Promise<any>;
+    deleteFollowupMessage(token: string, messageId: Snowflake): Promise<void>;
 }
 //# sourceMappingURL=index.d.ts.map

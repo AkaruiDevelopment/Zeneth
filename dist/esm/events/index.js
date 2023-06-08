@@ -3,6 +3,7 @@ import Ready from './manager/readyManager.js';
 import MessageCreate from './manager/messageCreateManager.js';
 import ChannelCreate from './manager/channelCreateManager.js';
 import GuildCreate from './manager/guildCreateManager.js';
+import InteractionCreate from './manager/interactionCreateManager.js';
 export default function EventManager(data, client) {
     switch (data.t) {
         case GatewayEventNames.Hello:
@@ -18,6 +19,9 @@ export default function EventManager(data, client) {
             break;
         case GatewayEventNames.GuildCreate:
             GuildCreate(data, client);
+            break;
+        case GatewayEventNames.InteractionCreate:
+            InteractionCreate(data, client);
             break;
     }
 }

@@ -7,7 +7,7 @@ export class AoiLunaError {
     method: string,
   ) {
     const error = new Error(msg);
-    error.name = 'UzumiError -> [DAPIError]';
+    error.name = 'AoiLunaError -> [DAPIError]';
     //@ts-ignore
     error.url = url;
     //@ts-ignore

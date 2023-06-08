@@ -311,4 +311,30 @@ export declare enum StickerFormatType {
     LOTTIE = 3,
     GIF = 4
 }
+export declare enum ApplicationCommandTypes {
+    ChatInput = 1,
+    User = 2,
+    Message = 3
+}
+export declare enum ApplicationCommandOptionTypes {
+    SubCommand = 1,
+    SubCommandGroup = 2,
+    String = 3,
+    Integer = 4,
+    Boolean = 5,
+    User = 6,
+    Channel = 7,
+    Role = 8,
+    Mentionable = 9,
+    Number = 10
+}
+export declare enum InteractionResponseTypes {
+    Pong = 1,
+    ChannelMessageWithSource = 4,
+    DeferredChannelMessageWithSource = 5,
+    DeferredUpdateMessage = 6,
+    UpdateMessage = 7,
+    ApplicationCommandAutocompleteResult = 8,
+    Modal = 9
+}
 //# sourceMappingURL=enums.d.ts.map

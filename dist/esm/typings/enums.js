@@ -341,4 +341,33 @@ export var StickerFormatType;
     StickerFormatType[StickerFormatType["LOTTIE"] = 3] = "LOTTIE";
     StickerFormatType[StickerFormatType["GIF"] = 4] = "GIF";
 })(StickerFormatType || (StickerFormatType = {}));
+export var ApplicationCommandTypes;
+(function (ApplicationCommandTypes) {
+    ApplicationCommandTypes[ApplicationCommandTypes["ChatInput"] = 1] = "ChatInput";
+    ApplicationCommandTypes[ApplicationCommandTypes["User"] = 2] = "User";
+    ApplicationCommandTypes[ApplicationCommandTypes["Message"] = 3] = "Message";
+})(ApplicationCommandTypes || (ApplicationCommandTypes = {}));
+export var ApplicationCommandOptionTypes;
+(function (ApplicationCommandOptionTypes) {
+    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["SubCommand"] = 1] = "SubCommand";
+    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["SubCommandGroup"] = 2] = "SubCommandGroup";
+    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["String"] = 3] = "String";
+    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["Integer"] = 4] = "Integer";
+    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["Boolean"] = 5] = "Boolean";
+    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["User"] = 6] = "User";
+    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["Channel"] = 7] = "Channel";
+    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["Role"] = 8] = "Role";
+    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["Mentionable"] = 9] = "Mentionable";
+    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["Number"] = 10] = "Number";
+})(ApplicationCommandOptionTypes || (ApplicationCommandOptionTypes = {}));
+export var InteractionResponseTypes;
+(function (InteractionResponseTypes) {
+    InteractionResponseTypes[InteractionResponseTypes["Pong"] = 1] = "Pong";
+    InteractionResponseTypes[InteractionResponseTypes["ChannelMessageWithSource"] = 4] = "ChannelMessageWithSource";
+    InteractionResponseTypes[InteractionResponseTypes["DeferredChannelMessageWithSource"] = 5] = "DeferredChannelMessageWithSource";
+    InteractionResponseTypes[InteractionResponseTypes["DeferredUpdateMessage"] = 6] = "DeferredUpdateMessage";
+    InteractionResponseTypes[InteractionResponseTypes["UpdateMessage"] = 7] = "UpdateMessage";
+    InteractionResponseTypes[InteractionResponseTypes["ApplicationCommandAutocompleteResult"] = 8] = "ApplicationCommandAutocompleteResult";
+    InteractionResponseTypes[InteractionResponseTypes["Modal"] = 9] = "Modal";
+})(InteractionResponseTypes || (InteractionResponseTypes = {}));
 //# sourceMappingURL=enums.js.map

@@ -1,6 +1,6 @@
 /// <reference types="node" />
-import ws from 'ws';
-import Client from '../client/index.js';
+import ws from "ws";
+import Client from "../client/index.js";
 export default class Websocket {
     #private;
     ws: ws;
@@ -12,6 +12,8 @@ export default class Websocket {
         s: number | null;
         lastPing: number;
         ping: number;
+        initialReadyAt?: number;
+        currentReadyAt?: number;
     };
     constructor(client: Client);
 }

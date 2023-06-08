@@ -1227,6 +1227,83 @@ class Client {
         const url = `https://cdn.discordapp.com/${type}/${hash}.${dynamic ? "gif" : format}?size=${size}`;
         return url;
     }
+    // Interaction
+    async createInteractionResponse(id, token, type, data) {
+        const builtApi = this.api().interactions(id, token).callback().post();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = {
+            type,
+            data
+        };
+        await (0, index_js_2.default)(req, this);
+    }
+    async getOriginalInteractionResponse(token) {
+        const builtApi = this.api().webhooks(this.user.id, token).messages("@original").get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        const res = await (0, index_js_2.default)(req, this);
+        return new index_js_3.Message(res, this);
+    }
+    async editOriginalInteractionResponse(token, data) {
+        const builtApi = this.api().webhooks(this.user.id, token).messages("@original").patch();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await (0, index_js_2.default)(req, this);
+        return new index_js_3.Message(res, this);
+    }
+    async deleteOriginalInteractionResponse(token) {
+        const builtApi = this.api().webhooks(this.user.id, token).messages("@original").delete();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        await (0, index_js_2.default)(req, this);
+    }
+    async createFollowupMessage(token, data) {
+        const builtApi = this.api().webhooks(this.user.id, token).post();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await (0, index_js_2.default)(req, this);
+        return res && new index_js_3.Message(res, this);
+    }
+    async getFollowupMessage(token, messageId) {
+        const builtApi = this.api().webhooks(this.user.id, token).messages(messageId).get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        const res = await (0, index_js_2.default)(req, this);
+        return res && new index_js_3.Message(res, this);
+    }
+    async editFollowupMessage(token, messageId, data) {
+        const builtApi = this.api().webhooks(this.user.id, token).messages(messageId).patch();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await (0, index_js_2.default)(req, this);
+        return res && new index_js_3.Message(res, this);
+    }
+    async deleteFollowupMessage(token, messageId) {
+        const builtApi = this.api().webhooks(this.user.id, token).messages(messageId).delete();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        await (0, index_js_2.default)(req, this);
+    }
 }
 exports.default = Client;
 //# sourceMappingURL=index.js.map

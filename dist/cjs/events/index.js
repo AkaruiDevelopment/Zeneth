@@ -8,6 +8,7 @@ const readyManager_js_1 = __importDefault(require("./manager/readyManager.js"));
 const messageCreateManager_js_1 = __importDefault(require("./manager/messageCreateManager.js"));
 const channelCreateManager_js_1 = __importDefault(require("./manager/channelCreateManager.js"));
 const guildCreateManager_js_1 = __importDefault(require("./manager/guildCreateManager.js"));
+const interactionCreateManager_js_1 = __importDefault(require("./manager/interactionCreateManager.js"));
 function EventManager(data, client) {
     switch (data.t) {
         case enums_js_1.GatewayEventNames.Hello:
@@ -23,6 +24,9 @@ function EventManager(data, client) {
             break;
         case enums_js_1.GatewayEventNames.GuildCreate:
             (0, guildCreateManager_js_1.default)(data, client);
+            break;
+        case enums_js_1.GatewayEventNames.InteractionCreate:
+            (0, interactionCreateManager_js_1.default)(data, client);
             break;
     }
 }

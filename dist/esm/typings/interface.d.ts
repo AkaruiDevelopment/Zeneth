@@ -1,7 +1,7 @@
 /// <reference types="node" />
 /// <reference types="node" />
 import { integer, Camelize, snowflake, Snowflake, SweeperType } from './types.js';
-import { ActionTypes, AllowedMentionTypes, ApplicationRoleConnectionMetadataType, ButtonStyles, ChannelTypes, DefaultMessageNotifications, ExplicitContentFilterLevel, GatewayEventNames, GatewayOpCodes, GuildFeatures, GuildNSFWLevel, GuildScheduledEventEntityType, GuildScheduledEventPrivacyLevel, GuildScheduledEventStatus, InteractionTypes, InviteTargetTypes, KeywordPresetTypes, Locales, MFALevel, MessageFlags, OverwriteType, PremiumTier, PremiumTypes, Status, SystemChannelFlags, TextInputStyles, ThreadAutoArchiveDuration, VerificationLevel } from './enums.js';
+import { ActionTypes, AllowedMentionTypes, ApplicationCommandOptionTypes, ApplicationCommandTypes, ApplicationRoleConnectionMetadataType, ButtonStyles, ChannelTypes, DefaultMessageNotifications, ExplicitContentFilterLevel, GatewayEventNames, GatewayOpCodes, GuildFeatures, GuildNSFWLevel, GuildScheduledEventEntityType, GuildScheduledEventPrivacyLevel, GuildScheduledEventStatus, InteractionTypes, InviteTargetTypes, KeywordPresetTypes, Locales, MFALevel, MessageFlags, OverwriteType, PremiumTier, PremiumTypes, Status, SystemChannelFlags, TextInputStyles, ThreadAutoArchiveDuration, VerificationLevel } from './enums.js';
 import User from '../classes/User.js';
 import Member from '../classes/Member.js';
 export interface ClientOptions {
@@ -190,6 +190,10 @@ export interface GatewayGuildCreateData extends GatewayDispatchData {
 export interface GatewayChannelCreateData extends GatewayDispatchData {
     t: GatewayEventNames.ChannelCreate;
     d: RawChannelData;
+}
+export interface GatewayInteractionCreateData extends GatewayDispatchData {
+    t: GatewayEventNames.InteractionCreate;
+    d: RawInteractionData;
 }
 export interface RawMessageData {
     guild_id: snowflake;
@@ -862,5 +866,67 @@ export interface ModifyUserVoiceStatePayload {
 }
 export interface ModifyCurrentUserVoiceStatePayload extends ModifyUserVoiceStatePayload {
     requestToSpeakTimestamp?: Date | null;
+}
+export interface RawInteractionData {
+    id: snowflake;
+    application_id: snowflake;
+    type: InteractionTypes;
+    data?: RawInteractionDataData;
+    guild_id?: snowflake;
+    channel?: RawChannelData;
+    channel_id?: snowflake;
+    member?: RawMemberData;
+    user?: RawUserData;
+    token: string;
+    version: integer;
+    message?: RawMessageData;
+    app_permissions?: string;
+    locale?: Locales;
+    guild_locale?: Locales;
+}
+export interface RawInteractionDataData {
+    id: snowflake;
+    name: string;
+    type: ApplicationCommandTypes;
+    resolved?: RawInteractionApplicationCommandResolvedData;
+    options?: RawApplicationCommandInteractionDataOption[];
+    guild_id?: snowflake;
+    target_id?: snowflake;
+}
+export interface RawInteractionApplicationCommandResolvedData {
+    users?: Record<snowflake, RawUserData>;
+    members?: Record<snowflake, RawMemberData>;
+    roles?: Record<snowflake, RawRoleData>;
+    channels?: Record<snowflake, RawChannelData>;
+    messages?: Record<snowflake, RawMessageData>;
+    attachments?: Record<snowflake, RawAttachmentData>;
+}
+export interface RawApplicationCommandInteractionDataOption {
+    name: string;
+    type: ApplicationCommandOptionTypes;
+    value?: string | integer | boolean;
+    options?: RawApplicationCommandInteractionDataOption[];
+    focused?: boolean;
+}
+export interface InteractionResponsePayload extends MessagePayload {
+    messageReference: undefined;
+    stickerIds: undefined;
+    nounce: undefined;
+}
+export interface AutoCompleteInteractionResponsePayload {
+    choices: {
+        name: string;
+        value: string;
+        nameLocalizations?: Record<Locales, string>;
+    }[];
+}
+export interface ActionRow {
+    type: 1;
+    components: (RawButtonData | RawMenuData | RawTextInputData)[];
+}
+export interface ModalInteractionResponsePayload {
+    title: string;
+    customId: string;
+    components: Camelize<(ActionRow | RawTextInputData)>[];
 }
 //# sourceMappingURL=interface.d.ts.map
