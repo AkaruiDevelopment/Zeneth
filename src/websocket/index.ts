@@ -160,46 +160,59 @@ export default class Websocket {
         this.#handleEvents();
         let RetryCounts = 0;
         this.ws.once("open", () => {
-            const interval = setTimeout(() => {
-                if (this.ws.readyState === ws.OPEN) {
-                    this.ws.send(JSON.stringify(data));
-                    this.data.currentReadyAt = Date.now();
-                    clearInterval(interval);
-                    createDebug(
-                        {
-                            message: "Resuming to Discord Gateway",
-                            timestamp: Date.now(),
-                            status: "resume",
-                        },
-                        this.#client,
-                    );
-                } else {
-                    if (RetryCounts === 10) {
+            if (this.ws.readyState !== ws.OPEN) {
+                const interval = setTimeout(() => {
+                    if (this.ws.readyState === ws.OPEN) {
+                        this.ws.send(JSON.stringify(data));
+                        this.data.currentReadyAt = Date.now();
+                        clearInterval(interval);
+                        createDebug(
+                            {
+                                message: "Resuming to Discord Gateway",
+                                timestamp: Date.now(),
+                                status: "resume",
+                            },
+                            this.#client,
+                        );
+                    } else {
+                        if (RetryCounts === 10) {
+                            createDebug(
+                                {
+                                    message:
+                                        "Failed to resume to Discord Gateway after 10 retries. Closing connection",
+                                    timestamp: Date.now(),
+                                    status: "error",
+                                },
+                                this.#client,
+                            );
+                            clearInterval(interval);
+                            this.ws.close();
+                            process.exit(1);
+                        }
                         createDebug(
                             {
                                 message:
-                                    "Failed to resume to Discord Gateway after 10 retries. Closing connection",
+                                    "Failed to resume to Discord Gateway, Retrying in 10 seconds",
                                 timestamp: Date.now(),
                                 status: "error",
                             },
                             this.#client,
                         );
-                        clearInterval(interval);
-                        this.ws.close();
-                        process.exit(1);
+                        RetryCounts++;
                     }
-                    createDebug(
-                        {
-                            message:
-                                "Failed to resume to Discord Gateway, Retrying in 10 seconds",
-                            timestamp: Date.now(),
-                            status: "error",
-                        },
-                        this.#client,
-                    );
-                    RetryCounts++;
-                }
-            }, 10000);
+                }, 10000);
+            } else {
+                this.ws.send(JSON.stringify(data));
+                this.data.currentReadyAt = Date.now();
+                createDebug(
+                    {
+                        message: "Resuming to Discord Gateway",
+                        timestamp: Date.now(),
+                        status: "resume",
+                    },
+                    this.#client,
+                );
+            }
         });
 
         createDebug(
