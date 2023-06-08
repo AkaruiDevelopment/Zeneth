@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.InteractionResponseTypes = exports.ApplicationCommandOptionTypes = exports.ApplicationCommandTypes = exports.StickerFormatType = exports.ThreadAutoArchiveDuration = exports.GuildScheduledEventEntityType = exports.GuildScheduledEventStatus = exports.GuildScheduledEventPrivacyLevel = exports.InviteTargetTypes = exports.GuildFeatures = exports.SystemChannelFlags = exports.GuildNSFWLevel = exports.PremiumTier = exports.MFALevel = exports.ExplicitContentFilterLevel = exports.DefaultMessageNotifications = exports.VerificationLevel = exports.OverwriteType = exports.Intents = exports.MessageFlags = exports.AllowedMentionTypes = exports.ActionTypes = exports.KeywordPresetTypes = exports.ApplicationRoleConnectionMetadataType = exports.TextInputStyles = exports.ButtonStyles = exports.ChannelTypes = exports.InteractionTypes = exports.PremiumTypes = exports.Locales = exports.Status = exports.GatewayEventNames = exports.GatewayOpCodes = void 0;
+exports.ComponentTypes = exports.InteractionResponseTypes = exports.ApplicationCommandOptionTypes = exports.ApplicationCommandTypes = exports.StickerFormatType = exports.ThreadAutoArchiveDuration = exports.GuildScheduledEventEntityType = exports.GuildScheduledEventStatus = exports.GuildScheduledEventPrivacyLevel = exports.InviteTargetTypes = exports.GuildFeatures = exports.SystemChannelFlags = exports.GuildNSFWLevel = exports.PremiumTier = exports.MFALevel = exports.ExplicitContentFilterLevel = exports.DefaultMessageNotifications = exports.VerificationLevel = exports.OverwriteType = exports.Intents = exports.MessageFlags = exports.AllowedMentionTypes = exports.ActionTypes = exports.KeywordPresetTypes = exports.ApplicationRoleConnectionMetadataType = exports.TextInputStyles = exports.ButtonStyles = exports.ChannelTypes = exports.InteractionTypes = exports.PremiumTypes = exports.Locales = exports.Status = exports.GatewayEventNames = exports.GatewayOpCodes = void 0;
 var GatewayOpCodes;
 (function (GatewayOpCodes) {
     GatewayOpCodes[GatewayOpCodes["Dispatch"] = 0] = "Dispatch";
@@ -373,4 +373,15 @@ var InteractionResponseTypes;
     InteractionResponseTypes[InteractionResponseTypes["ApplicationCommandAutocompleteResult"] = 8] = "ApplicationCommandAutocompleteResult";
     InteractionResponseTypes[InteractionResponseTypes["Modal"] = 9] = "Modal";
 })(InteractionResponseTypes = exports.InteractionResponseTypes || (exports.InteractionResponseTypes = {}));
+var ComponentTypes;
+(function (ComponentTypes) {
+    ComponentTypes[ComponentTypes["ActionRow"] = 1] = "ActionRow";
+    ComponentTypes[ComponentTypes["Button"] = 2] = "Button";
+    ComponentTypes[ComponentTypes["StringSelect"] = 3] = "StringSelect";
+    ComponentTypes[ComponentTypes["TextSelect"] = 4] = "TextSelect";
+    ComponentTypes[ComponentTypes["UserSelect"] = 5] = "UserSelect";
+    ComponentTypes[ComponentTypes["RoleSelect"] = 6] = "RoleSelect";
+    ComponentTypes[ComponentTypes["MentionableSelect"] = 7] = "MentionableSelect";
+    ComponentTypes[ComponentTypes["ChannelSelect"] = 8] = "ChannelSelect";
+})(ComponentTypes = exports.ComponentTypes || (exports.ComponentTypes = {}));
 //# sourceMappingURL=enums.js.map

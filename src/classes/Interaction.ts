@@ -10,9 +10,11 @@ import {
     InteractionResponsePayload,
     RawInteractionData,
     RawInteractionDataData,
+    RawMessageComponentData,
+    SelectOption,
 } from "../typings/interface.js";
 import Client from "../client/index.js";
-import { InteractionTypes, Locales } from "../typings/enums.js";
+import { ComponentTypes, InteractionTypes, Locales } from "../typings/enums.js";
 export default class Interaction {
     appPermissions: string | undefined;
     applicationId: bigint;
@@ -30,6 +32,10 @@ export default class Interaction {
     user: User | undefined;
     version: number;
     #client: Client;
+    components?: Camelize<RawMessageComponentData>[];
+    componentType?: ComponentTypes; 
+    customId: string | undefined;
+    values?: SelectOption[];
 
     constructor(data: RawInteractionData, client: Client) {
         this.appPermissions = data.app_permissions;
@@ -55,6 +61,10 @@ export default class Interaction {
         this.type = data.type;
         this.user = data.user ? new User(data.user, client) : undefined;
         this.version = data.version;
+        this.components = convertToCamelCase(data.components) as Camelize<RawMessageComponentData>[];
+        this.componentType = data.component_type;
+        this.customId = data.custom_id;
+        this.values = data.values;
         this.#client = client;
 
         this.#clean();

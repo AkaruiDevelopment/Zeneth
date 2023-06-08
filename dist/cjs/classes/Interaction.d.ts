@@ -1,7 +1,7 @@
 import { Camelize, Channel, Member, Message, User } from "..";
-import { InteractionResponsePayload, RawInteractionData, RawInteractionDataData } from "../typings/interface.js";
+import { InteractionResponsePayload, RawInteractionData, RawInteractionDataData, RawMessageComponentData, SelectOption } from "../typings/interface.js";
 import Client from "../client/index.js";
-import { InteractionTypes, Locales } from "../typings/enums.js";
+import { ComponentTypes, InteractionTypes, Locales } from "../typings/enums.js";
 export default class Interaction {
     #private;
     appPermissions: string | undefined;
@@ -19,6 +19,10 @@ export default class Interaction {
     type: InteractionTypes;
     user: User | undefined;
     version: number;
+    components?: Camelize<RawMessageComponentData>[];
+    componentType?: ComponentTypes;
+    customId: string | undefined;
+    values?: SelectOption[];
     constructor(data: RawInteractionData, client: Client);
     get [Symbol.toStringTag](): bigint;
     createResponse(type: InteractionTypes, data: InteractionResponsePayload): void;

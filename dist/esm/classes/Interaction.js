@@ -16,6 +16,10 @@ export default class Interaction {
     user;
     version;
     #client;
+    components;
+    componentType;
+    customId;
+    values;
     constructor(data, client) {
         this.appPermissions = data.app_permissions;
         this.applicationId = BigInt(data.application_id);
@@ -38,6 +42,10 @@ export default class Interaction {
         this.type = data.type;
         this.user = data.user ? new User(data.user, client) : undefined;
         this.version = data.version;
+        this.components = convertToCamelCase(data.components);
+        this.componentType = data.component_type;
+        this.customId = data.custom_id;
+        this.values = data.values;
         this.#client = client;
         this.#clean();
     }

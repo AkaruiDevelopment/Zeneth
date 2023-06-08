@@ -400,3 +400,14 @@ export enum InteractionResponseTypes {
     ApplicationCommandAutocompleteResult,
     Modal,
 }
+
+export enum ComponentTypes {
+    ActionRow = 1,
+    Button,
+    StringSelect,
+    TextSelect,
+    UserSelect,
+    RoleSelect,
+    MentionableSelect,
+    ChannelSelect,
+}

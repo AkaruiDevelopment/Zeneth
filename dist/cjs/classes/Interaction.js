@@ -18,6 +18,10 @@ class Interaction {
     user;
     version;
     #client;
+    components;
+    componentType;
+    customId;
+    values;
     constructor(data, client) {
         this.appPermissions = data.app_permissions;
         this.applicationId = BigInt(data.application_id);
@@ -40,6 +44,10 @@ class Interaction {
         this.type = data.type;
         this.user = data.user ? new __1.User(data.user, client) : undefined;
         this.version = data.version;
+        this.components = (0, __1.convertToCamelCase)(data.components);
+        this.componentType = data.component_type;
+        this.customId = data.custom_id;
+        this.values = data.values;
         this.#client = client;
         this.#clean();
     }

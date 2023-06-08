@@ -7,6 +7,7 @@ import {
   ApplicationRoleConnectionMetadataType,
   ButtonStyles,
   ChannelTypes,
+  ComponentTypes,
   DefaultMessageNotifications,
   ExplicitContentFilterLevel,
   GatewayEventNames,
@@ -1021,6 +1022,22 @@ export interface RawInteractionData {
   app_permissions?: string;
   locale?: Locales;
   guild_locale?: Locales;
+  custom_id?: string;
+  component_type?: ComponentTypes;
+  values?: SelectOption[];
+  components?: RawMessageComponentData;
+}
+
+export interface SelectOption {
+  label: string;
+  value: string;
+  description?: string;
+  emoji?: {
+    id?: snowflake;
+    name?: string;
+    animated?: boolean;
+  };
+  default?: boolean;
 }
 
 export interface RawInteractionDataData {

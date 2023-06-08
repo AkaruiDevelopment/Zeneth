@@ -337,4 +337,14 @@ export declare enum InteractionResponseTypes {
     ApplicationCommandAutocompleteResult = 8,
     Modal = 9
 }
+export declare enum ComponentTypes {
+    ActionRow = 1,
+    Button = 2,
+    StringSelect = 3,
+    TextSelect = 4,
+    UserSelect = 5,
+    RoleSelect = 6,
+    MentionableSelect = 7,
+    ChannelSelect = 8
+}
 //# sourceMappingURL=enums.d.ts.map

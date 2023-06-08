@@ -370,4 +370,15 @@ export var InteractionResponseTypes;
     InteractionResponseTypes[InteractionResponseTypes["ApplicationCommandAutocompleteResult"] = 8] = "ApplicationCommandAutocompleteResult";
     InteractionResponseTypes[InteractionResponseTypes["Modal"] = 9] = "Modal";
 })(InteractionResponseTypes || (InteractionResponseTypes = {}));
+export var ComponentTypes;
+(function (ComponentTypes) {
+    ComponentTypes[ComponentTypes["ActionRow"] = 1] = "ActionRow";
+    ComponentTypes[ComponentTypes["Button"] = 2] = "Button";
+    ComponentTypes[ComponentTypes["StringSelect"] = 3] = "StringSelect";
+    ComponentTypes[ComponentTypes["TextSelect"] = 4] = "TextSelect";
+    ComponentTypes[ComponentTypes["UserSelect"] = 5] = "UserSelect";
+    ComponentTypes[ComponentTypes["RoleSelect"] = 6] = "RoleSelect";
+    ComponentTypes[ComponentTypes["MentionableSelect"] = 7] = "MentionableSelect";
+    ComponentTypes[ComponentTypes["ChannelSelect"] = 8] = "ChannelSelect";
+})(ComponentTypes || (ComponentTypes = {}));
 //# sourceMappingURL=enums.js.map

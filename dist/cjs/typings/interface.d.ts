@@ -1,7 +1,7 @@
 /// <reference types="node" />
 /// <reference types="node" />
 import { integer, Camelize, snowflake, Snowflake, SweeperType } from './types.js';
-import { ActionTypes, AllowedMentionTypes, ApplicationCommandOptionTypes, ApplicationCommandTypes, ApplicationRoleConnectionMetadataType, ButtonStyles, ChannelTypes, DefaultMessageNotifications, ExplicitContentFilterLevel, GatewayEventNames, GatewayOpCodes, GuildFeatures, GuildNSFWLevel, GuildScheduledEventEntityType, GuildScheduledEventPrivacyLevel, GuildScheduledEventStatus, InteractionTypes, InviteTargetTypes, KeywordPresetTypes, Locales, MFALevel, MessageFlags, OverwriteType, PremiumTier, PremiumTypes, Status, SystemChannelFlags, TextInputStyles, ThreadAutoArchiveDuration, VerificationLevel } from './enums.js';
+import { ActionTypes, AllowedMentionTypes, ApplicationCommandOptionTypes, ApplicationCommandTypes, ApplicationRoleConnectionMetadataType, ButtonStyles, ChannelTypes, ComponentTypes, DefaultMessageNotifications, ExplicitContentFilterLevel, GatewayEventNames, GatewayOpCodes, GuildFeatures, GuildNSFWLevel, GuildScheduledEventEntityType, GuildScheduledEventPrivacyLevel, GuildScheduledEventStatus, InteractionTypes, InviteTargetTypes, KeywordPresetTypes, Locales, MFALevel, MessageFlags, OverwriteType, PremiumTier, PremiumTypes, Status, SystemChannelFlags, TextInputStyles, ThreadAutoArchiveDuration, VerificationLevel } from './enums.js';
 import User from '../classes/User.js';
 import Member from '../classes/Member.js';
 export interface ClientOptions {
@@ -883,6 +883,21 @@ export interface RawInteractionData {
     app_permissions?: string;
     locale?: Locales;
     guild_locale?: Locales;
+    custom_id?: string;
+    component_type?: ComponentTypes;
+    values?: SelectOption[];
+    components?: RawMessageComponentData;
+}
+export interface SelectOption {
+    label: string;
+    value: string;
+    description?: string;
+    emoji?: {
+        id?: snowflake;
+        name?: string;
+        animated?: boolean;
+    };
+    default?: boolean;
 }
 export interface RawInteractionDataData {
     id: snowflake;
