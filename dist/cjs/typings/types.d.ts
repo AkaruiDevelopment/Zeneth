@@ -1,6 +1,7 @@
 import Channel from '../classes/Channel.js';
 import Guild from '../classes/Guild.js';
 import Message from '../classes/Message.js';
+import { Interaction } from '../index.js';
 import { GatewayEventNames } from './enums.js';
 import { GatewayDebugData, GatewayHelloData, GatewayReadyData, GatewayResumedData } from './interface.js';
 export type integer = number;
@@ -11,7 +12,7 @@ export type Camelize<T> = {
 export type snowflake = string;
 export type Snowflake = bigint;
 export type EventData<T extends GatewayEventNames> = T extends GatewayEventNames.Hello ? GatewayHelloData : null;
-export type ClientEvents<T extends GatewayEventNames> = T extends GatewayEventNames.Hello ? (data: Camelize<GatewayHelloData>) => void : T extends GatewayEventNames.Ready ? (data: Camelize<GatewayReadyData>) => void : T extends GatewayEventNames.Resumed ? (data: Camelize<GatewayResumedData>) => void : T extends GatewayEventNames.Reconnect ? () => void : T extends GatewayEventNames.MessageCreate ? (data: Message) => void : T extends GatewayEventNames.Debug ? (data: Camelize<GatewayDebugData>) => void : T extends GatewayEventNames.ChannelCreate ? (data: Channel) => void : T extends GatewayEventNames.GuildCreate ? (data: Guild) => void : Function;
+export type ClientEvents<T extends GatewayEventNames> = T extends GatewayEventNames.Hello ? (data: Camelize<GatewayHelloData>) => void : T extends GatewayEventNames.Ready ? (data: Camelize<GatewayReadyData>) => void : T extends GatewayEventNames.Resumed ? (data: Camelize<GatewayResumedData>) => void : T extends GatewayEventNames.Reconnect ? () => void : T extends GatewayEventNames.MessageCreate ? (data: Message) => void : T extends GatewayEventNames.Debug ? (data: Camelize<GatewayDebugData>) => void : T extends GatewayEventNames.ChannelCreate ? (data: Channel) => void : T extends GatewayEventNames.GuildCreate ? (data: Guild) => void : T extends GatewayEventNames.GuildDelete ? (data: Guild) => void : T extends GatewayEventNames.GuildUpdate ? (data: Guild) => void : T extends GatewayEventNames.MessageDelete ? (data: Message) => void : T extends GatewayEventNames.MessageUpdate ? (data: Message) => void : T extends GatewayEventNames.MessageDeleteBulk ? (data: Message[]) => void : T extends GatewayEventNames.InteractionCreate ? (data: Interaction) => void : Function;
 export type ApiroxyData = {
     api: string;
     route: string;
