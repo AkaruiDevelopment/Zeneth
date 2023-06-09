@@ -6,7 +6,7 @@ export default class Group<K = unknown, V = unknown> extends G<K, V> {
     config: {
         sweeper: {
             type: SweeperType;
-            timer: SweeperOptions['timer'];
+            timer: SweeperOptions["timer"];
             timeLimit: number;
             cacheTimeLimit: number;
         };
@@ -17,5 +17,8 @@ export default class Group<K = unknown, V = unknown> extends G<K, V> {
     constructor(config: GroupConfigOptions, it?: Iterable<readonly [K, V]> | undefined);
     defaultSweep(): any;
     get sweeperType(): SweeperType;
+    get(key: K): V | undefined;
+    find(fn: (value: V, key: K, collection: this) => boolean): V | undefined;
+    filter(fn: (val: V, key: K, grp: this) => boolean): G<K, V>;
 }
 //# sourceMappingURL=Group.d.ts.map

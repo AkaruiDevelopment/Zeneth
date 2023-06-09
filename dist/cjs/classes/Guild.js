@@ -27,7 +27,15 @@ class Guild {
     defaultMessageNotifications;
     explicitContentFilter;
     roles;
-    emojis;
+    emojis = new Group_js_1.default({
+        class: 'Emoji',
+        sweeper: {
+            cacheTimeLimit: 86400000,
+            timeLimit: 86400000,
+            timer: null,
+            type: 'priority',
+        },
+    });
     features;
     mfaLevel;
     applicationId;
@@ -43,7 +51,15 @@ class Guild {
     approx;
     welcomeScreen;
     NSFWLevel;
-    stickers;
+    stickers = new Group_js_1.default({
+        class: 'Sticker',
+        sweeper: {
+            cacheTimeLimit: 86400000,
+            timeLimit: 86400000,
+            timer: null,
+            type: 'priority',
+        },
+    });
     // extra fields
     joinedAt;
     large;
@@ -134,7 +150,7 @@ class Guild {
         this.discoverySlash = data.discovery_splash
             ? (0, helpers_js_1.ConvertHexToBigInt)(data.discovery_splash)
             : undefined;
-        this.emojis = data.emojis.map((x) => new Emoji_js_1.default(x, client, data.id));
+        data.emojis?.forEach((x) => this.emojis.set(BigInt(x.id), new Emoji_js_1.default(x, client, this.id)));
         this.explicitContentFilter = data.explicit_content_filter;
         this.features = data.features;
         this.icon = data.icon ? (0, helpers_js_1.ConvertHexToBigInt)(data.icon) : undefined;
@@ -166,7 +182,7 @@ class Guild {
             ? BigInt(data.rules_channel_id)
             : null;
         this.splash = data.splash ? (0, helpers_js_1.ConvertHexToBigInt)(data.splash) : undefined;
-        this.stickers = data.stickers?.map((x) => new Sticker_js_1.default(x, client));
+        data.stickers?.forEach((x) => this.stickers?.set(BigInt(x.id), new Sticker_js_1.default(x, client)));
         this.system = {
             channelFlags: data.system_channel_flags,
             channelId: data.system_channel_id ? BigInt(data.system_channel_id) : null,

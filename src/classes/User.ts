@@ -2,9 +2,10 @@ import Client from '../client/index.js';
 import { Locales } from '../typings/enums.js';
 import { RawUserData } from '../typings/interface.js';
 import { Snowflake, integer } from '../typings/types.js';
-import { ConvertBigIntToHex, ConvertHexToBigInt } from '../utils/helpers.js';
+import { ConvertBigIntToHex, ConvertHexToBigInt, parseSnowflake } from '../utils/helpers.js';
 
 export default class User {
+  [ x: string ]: any;
   id: Snowflake;
   username: string;
   discriminator: number;
@@ -24,7 +25,8 @@ export default class User {
   globalName?: string ;
   displayName?: string ;
   avatarDecoration?: bigint ;
-
+  guildIds?: Snowflake[];
+  __priority: number;
   #client: Client;
   constructor(data: RawUserData, client: Client) {
     this.#client = client;
@@ -47,6 +49,8 @@ export default class User {
     this.globalName = data.global_name ?? undefined;
     this.displayName = data.display_name ?? undefined;
     this.avatarDecoration = data.avatar_decoration ? ConvertHexToBigInt(data.avatar_decoration.split("_").slice(1).join("_")) : undefined;
+    this.guildIds = [];
+    this.__priority = 0;
     this.#clean();
   }
 
@@ -98,5 +102,9 @@ export default class User {
   get [ Symbol.toStringTag ] ()
   {
     return  this.id 
+  }
+
+  get parsedSnowflake() {
+    return parseSnowflake(this.id);
   }
 }

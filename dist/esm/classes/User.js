@@ -1,4 +1,4 @@
-import { ConvertBigIntToHex, ConvertHexToBigInt } from '../utils/helpers.js';
+import { ConvertBigIntToHex, ConvertHexToBigInt, parseSnowflake } from '../utils/helpers.js';
 export default class User {
     id;
     username;
@@ -19,6 +19,8 @@ export default class User {
     globalName;
     displayName;
     avatarDecoration;
+    guildIds;
+    __priority;
     #client;
     constructor(data, client) {
         this.#client = client;
@@ -41,6 +43,8 @@ export default class User {
         this.globalName = data.global_name ?? undefined;
         this.displayName = data.display_name ?? undefined;
         this.avatarDecoration = data.avatar_decoration ? ConvertHexToBigInt(data.avatar_decoration.split("_").slice(1).join("_")) : undefined;
+        this.guildIds = [];
+        this.__priority = 0;
         this.#clean();
     }
     #clean() {
@@ -81,6 +85,9 @@ export default class User {
     }
     get [Symbol.toStringTag]() {
         return this.id;
+    }
+    get parsedSnowflake() {
+        return parseSnowflake(this.id);
     }
 }
 //# sourceMappingURL=User.js.map

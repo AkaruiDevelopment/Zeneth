@@ -6,8 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const enums_js_1 = require("../../typings/enums.js");
 const Cacher_js_1 = require("./Cacher.js");
 const channelUpdater_js_1 = __importDefault(require("./update/channelUpdater.js"));
+const emojiUpdater_js_1 = __importDefault(require("./update/emojiUpdater.js"));
 const guildUpdater_js_1 = __importDefault(require("./update/guildUpdater.js"));
 const messageUpdater_js_1 = __importDefault(require("./update/messageUpdater.js"));
+const userUpdater_js_1 = __importDefault(require("./update/userUpdater.js"));
 function createCacheManager(input, client) {
     const cacher = new Cacher_js_1.Cacher(input);
     const cacheNames = Object.keys(input);
@@ -26,6 +28,20 @@ function createCacheManager(input, client) {
                 break;
             case 'guilds':
                 client.on(enums_js_1.GatewayEventNames.GuildCreate, (guild) => (0, guildUpdater_js_1.default)(guild, cacher));
+                break;
+            case 'emojis':
+                client.on(enums_js_1.GatewayEventNames.GuildCreate, (guild) => {
+                    for (const emoji of guild.emojis.V()) {
+                        (0, emojiUpdater_js_1.default)(emoji, cacher);
+                    }
+                });
+                break;
+            case 'users':
+                client.on(enums_js_1.GatewayEventNames.GuildCreate, (guild) => {
+                    for (const member of guild.members.V()) {
+                        (0, userUpdater_js_1.default)(member.user, cacher, guild.id);
+                    }
+                });
                 break;
         }
     }

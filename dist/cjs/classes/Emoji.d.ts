@@ -14,7 +14,7 @@ export default class Emoji {
     available?: boolean;
     guildId?: Snowflake;
     __priority: number;
-    constructor(data: RawEmojiData, client: Client, guild?: snowflake);
+    constructor(data: RawEmojiData, client: Client, guild?: snowflake | Snowflake);
     get [Symbol.toStringTag](): string | bigint | null;
     get parsedSnowflake(): {
         timestamp: number;

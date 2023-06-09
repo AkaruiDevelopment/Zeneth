@@ -1,6 +1,7 @@
 import Channel from '../classes/Channel.js';
 import Guild from '../classes/Guild.js';
 import Message from '../classes/Message.js';
+import { Interaction } from '../index.js';
 import { GatewayEventNames } from './enums.js';
 import {
   GatewayDebugData,
@@ -42,6 +43,18 @@ export type ClientEvents<T extends GatewayEventNames> =
   ? ( data: Channel ) => void
   : T extends GatewayEventNames.GuildCreate
   ? ( data: Guild ) => void
+  : T extends GatewayEventNames.GuildDelete
+  ? ( data: Guild ) => void
+  : T extends GatewayEventNames.GuildUpdate
+  ? ( data: Guild ) => void
+  : T extends GatewayEventNames.MessageDelete
+  ? ( data: Message ) => void
+  : T extends GatewayEventNames.MessageUpdate
+  ? ( data: Message ) => void
+  : T extends GatewayEventNames.MessageDeleteBulk
+  ? ( data: Message[] ) => void
+  : T extends GatewayEventNames.InteractionCreate
+  ? ( data: Interaction ) => void
   : Function;
 
 export type ApiroxyData = {

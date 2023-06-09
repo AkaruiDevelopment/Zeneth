@@ -52,7 +52,15 @@ export default class Guild {
   defaultMessageNotifications: DefaultMessageNotifications;
   explicitContentFilter: ExplicitContentFilterLevel;
   roles: Role[];
-  emojis: Emoji[];
+  emojis: Collection<Snowflake, Emoji> = new Collection<Snowflake, Emoji>({
+    class: 'Emoji',
+    sweeper: {
+      cacheTimeLimit: 86400000,
+      timeLimit: 86400000,
+      timer: null,
+      type: 'priority',
+    },
+  });
   features: GuildFeatures[];
   mfaLevel: MFALevel;
   applicationId: Snowflake | undefined;
@@ -82,7 +90,15 @@ export default class Guild {
   };
   welcomeScreen?: Camelize<RawWelcomeScreenData>;
   NSFWLevel: GuildNSFWLevel;
-  stickers?: Sticker[];
+  stickers?: Collection<Snowflake, Sticker> = new Collection<Snowflake, Sticker>({
+    class: 'Sticker',
+    sweeper: {
+      cacheTimeLimit: 86400000,
+      timeLimit: 86400000,
+      timer: null,
+      type: 'priority',
+    },
+  });
 
   // extra fields
 
@@ -188,7 +204,9 @@ export default class Guild {
     this.discoverySlash = data.discovery_splash
       ? ConvertHexToBigInt(data.discovery_splash)
       : undefined;
-    this.emojis = data.emojis.map((x) => new Emoji(x, client, data.id));
+    data.emojis?.forEach((x) =>
+      this.emojis.set(BigInt(x.id as string), new Emoji(x, client, this.id)),
+    );
     this.explicitContentFilter = data.explicit_content_filter;
     this.features = data.features;
     this.icon = data.icon ? ConvertHexToBigInt(data.icon) : undefined;
@@ -220,7 +238,9 @@ export default class Guild {
       ? BigInt(data.rules_channel_id)
       : null;
     this.splash = data.splash ? ConvertHexToBigInt(data.splash) : undefined;
-    this.stickers = data.stickers?.map((x) => new Sticker(x, client));
+    data.stickers?.forEach((x) =>
+      this.stickers?.set(BigInt(x.id), new Sticker(x, client))
+    );
     this.system = {
       channelFlags: data.system_channel_flags,
       channelId: data.system_channel_id ? BigInt(data.system_channel_id) : null,

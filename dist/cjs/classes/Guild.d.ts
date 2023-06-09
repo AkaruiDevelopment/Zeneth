@@ -31,7 +31,7 @@ export default class Guild {
     defaultMessageNotifications: DefaultMessageNotifications;
     explicitContentFilter: ExplicitContentFilterLevel;
     roles: Role[];
-    emojis: Emoji[];
+    emojis: Collection<Snowflake, Emoji>;
     features: GuildFeatures[];
     mfaLevel: MFALevel;
     applicationId: Snowflake | undefined;
@@ -61,7 +61,7 @@ export default class Guild {
     };
     welcomeScreen?: Camelize<RawWelcomeScreenData>;
     NSFWLevel: GuildNSFWLevel;
-    stickers?: Sticker[];
+    stickers?: Collection<Snowflake, Sticker>;
     joinedAt?: Date;
     large?: boolean;
     unavailable?: boolean;

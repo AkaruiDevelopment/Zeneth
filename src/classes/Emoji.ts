@@ -17,7 +17,7 @@ export default class Emoji {
     guildId?: Snowflake;
     __priority: number;
 
-    constructor(data: RawEmojiData,client: Client,guild?:snowflake) {
+    constructor(data: RawEmojiData,client: Client,guild?:snowflake | Snowflake) {
         this.#client= client;
         this.id = data.id ? BigInt(data.id) : null;
         this.name = data.name;

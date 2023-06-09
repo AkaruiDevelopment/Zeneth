@@ -21,6 +21,8 @@ class User {
     globalName;
     displayName;
     avatarDecoration;
+    guildIds;
+    __priority;
     #client;
     constructor(data, client) {
         this.#client = client;
@@ -43,6 +45,8 @@ class User {
         this.globalName = data.global_name ?? undefined;
         this.displayName = data.display_name ?? undefined;
         this.avatarDecoration = data.avatar_decoration ? (0, helpers_js_1.ConvertHexToBigInt)(data.avatar_decoration.split("_").slice(1).join("_")) : undefined;
+        this.guildIds = [];
+        this.__priority = 0;
         this.#clean();
     }
     #clean() {
@@ -83,6 +87,9 @@ class User {
     }
     get [Symbol.toStringTag]() {
         return this.id;
+    }
+    get parsedSnowflake() {
+        return (0, helpers_js_1.parseSnowflake)(this.id);
     }
 }
 exports.default = User;
