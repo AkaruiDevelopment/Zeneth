@@ -5,7 +5,7 @@ import {
     Message,
     User,
     convertToCamelCase,
-} from "..";
+} from "../index.js";
 import {
     InteractionResponsePayload,
     RawInteractionData,

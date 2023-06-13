@@ -1,4 +1,4 @@
-import { Camelize, Channel, Member, Message, User } from "..";
+import { Camelize, Channel, Member, Message, User } from "../index.js";
 import { InteractionResponsePayload, RawInteractionData, RawInteractionDataData, RawMessageComponentData, SelectOption } from "../typings/interface.js";
 import Client from "../client/index.js";
 import { ComponentTypes, InteractionTypes, Locales } from "../typings/enums.js";

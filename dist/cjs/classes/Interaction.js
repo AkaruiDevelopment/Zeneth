@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const __1 = require("..");
+const index_js_1 = require("../index.js");
 class Interaction {
     appPermissions;
     applicationId;
@@ -26,25 +26,25 @@ class Interaction {
         this.appPermissions = data.app_permissions;
         this.applicationId = BigInt(data.application_id);
         this.channel = data.channel
-            ? new __1.Channel(data.channel, client)
+            ? new index_js_1.Channel(data.channel, client)
             : undefined;
         this.channelId = data.channel_id ? BigInt(data.channel_id) : undefined;
-        this.data = (0, __1.convertToCamelCase)(data.data);
+        this.data = (0, index_js_1.convertToCamelCase)(data.data);
         this.guildId = data.guild_id ? BigInt(data.guild_id) : undefined;
         this.guildLocale = data.guild_locale;
         this.id = BigInt(data.id);
         this.locale = data.locale;
         this.member = data.member
-            ? new __1.Member(data.member, client, this.guildId)
+            ? new index_js_1.Member(data.member, client, this.guildId)
             : undefined;
         this.message = data.message
-            ? new __1.Message(data.message, client)
+            ? new index_js_1.Message(data.message, client)
             : undefined;
         this.token = data.token;
         this.type = data.type;
-        this.user = data.user ? new __1.User(data.user, client) : undefined;
+        this.user = data.user ? new index_js_1.User(data.user, client) : undefined;
         this.version = data.version;
-        this.components = (0, __1.convertToCamelCase)(data.components);
+        this.components = (0, index_js_1.convertToCamelCase)(data.components);
         this.componentType = data.component_type;
         this.customId = data.custom_id;
         this.values = data.values;

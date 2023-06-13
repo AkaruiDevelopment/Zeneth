@@ -1,4 +1,4 @@
-import { Channel, Member, Message, User, convertToCamelCase, } from "..";
+import { Channel, Member, Message, User, convertToCamelCase, } from "../index.js";
 export default class Interaction {
     appPermissions;
     applicationId;
