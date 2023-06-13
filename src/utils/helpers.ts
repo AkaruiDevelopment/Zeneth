@@ -23,7 +23,7 @@ export function ConvertBigIntToHex(hash: bigint) {
 export function parseDataToAoiLunaStandards(data: any): any {
     if (data === null) return null;
     if (data === undefined) return undefined;
-    if (!isNaN(Number(data)) && typeof data === "string") return BigInt(data);
+    if (!isNaN(Number(data)) && typeof data === "string" && Number(data) > Number.MAX_SAFE_INTEGER) return BigInt(data);
     if (typeof data === "string") {
         try {
             return new Date(data);

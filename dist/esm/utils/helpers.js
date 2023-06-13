@@ -19,7 +19,7 @@ export function parseDataToAoiLunaStandards(data) {
         return null;
     if (data === undefined)
         return undefined;
-    if (!isNaN(Number(data)) && typeof data === "string")
+    if (!isNaN(Number(data)) && typeof data === "string" && Number(data) > Number.MAX_SAFE_INTEGER)
         return BigInt(data);
     if (typeof data === "string") {
         try {
