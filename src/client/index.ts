@@ -1756,7 +1756,7 @@ export default class Client {
         id:Snowflake,
         token:string,
         type:InteractionTypes,
-        data:InteractionResponsePayload,
+        data?:InteractionResponsePayload,
     ) {
         const builtApi = this.api().interactions(id,token).callback().post();
         const req: requestOptions = createNullObject();
@@ -1765,7 +1765,7 @@ export default class Client {
         req.method = builtApi.method;
         req.params = {
             type,
-            data
+            data:data,
         }
         await request(req, this);
     }
