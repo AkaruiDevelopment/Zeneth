@@ -1231,7 +1231,7 @@ export default class Client {
         req.method = builtApi.method;
         req.params = {
             type,
-            data
+            data: data,
         };
         await request(req, this);
     }

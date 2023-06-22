@@ -1236,7 +1236,7 @@ class Client {
         req.method = builtApi.method;
         req.params = {
             type,
-            data
+            data: data,
         };
         await (0, index_js_2.default)(req, this);
     }

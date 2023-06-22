@@ -151,7 +151,7 @@ export default class Client {
     modifyUserVoiceState(guildId: Snowflake, userId: Snowflake, data: ModifyUserVoiceStatePayload): Promise<any>;
     getUser(userId: Snowflake): Promise<User>;
     getUrlFromHash(hash: string, type: "avatar" | "banner" | "icon" | "splash", size?: ImageSize, format?: ImageFormat, dynamic?: boolean): string;
-    createInteractionResponse(id: Snowflake, token: string, type: InteractionTypes, data: InteractionResponsePayload): Promise<void>;
+    createInteractionResponse(id: Snowflake, token: string, type: InteractionTypes, data?: InteractionResponsePayload): Promise<void>;
     getOriginalInteractionResponse(token: string): Promise<Message>;
     editOriginalInteractionResponse(token: string, data: InteractionResponsePayload): Promise<Message>;
     deleteOriginalInteractionResponse(token: string): Promise<void>;

@@ -31,10 +31,11 @@ const pack = {
     typescript: '^4.9.4'
   },
   dependencies: {
-    '@akarui/structures': 'github:akaruidevelopment/structures#v2',
+    '@akarui/structures': '^2.0.1',
     'file-type': '^18.2.0',
     ws: '^8.12.0'
-  }
+  },
+  files: [ 'dist', 'README.md', 'LICENSE', 'package.json' ]
 } as const;
 
 const userAgent =
