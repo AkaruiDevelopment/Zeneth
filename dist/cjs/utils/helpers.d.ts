@@ -4,7 +4,7 @@ import { Camelize, Snakify, Snowflake } from "../typings/types.js";
 import Client from "../client/index.js";
 export declare function ConvertHexToBigInt(hash: string): bigint;
 export declare function ConvertBigIntToHex(hash: bigint): string;
-export declare function parseDataToAoiLunaStandards(data: any): any;
+export declare function parseDataToZenethStandards(data: any): any;
 export declare function convertToCamelCase<T extends any>(obj: T): Camelize<T> | Camelize<T>[] | T;
 export declare function convertToSnakeCase<T extends any>(obj: T): Snakify<T> | Snakify<T>[] | T;
 export declare function createNullObject(): any;

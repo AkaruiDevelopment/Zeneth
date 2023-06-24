@@ -20,10 +20,15 @@ export function ConvertBigIntToHex(hash: bigint) {
     return hash.toString(16);
 }
 
-export function parseDataToAoiLunaStandards(data: any): any {
+export function parseDataToZenethStandards(data: any): any {
     if (data === null) return null;
     if (data === undefined) return undefined;
-    if (!isNaN(Number(data)) && typeof data === "string" && Number(data) > Number.MAX_SAFE_INTEGER) return BigInt(data);
+    if (
+        !isNaN(Number(data)) &&
+        typeof data === "string" &&
+        Number(data) > Number.MAX_SAFE_INTEGER
+    )
+        return BigInt(data);
     if (typeof data === "string") {
         try {
             return new Date(data);
@@ -33,10 +38,10 @@ export function parseDataToAoiLunaStandards(data: any): any {
     }
     if (typeof data === "object" && data) {
         if (data instanceof Array) {
-            return data.map((item) => parseDataToAoiLunaStandards(item));
+            return data.map((item) => parseDataToZenethStandards(item));
         }
         for (const key in data) {
-            data[key] = parseDataToAoiLunaStandards(data[key]);
+            data[key] = parseDataToZenethStandards(data[key]);
         }
         return data;
     }
@@ -47,7 +52,7 @@ export function convertToCamelCase<T extends any>(
     obj: T,
 ): Camelize<T> | Camelize<T>[] | T {
     if (typeof obj !== "object")
-        return parseDataToAoiLunaStandards(obj) as Camelize<T>;
+        return parseDataToZenethStandards(obj) as Camelize<T>;
     if (!obj) return obj as Camelize<T>;
     else if (obj instanceof Array) {
         return obj.map((item) => {
@@ -113,7 +118,7 @@ export function isUrl(url: string) {
 }
 //@ts-ignore
 const fileType = async (file: Buffer) =>
-// @ts-ignore
+    // @ts-ignore
     await import("file-type").then((x) => x.fileTypeFromBuffer(file));
 
 export async function getFileData(file: string | Buffer) {

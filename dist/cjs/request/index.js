@@ -69,7 +69,7 @@ async function request(data, client, headers) {
                 if (res.ok)
                     resolve(res.json());
                 else {
-                    throw index_js_1.AoiLunaError.apiError((await res.json()).message, data.url, data.route, res.status, data.method);
+                    throw index_js_1.ZenethError.apiError((await res.json()).message, data.url, data.route, res.status, data.method);
                 }
             }, globalQueueData.resetAfter);
         });
@@ -82,7 +82,7 @@ async function request(data, client, headers) {
                     if (res.ok)
                         resolve(res.json());
                     else {
-                        throw index_js_1.AoiLunaError.apiError((await res.json()).message, data.url, data.route, res.status, data.method);
+                        throw index_js_1.ZenethError.apiError((await res.json()).message, data.url, data.route, res.status, data.method);
                     }
                 }, queueData.resetAfter);
             });
@@ -92,7 +92,7 @@ async function request(data, client, headers) {
             if (res.ok)
                 return res.json();
             else {
-                throw index_js_1.AoiLunaError.apiError((await res.json()).message, data.url, data.route, res.status, data.method);
+                throw index_js_1.ZenethError.apiError((await res.json()).message, data.url, data.route, res.status, data.method);
             }
         }
     }

@@ -1,5 +1,5 @@
 import Client from '../client/index.js';
-import { AoiLunaError } from '../error/index.js';
+import { ZenethError } from "../error/index.js";
 import { Queue, requestOptions } from '../typings/interface.js';
 //@ts-ignore
 import { userAgent } from '../utils/libconstants.js';
@@ -81,7 +81,7 @@ export default async function request(
         const res = await __request__(data, requestData, client);
         if (res.ok) resolve(res.json());
         else {
-          throw AoiLunaError.apiError(
+          throw ZenethError.apiError(
             (await res.json()).message,
             data.url,
             data.route,
@@ -98,7 +98,7 @@ export default async function request(
           const res = await __request__(data, requestData, client);
           if (res.ok) resolve(res.json());
           else {
-            throw AoiLunaError.apiError(
+            throw ZenethError.apiError(
               (await res.json()).message,
               data.url,
               data.route,
@@ -112,7 +112,7 @@ export default async function request(
       const res = await __request__(data, requestData, client);
       if (res.ok) return res.json();
       else {
-        throw AoiLunaError.apiError(
+        throw ZenethError.apiError(
           (await res.json()).message,
           data.url,
           data.route,

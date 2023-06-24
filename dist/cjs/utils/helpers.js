@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isFilePath = exports.parseSnowflake = exports.convertFileToBase64 = exports.convertUrlOrFileToBase64 = exports.convertUrlToBase64 = exports.createDebug = exports.returnMessagePayload = exports.getFileData = exports.isUrl = exports.Stringify = exports.createNullObject = exports.convertToSnakeCase = exports.convertToCamelCase = exports.parseDataToAoiLunaStandards = exports.ConvertBigIntToHex = exports.ConvertHexToBigInt = void 0;
+exports.isFilePath = exports.parseSnowflake = exports.convertFileToBase64 = exports.convertUrlOrFileToBase64 = exports.convertUrlToBase64 = exports.createDebug = exports.returnMessagePayload = exports.getFileData = exports.isUrl = exports.Stringify = exports.createNullObject = exports.convertToSnakeCase = exports.convertToCamelCase = exports.parseDataToZenethStandards = exports.ConvertBigIntToHex = exports.ConvertHexToBigInt = void 0;
 const fs_1 = require("fs");
 const promises_1 = require("fs/promises");
 const debugManager_js_1 = __importDefault(require("../events/manager/debugManager.js"));
@@ -22,12 +22,14 @@ function ConvertBigIntToHex(hash) {
     return hash.toString(16);
 }
 exports.ConvertBigIntToHex = ConvertBigIntToHex;
-function parseDataToAoiLunaStandards(data) {
+function parseDataToZenethStandards(data) {
     if (data === null)
         return null;
     if (data === undefined)
         return undefined;
-    if (!isNaN(Number(data)) && typeof data === "string" && Number(data) > Number.MAX_SAFE_INTEGER)
+    if (!isNaN(Number(data)) &&
+        typeof data === "string" &&
+        Number(data) > Number.MAX_SAFE_INTEGER)
         return BigInt(data);
     if (typeof data === "string") {
         try {
@@ -39,19 +41,19 @@ function parseDataToAoiLunaStandards(data) {
     }
     if (typeof data === "object" && data) {
         if (data instanceof Array) {
-            return data.map((item) => parseDataToAoiLunaStandards(item));
+            return data.map((item) => parseDataToZenethStandards(item));
         }
         for (const key in data) {
-            data[key] = parseDataToAoiLunaStandards(data[key]);
+            data[key] = parseDataToZenethStandards(data[key]);
         }
         return data;
     }
     return data;
 }
-exports.parseDataToAoiLunaStandards = parseDataToAoiLunaStandards;
+exports.parseDataToZenethStandards = parseDataToZenethStandards;
 function convertToCamelCase(obj) {
     if (typeof obj !== "object")
-        return parseDataToAoiLunaStandards(obj);
+        return parseDataToZenethStandards(obj);
     if (!obj)
         return obj;
     else if (obj instanceof Array) {

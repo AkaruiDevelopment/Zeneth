@@ -162,13 +162,13 @@ export default class Client {
     getGlobalApplicationCommands(withLocalization?: boolean): Promise<Camelize<RawApplicationData>[]>;
     createGlobalApplicationCommand(data: CreateApplicationCommandPayload): Promise<Camelize<RawApplicationData> | undefined>;
     getGlobalApplicationCommand(commandId: Snowflake): Promise<Camelize<RawApplicationData> | undefined>;
-    editGlobalApplicationCommand(commandId: Snowflake, data: Omit<CreateApplicationCommandPayload, 'type'>): Promise<Camelize<RawApplicationData> | undefined>;
+    editGlobalApplicationCommand(commandId: Snowflake, data: Omit<CreateApplicationCommandPayload, "type">): Promise<Camelize<RawApplicationData> | undefined>;
     deleteGlobalApplicationCommand(commandId: Snowflake): Promise<void>;
     bulkOverwriteGlobalApplicationCommands(data: CreateApplicationCommandPayload[]): Promise<Camelize<RawApplicationData>[]>;
     getGuildApplicationCommands(guildId: Snowflake, withLocalization?: boolean): Promise<Camelize<RawApplicationData>[]>;
     createGuildApplicationCommand(guildId: Snowflake, data: CreateApplicationCommandPayload): Promise<Camelize<RawApplicationData> | undefined>;
     getGuildApplicationCommand(guildId: Snowflake, commandId: Snowflake): Promise<Camelize<RawApplicationData> | undefined>;
-    editGuildApplicationCommand(guildId: Snowflake, commandId: Snowflake, data: Omit<CreateApplicationCommandPayload, 'type'>): Promise<Camelize<RawApplicationData> | undefined>;
+    editGuildApplicationCommand(guildId: Snowflake, commandId: Snowflake, data: Omit<CreateApplicationCommandPayload, "type">): Promise<Camelize<RawApplicationData> | undefined>;
     deleteGuildApplicationCommand(guildId: Snowflake, commandId: Snowflake): Promise<void>;
     bulkOverwriteGuildApplicationCommands(guildId: Snowflake, data: CreateApplicationCommandPayload[]): Promise<Camelize<RawApplicationData>[]>;
     getGuildApplicationCommandPermissions(guildId: Snowflake): Promise<Camelize<RawGuildApplicationCommandPermissions>[]>;

@@ -2,7 +2,7 @@ import Websocket from "../websocket/index.js";
 import Api from "../utils/api.js";
 import QueueManager from "../request/queue.js";
 import request from "../request/index.js";
-import { convertToCamelCase, convertUrlOrFileToBase64, createNullObject, parseDataToAoiLunaStandards, returnMessagePayload, } from "../utils/helpers.js";
+import { convertToCamelCase, convertUrlOrFileToBase64, createNullObject, parseDataToZenethStandards, returnMessagePayload, } from "../utils/helpers.js";
 import { Channel, Emoji, Guild, Invite, Member, Message, Role, User, } from "../classes/index.js";
 export default class Client {
     #options;
@@ -760,7 +760,7 @@ export default class Client {
         req.route = builtApi.route;
         req.method = builtApi.method;
         const res = await request(req, this);
-        return parseDataToAoiLunaStandards(convertToCamelCase(res));
+        return parseDataToZenethStandards(convertToCamelCase(res));
     }
     async modifyGuild(guildId, data, reason) {
         const builtApi = this.api().guilds(guildId).patch();
@@ -1111,7 +1111,10 @@ export default class Client {
         return convertToCamelCase(await request(req, this));
     }
     async deleteGuildIntegration(guildId, integrationId, reason) {
-        const builtApi = this.api().guilds(guildId).integrations(integrationId).delete();
+        const builtApi = this.api()
+            .guilds(guildId)
+            .integrations(integrationId)
+            .delete();
         const req = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1170,7 +1173,7 @@ export default class Client {
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
-        return parseDataToAoiLunaStandards(convertToCamelCase(await request(req, this)));
+        return parseDataToZenethStandards(convertToCamelCase(await request(req, this)));
     }
     async modifyGuildWelcomeScreen(guildId, data, reason) {
         const builtApi = this.api().guilds(guildId)["welcome-screen"]().patch();
@@ -1180,33 +1183,39 @@ export default class Client {
         req.auditLogReason = reason;
         req.method = builtApi.method;
         req.params = data;
-        return parseDataToAoiLunaStandards(convertToCamelCase(await request(req, this)));
+        return parseDataToZenethStandards(convertToCamelCase(await request(req, this)));
     }
     async getGuildOnBoarding(guildId) {
-        const builtApi = this.api().guilds(guildId)["onboarding-application"]().get();
+        const builtApi = this.api()
+            .guilds(guildId)["onboarding-application"]()
+            .get();
         const req = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
-        return parseDataToAoiLunaStandards(convertToCamelCase(await request(req, this)));
+        return parseDataToZenethStandards(convertToCamelCase(await request(req, this)));
     }
     async modifyCurrentUserVoiceState(guildId, data) {
-        const builtApi = this.api().guilds(guildId)["voice-states"]("@me").patch();
+        const builtApi = this.api()
+            .guilds(guildId)["voice-states"]("@me")
+            .patch();
         const req = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         req.params = data;
-        return parseDataToAoiLunaStandards(convertToCamelCase(await request(req, this)));
+        return parseDataToZenethStandards(convertToCamelCase(await request(req, this)));
     }
     async modifyUserVoiceState(guildId, userId, data) {
-        const builtApi = this.api().guilds(guildId)["voice-states"](userId).patch();
+        const builtApi = this.api()
+            .guilds(guildId)["voice-states"](userId)
+            .patch();
         const req = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         req.params = data;
-        return parseDataToAoiLunaStandards(convertToCamelCase(await request(req, this)));
+        return parseDataToZenethStandards(convertToCamelCase(await request(req, this)));
     }
     // User
     async getUser(userId) {
@@ -1236,7 +1245,10 @@ export default class Client {
         await request(req, this);
     }
     async getOriginalInteractionResponse(token) {
-        const builtApi = this.api().webhooks(this.user.id, token).messages("@original").get();
+        const builtApi = this.api()
+            .webhooks(this.user.id, token)
+            .messages("@original")
+            .get();
         const req = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1245,7 +1257,10 @@ export default class Client {
         return new Message(res, this);
     }
     async editOriginalInteractionResponse(token, data) {
-        const builtApi = this.api().webhooks(this.user.id, token).messages("@original").patch();
+        const builtApi = this.api()
+            .webhooks(this.user.id, token)
+            .messages("@original")
+            .patch();
         const req = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1255,7 +1270,10 @@ export default class Client {
         return new Message(res, this);
     }
     async deleteOriginalInteractionResponse(token) {
-        const builtApi = this.api().webhooks(this.user.id, token).messages("@original").delete();
+        const builtApi = this.api()
+            .webhooks(this.user.id, token)
+            .messages("@original")
+            .delete();
         const req = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1273,7 +1291,10 @@ export default class Client {
         return res && new Message(res, this);
     }
     async getFollowupMessage(token, messageId) {
-        const builtApi = this.api().webhooks(this.user.id, token).messages(messageId).get();
+        const builtApi = this.api()
+            .webhooks(this.user.id, token)
+            .messages(messageId)
+            .get();
         const req = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1282,7 +1303,10 @@ export default class Client {
         return res && new Message(res, this);
     }
     async editFollowupMessage(token, messageId, data) {
-        const builtApi = this.api().webhooks(this.user.id, token).messages(messageId).patch();
+        const builtApi = this.api()
+            .webhooks(this.user.id, token)
+            .messages(messageId)
+            .patch();
         const req = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1292,7 +1316,10 @@ export default class Client {
         return res && new Message(res, this);
     }
     async deleteFollowupMessage(token, messageId) {
-        const builtApi = this.api().webhooks(this.user.id, token).messages(messageId).delete();
+        const builtApi = this.api()
+            .webhooks(this.user.id, token)
+            .messages(messageId)
+            .delete();
         const req = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1307,40 +1334,55 @@ export default class Client {
         req.method = builtApi.method;
         if (withLocalization)
             req.params = { withLocalization };
-        const res = await request(req, this);
+        const res = (await request(req, this));
         return res.map((command) => convertToCamelCase(command));
     }
     async createGlobalApplicationCommand(data) {
-        const builtApi = this.api().applications(this.user.id).commands().post();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .commands()
+            .post();
         const req = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         req.params = data;
-        const res = await request(req, this);
-        return res && convertToCamelCase(res);
+        const res = (await request(req, this));
+        return (res &&
+            convertToCamelCase(res));
     }
     async getGlobalApplicationCommand(commandId) {
-        const builtApi = this.api().applications(this.user.id).commands(commandId).get();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .commands(commandId)
+            .get();
         const req = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
-        const res = await request(req, this);
-        return res && convertToCamelCase(res);
+        const res = (await request(req, this));
+        return (res &&
+            convertToCamelCase(res));
     }
     async editGlobalApplicationCommand(commandId, data) {
-        const builtApi = this.api().applications(this.user.id).commands(commandId).patch();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .commands(commandId)
+            .patch();
         const req = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         req.params = data;
-        const res = await request(req, this);
-        return res && convertToCamelCase(res);
+        const res = (await request(req, this));
+        return (res &&
+            convertToCamelCase(res));
     }
     async deleteGlobalApplicationCommand(commandId) {
-        const builtApi = this.api().applications(this.user.id).commands(commandId).delete();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .commands(commandId)
+            .delete();
         const req = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1354,51 +1396,74 @@ export default class Client {
         req.route = builtApi.route;
         req.method = builtApi.method;
         req.params = data;
-        const res = await request(req, this);
+        const res = (await request(req, this));
         return res.map((command) => convertToCamelCase(command));
     }
     async getGuildApplicationCommands(guildId, withLocalization) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().get();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands()
+            .get();
         const req = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         if (withLocalization)
             req.params = { withLocalization };
-        const res = await request(req, this);
+        const res = (await request(req, this));
         return res.map((command) => convertToCamelCase(command));
     }
     async createGuildApplicationCommand(guildId, data) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().post();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands()
+            .post();
         const req = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         req.params = data;
-        const res = await request(req, this);
-        return res && convertToCamelCase(res);
+        const res = (await request(req, this));
+        return (res &&
+            convertToCamelCase(res));
     }
     async getGuildApplicationCommand(guildId, commandId) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).get();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands(commandId)
+            .get();
         const req = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
-        const res = await request(req, this);
-        return res && convertToCamelCase(res);
+        const res = (await request(req, this));
+        return (res &&
+            convertToCamelCase(res));
     }
     async editGuildApplicationCommand(guildId, commandId, data) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).patch();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands(commandId)
+            .patch();
         const req = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         req.params = data;
-        const res = await request(req, this);
-        return res && convertToCamelCase(res);
+        const res = (await request(req, this));
+        return (res &&
+            convertToCamelCase(res));
     }
     async deleteGuildApplicationCommand(guildId, commandId) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).delete();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands(commandId)
+            .delete();
         const req = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1406,17 +1471,26 @@ export default class Client {
         await request(req, this);
     }
     async bulkOverwriteGuildApplicationCommands(guildId, data) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().put();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands()
+            .put();
         const req = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         req.params = data;
-        const res = await request(req, this);
+        const res = (await request(req, this));
         return res.map((command) => convertToCamelCase(command));
     }
     async getGuildApplicationCommandPermissions(guildId) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().permissions().get();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands()
+            .permissions()
+            .get();
         const req = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1425,7 +1499,12 @@ export default class Client {
         return res.map((command) => convertToCamelCase(command));
     }
     async getApplicationCommandPermissions(guildId, commandId) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).permissions().get();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands(commandId)
+            .permissions()
+            .get();
         const req = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;

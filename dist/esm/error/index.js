@@ -1,7 +1,7 @@
-export class AoiLunaError {
+export class ZenethError {
     static apiError(msg, url, route, status, method) {
         const error = new Error(msg);
-        error.name = 'AoiLunaError -> [DAPIError]';
+        error.name = 'ZenethError -> [DAPIError]';
         //@ts-ignore
         error.url = url;
         //@ts-ignore

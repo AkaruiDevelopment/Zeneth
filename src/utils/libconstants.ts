@@ -2,7 +2,7 @@
 import { Intents } from "../typings/enums.js";
 const DiscordApi = 'https://discord.com/api/v10';
 const pack = {
-  name: 'aoiluna',
+  name: 'zeneth',
   version: '0.0.1',
   description: 'A library to interact with discord api easily ',
   main: './dist/cjs/index.js',
@@ -18,13 +18,13 @@ const pack = {
   },
   repository: {
     type: 'git',
-    url: 'git+https://github.com/akaruidevelopment/aoiluna.git'
+    url: 'git+https://github.com/akaruidevelopment/zeneth.git'
   },
   keywords: [ 'discord-api', 'discord', 'api', 'nodejs', 'deno', 'discordbot' ],
   author: 'Akarui Development',
   license: 'Apache-2.0',
-  bugs: { url: 'https://github.com/akaruidevelopment/aoiluna/issues' },
-  homepage: 'https://github.com/akaruidevelopment/aoiluna#readme',
+  bugs: { url: 'https://github.com/akaruidevelopment/zeneth/issues' },
+  homepage: 'https://github.com/akaruidevelopment/zeneth#readme',
   devDependencies: {
     '@types/node': '^18.11.18',
     '@types/ws': '^8.5.4',

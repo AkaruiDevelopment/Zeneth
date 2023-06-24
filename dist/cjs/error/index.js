@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AoiLunaError = void 0;
-class AoiLunaError {
+exports.ZenethError = void 0;
+class ZenethError {
     static apiError(msg, url, route, status, method) {
         const error = new Error(msg);
-        error.name = 'AoiLunaError -> [DAPIError]';
+        error.name = 'ZenethError -> [DAPIError]';
         //@ts-ignore
         error.url = url;
         //@ts-ignore
@@ -16,5 +16,5 @@ class AoiLunaError {
         throw error;
     }
 }
-exports.AoiLunaError = AoiLunaError;
+exports.ZenethError = ZenethError;
 //# sourceMappingURL=index.js.map

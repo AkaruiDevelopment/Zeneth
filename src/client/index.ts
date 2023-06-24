@@ -1,4 +1,8 @@
-import { GatewayEventNames, InteractionTypes, MFALevel } from "../typings/enums.js";
+import {
+    GatewayEventNames,
+    InteractionTypes,
+    MFALevel,
+} from "../typings/enums.js";
 import {
     ApplicationRoleConnectionMetadata,
     AutoModerationRule,
@@ -58,7 +62,7 @@ import {
     convertToCamelCase,
     convertUrlOrFileToBase64,
     createNullObject,
-    parseDataToAoiLunaStandards,
+    parseDataToZenethStandards,
     returnMessagePayload,
 } from "../utils/helpers.js";
 
@@ -1080,7 +1084,7 @@ export default class Client {
         req.method = builtApi.method;
 
         const res = await request(req, this);
-        return parseDataToAoiLunaStandards(convertToCamelCase(res));
+        return parseDataToZenethStandards(convertToCamelCase(res));
     }
 
     async modifyGuild(
@@ -1596,8 +1600,15 @@ export default class Client {
         return convertToCamelCase(await request(req, this));
     }
 
-    async deleteGuildIntegration( guildId: Snowflake, integrationId: Snowflake, reason?: string, ) {
-        const builtApi = this.api().guilds(guildId).integrations(integrationId).delete();
+    async deleteGuildIntegration(
+        guildId: Snowflake,
+        integrationId: Snowflake,
+        reason?: string,
+    ) {
+        const builtApi = this.api()
+            .guilds(guildId)
+            .integrations(integrationId)
+            .delete();
         const req: requestOptions = createNullObject();
 
         req.url = builtApi.api;
@@ -1621,7 +1632,11 @@ export default class Client {
         return convertToCamelCase(await request(req, this));
     }
 
-    async modifyGuildWidget( guildId: Snowflake, data: ModifyGuildWidgetPayload, reason?: string, ) {
+    async modifyGuildWidget(
+        guildId: Snowflake,
+        data: ModifyGuildWidgetPayload,
+        reason?: string,
+    ) {
         const builtApi = this.api().guilds(guildId).widget().patch();
         const req: requestOptions = createNullObject();
 
@@ -1676,10 +1691,16 @@ export default class Client {
         req.route = builtApi.route;
         req.method = builtApi.method;
 
-        return parseDataToAoiLunaStandards(convertToCamelCase(await request(req, this)));
+        return parseDataToZenethStandards(
+            convertToCamelCase(await request(req, this)),
+        );
     }
 
-    async modifyGuildWelcomeScreen( guildId: Snowflake, data: ModifyGuildWelcomeScreenPayload, reason?: string, ) {
+    async modifyGuildWelcomeScreen(
+        guildId: Snowflake,
+        data: ModifyGuildWelcomeScreenPayload,
+        reason?: string,
+    ) {
         const builtApi = this.api().guilds(guildId)["welcome-screen"]().patch();
         const req: requestOptions = createNullObject();
 
@@ -1689,22 +1710,35 @@ export default class Client {
         req.method = builtApi.method;
         req.params = data;
 
-        return parseDataToAoiLunaStandards(convertToCamelCase(await request(req, this)));
+        return parseDataToZenethStandards(
+            convertToCamelCase(await request(req, this)),
+        );
     }
 
     async getGuildOnBoarding(guildId: Snowflake) {
-        const builtApi = this.api().guilds(guildId)["onboarding-application"]().get();
+        const builtApi = this.api()
+            .guilds(guildId)
+            ["onboarding-application"]()
+            .get();
         const req: requestOptions = createNullObject();
 
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
 
-        return parseDataToAoiLunaStandards(convertToCamelCase(await request(req, this)));
+        return parseDataToZenethStandards(
+            convertToCamelCase(await request(req, this)),
+        );
     }
 
-    async modifyCurrentUserVoiceState( guildId: Snowflake, data: ModifyCurrentUserVoiceStatePayload, ) {
-        const builtApi = this.api().guilds(guildId)["voice-states"]("@me").patch();
+    async modifyCurrentUserVoiceState(
+        guildId: Snowflake,
+        data: ModifyCurrentUserVoiceStatePayload,
+    ) {
+        const builtApi = this.api()
+            .guilds(guildId)
+            ["voice-states"]("@me")
+            .patch();
         const req: requestOptions = createNullObject();
 
         req.url = builtApi.api;
@@ -1712,11 +1746,20 @@ export default class Client {
         req.method = builtApi.method;
         req.params = data;
 
-        return parseDataToAoiLunaStandards(convertToCamelCase(await request(req, this)));
+        return parseDataToZenethStandards(
+            convertToCamelCase(await request(req, this)),
+        );
     }
 
-    async modifyUserVoiceState( guildId: Snowflake, userId: Snowflake, data: ModifyUserVoiceStatePayload, ) {
-        const builtApi = this.api().guilds(guildId)["voice-states"](userId).patch();
+    async modifyUserVoiceState(
+        guildId: Snowflake,
+        userId: Snowflake,
+        data: ModifyUserVoiceStatePayload,
+    ) {
+        const builtApi = this.api()
+            .guilds(guildId)
+            ["voice-states"](userId)
+            .patch();
         const req: requestOptions = createNullObject();
 
         req.url = builtApi.api;
@@ -1724,9 +1767,10 @@ export default class Client {
         req.method = builtApi.method;
         req.params = data;
 
-        return parseDataToAoiLunaStandards(convertToCamelCase(await request(req, this)));
+        return parseDataToZenethStandards(
+            convertToCamelCase(await request(req, this)),
+        );
     }
-
 
     // User
 
@@ -1756,24 +1800,27 @@ export default class Client {
 
     // Interaction
     async createInteractionResponse(
-        id:Snowflake,
-        token:string,
-        type:InteractionTypes,
-        data?:InteractionResponsePayload,
+        id: Snowflake,
+        token: string,
+        type: InteractionTypes,
+        data?: InteractionResponsePayload,
     ) {
-        const builtApi = this.api().interactions(id,token).callback().post();
+        const builtApi = this.api().interactions(id, token).callback().post();
         const req: requestOptions = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         req.params = {
             type,
-            data:data,
-        }
+            data: data,
+        };
         await request(req, this);
     }
-    async getOriginalInteractionResponse(token:string) {
-        const builtApi = this.api().webhooks(this.user.id,token).messages("@original").get();
+    async getOriginalInteractionResponse(token: string) {
+        const builtApi = this.api()
+            .webhooks(this.user.id, token)
+            .messages("@original")
+            .get();
         const req: requestOptions = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1781,8 +1828,14 @@ export default class Client {
         const res = await request(req, this);
         return new Message(res, this);
     }
-    async editOriginalInteractionResponse(token:string,data:InteractionResponsePayload) {
-        const builtApi = this.api().webhooks(this.user.id,token).messages("@original").patch();
+    async editOriginalInteractionResponse(
+        token: string,
+        data: InteractionResponsePayload,
+    ) {
+        const builtApi = this.api()
+            .webhooks(this.user.id, token)
+            .messages("@original")
+            .patch();
         const req: requestOptions = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1791,16 +1844,22 @@ export default class Client {
         const res = await request(req, this);
         return new Message(res, this);
     }
-    async deleteOriginalInteractionResponse(token:string) {
-        const builtApi = this.api().webhooks(this.user.id,token).messages("@original").delete();
+    async deleteOriginalInteractionResponse(token: string) {
+        const builtApi = this.api()
+            .webhooks(this.user.id, token)
+            .messages("@original")
+            .delete();
         const req: requestOptions = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         await request(req, this);
     }
-    async createFollowupMessage(token:string,data:InteractionResponsePayload) {
-        const builtApi = this.api().webhooks(this.user.id,token).post();
+    async createFollowupMessage(
+        token: string,
+        data: InteractionResponsePayload,
+    ) {
+        const builtApi = this.api().webhooks(this.user.id, token).post();
         const req: requestOptions = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1809,8 +1868,11 @@ export default class Client {
         const res = await request(req, this);
         return res && new Message(res, this);
     }
-    async getFollowupMessage(token:string,messageId:Snowflake) {
-        const builtApi = this.api().webhooks(this.user.id,token).messages(messageId).get();
+    async getFollowupMessage(token: string, messageId: Snowflake) {
+        const builtApi = this.api()
+            .webhooks(this.user.id, token)
+            .messages(messageId)
+            .get();
         const req: requestOptions = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1818,8 +1880,15 @@ export default class Client {
         const res = await request(req, this);
         return res && new Message(res, this);
     }
-    async editFollowupMessage(token:string,messageId:Snowflake,data:InteractionResponsePayload) {
-        const builtApi = this.api().webhooks(this.user.id,token).messages(messageId).patch();
+    async editFollowupMessage(
+        token: string,
+        messageId: Snowflake,
+        data: InteractionResponsePayload,
+    ) {
+        const builtApi = this.api()
+            .webhooks(this.user.id, token)
+            .messages(messageId)
+            .patch();
         const req: requestOptions = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1828,135 +1897,256 @@ export default class Client {
         const res = await request(req, this);
         return res && new Message(res, this);
     }
-    async deleteFollowupMessage(token:string,messageId:Snowflake) {
-        const builtApi = this.api().webhooks(this.user.id,token).messages(messageId).delete();
+    async deleteFollowupMessage(token: string, messageId: Snowflake) {
+        const builtApi = this.api()
+            .webhooks(this.user.id, token)
+            .messages(messageId)
+            .delete();
         const req: requestOptions = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         await request(req, this);
     }
-    async getGlobalApplicationCommands(withLocalization?:boolean) {
+    async getGlobalApplicationCommands(withLocalization?: boolean) {
         const builtApi = this.api().applications(this.user.id).commands().get();
         const req: requestOptions = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
-        if (withLocalization) req.params = {withLocalization};
-        const res = await request(req, this) as RawApplicationData[];
-        return res.map((command:RawApplicationData) => convertToCamelCase(command) as Camelize<RawApplicationData>);
+        if (withLocalization) req.params = { withLocalization };
+        const res = (await request(req, this)) as RawApplicationData[];
+        return res.map(
+            (command: RawApplicationData) =>
+                convertToCamelCase(command) as Camelize<RawApplicationData>,
+        );
     }
 
-    async createGlobalApplicationCommand(data:CreateApplicationCommandPayload) {
-        const builtApi = this.api().applications(this.user.id).commands().post();
+    async createGlobalApplicationCommand(
+        data: CreateApplicationCommandPayload,
+    ) {
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .commands()
+            .post();
         const req: requestOptions = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         req.params = data;
-        const res = await request(req, this) as RawApplicationData | undefined;
-        return res && convertToCamelCase(res) as undefined | Camelize<RawApplicationData>;
+        const res = (await request(req, this)) as
+            | RawApplicationData
+            | undefined;
+        return (
+            res &&
+            (convertToCamelCase(res) as
+                | undefined
+                | Camelize<RawApplicationData>)
+        );
     }
-    async getGlobalApplicationCommand(commandId:Snowflake) {
-        const builtApi = this.api().applications(this.user.id).commands(commandId).get();
+    async getGlobalApplicationCommand(commandId: Snowflake) {
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .commands(commandId)
+            .get();
         const req: requestOptions = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
-        const res = await request(req, this) as RawApplicationData | undefined;
-        return res && convertToCamelCase(res) as undefined | Camelize<RawApplicationData>;
-    }   
-    async editGlobalApplicationCommand(commandId:Snowflake,data:Omit<CreateApplicationCommandPayload,'type'>) {
-        const builtApi = this.api().applications(this.user.id).commands(commandId).patch();
+        const res = (await request(req, this)) as
+            | RawApplicationData
+            | undefined;
+        return (
+            res &&
+            (convertToCamelCase(res) as
+                | undefined
+                | Camelize<RawApplicationData>)
+        );
+    }
+    async editGlobalApplicationCommand(
+        commandId: Snowflake,
+        data: Omit<CreateApplicationCommandPayload, "type">,
+    ) {
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .commands(commandId)
+            .patch();
         const req: requestOptions = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         req.params = data;
-        const res = await request(req, this) as RawApplicationData | undefined;
-        return res && convertToCamelCase(res) as undefined | Camelize<RawApplicationData>;
+        const res = (await request(req, this)) as
+            | RawApplicationData
+            | undefined;
+        return (
+            res &&
+            (convertToCamelCase(res) as
+                | undefined
+                | Camelize<RawApplicationData>)
+        );
     }
-    async deleteGlobalApplicationCommand(commandId:Snowflake) {
-        const builtApi = this.api().applications(this.user.id).commands(commandId).delete();
+    async deleteGlobalApplicationCommand(commandId: Snowflake) {
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .commands(commandId)
+            .delete();
         const req: requestOptions = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         await request(req, this);
     }
-    async bulkOverwriteGlobalApplicationCommands(data:CreateApplicationCommandPayload[]) {
+    async bulkOverwriteGlobalApplicationCommands(
+        data: CreateApplicationCommandPayload[],
+    ) {
         const builtApi = this.api().applications(this.user.id).commands().put();
         const req: requestOptions = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         req.params = data;
-        const res = await request(req, this) as RawApplicationData[];
-        return res.map((command:RawApplicationData) => convertToCamelCase(command) as Camelize<RawApplicationData>);
+        const res = (await request(req, this)) as RawApplicationData[];
+        return res.map(
+            (command: RawApplicationData) =>
+                convertToCamelCase(command) as Camelize<RawApplicationData>,
+        );
     }
-    async getGuildApplicationCommands(guildId:Snowflake,withLocalization?:boolean) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().get();
+    async getGuildApplicationCommands(
+        guildId: Snowflake,
+        withLocalization?: boolean,
+    ) {
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands()
+            .get();
         const req: requestOptions = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
-        if (withLocalization) req.params = {withLocalization};
-        const res = await request(req, this) as RawApplicationData[];
-        return res.map((command:RawApplicationData) => convertToCamelCase(command) as Camelize<RawApplicationData>);
+        if (withLocalization) req.params = { withLocalization };
+        const res = (await request(req, this)) as RawApplicationData[];
+        return res.map(
+            (command: RawApplicationData) =>
+                convertToCamelCase(command) as Camelize<RawApplicationData>,
+        );
     }
-    async createGuildApplicationCommand(guildId:Snowflake,data:CreateApplicationCommandPayload) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().post();
+    async createGuildApplicationCommand(
+        guildId: Snowflake,
+        data: CreateApplicationCommandPayload,
+    ) {
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands()
+            .post();
         const req: requestOptions = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         req.params = data;
-        const res = await request(req, this) as RawApplicationData | undefined;
-        return res && convertToCamelCase(res) as undefined | Camelize<RawApplicationData>;
+        const res = (await request(req, this)) as
+            | RawApplicationData
+            | undefined;
+        return (
+            res &&
+            (convertToCamelCase(res) as
+                | undefined
+                | Camelize<RawApplicationData>)
+        );
     }
-    async getGuildApplicationCommand(guildId:Snowflake,commandId:Snowflake) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).get();
+    async getGuildApplicationCommand(guildId: Snowflake, commandId: Snowflake) {
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands(commandId)
+            .get();
         const req: requestOptions = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
-        const res = await request(req, this) as RawApplicationData | undefined;
-        return res && convertToCamelCase(res) as undefined | Camelize<RawApplicationData>;
+        const res = (await request(req, this)) as
+            | RawApplicationData
+            | undefined;
+        return (
+            res &&
+            (convertToCamelCase(res) as
+                | undefined
+                | Camelize<RawApplicationData>)
+        );
     }
-    async editGuildApplicationCommand(guildId:Snowflake,commandId:Snowflake,data:Omit<CreateApplicationCommandPayload,'type'>) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).patch();
+    async editGuildApplicationCommand(
+        guildId: Snowflake,
+        commandId: Snowflake,
+        data: Omit<CreateApplicationCommandPayload, "type">,
+    ) {
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands(commandId)
+            .patch();
         const req: requestOptions = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         req.params = data;
-        const res = await request(req, this) as RawApplicationData | undefined;
-        return res && convertToCamelCase(res) as undefined | Camelize<RawApplicationData>;
+        const res = (await request(req, this)) as
+            | RawApplicationData
+            | undefined;
+        return (
+            res &&
+            (convertToCamelCase(res) as
+                | undefined
+                | Camelize<RawApplicationData>)
+        );
     }
-    async deleteGuildApplicationCommand(guildId:Snowflake,commandId:Snowflake) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).delete();
+    async deleteGuildApplicationCommand(
+        guildId: Snowflake,
+        commandId: Snowflake,
+    ) {
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands(commandId)
+            .delete();
         const req: requestOptions = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         await request(req, this);
     }
-    async bulkOverwriteGuildApplicationCommands(guildId:Snowflake,data:CreateApplicationCommandPayload[]) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().put();
+    async bulkOverwriteGuildApplicationCommands(
+        guildId: Snowflake,
+        data: CreateApplicationCommandPayload[],
+    ) {
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands()
+            .put();
         const req: requestOptions = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         req.params = data;
-        const res = await request(req, this) as RawApplicationData[];
-        return res.map((command:RawApplicationData) => convertToCamelCase(command) as Camelize<RawApplicationData>);
+        const res = (await request(req, this)) as RawApplicationData[];
+        return res.map(
+            (command: RawApplicationData) =>
+                convertToCamelCase(command) as Camelize<RawApplicationData>,
+        );
     }
-    async getGuildApplicationCommandPermissions(guildId:Snowflake) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().permissions().get();
+    async getGuildApplicationCommandPermissions(guildId: Snowflake) {
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands()
+            .permissions()
+            .get();
         const req: requestOptions = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
-        req.method = builtApi.method;        
+        req.method = builtApi.method;
         const res = (await request(
             req,
             this,
@@ -1968,12 +2158,20 @@ export default class Client {
                 ) as Camelize<RawGuildApplicationCommandPermissions>,
         );
     }
-    async getApplicationCommandPermissions(guildId:Snowflake,commandId:Snowflake) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).permissions().get();
+    async getApplicationCommandPermissions(
+        guildId: Snowflake,
+        commandId: Snowflake,
+    ) {
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands(commandId)
+            .permissions()
+            .get();
         const req: requestOptions = createNullObject();
         req.url = builtApi.api;
         req.route = builtApi.route;
-        req.method = builtApi.method;        
+        req.method = builtApi.method;
         const res = (await request(
             req,
             this,
@@ -1982,5 +2180,4 @@ export default class Client {
             res,
         ) as Camelize<RawGuildApplicationCommandPermissions>;
     }
-    
 }

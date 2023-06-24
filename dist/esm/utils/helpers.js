@@ -14,12 +14,14 @@ export function ConvertBigIntToHex(hash) {
     }
     return hash.toString(16);
 }
-export function parseDataToAoiLunaStandards(data) {
+export function parseDataToZenethStandards(data) {
     if (data === null)
         return null;
     if (data === undefined)
         return undefined;
-    if (!isNaN(Number(data)) && typeof data === "string" && Number(data) > Number.MAX_SAFE_INTEGER)
+    if (!isNaN(Number(data)) &&
+        typeof data === "string" &&
+        Number(data) > Number.MAX_SAFE_INTEGER)
         return BigInt(data);
     if (typeof data === "string") {
         try {
@@ -31,10 +33,10 @@ export function parseDataToAoiLunaStandards(data) {
     }
     if (typeof data === "object" && data) {
         if (data instanceof Array) {
-            return data.map((item) => parseDataToAoiLunaStandards(item));
+            return data.map((item) => parseDataToZenethStandards(item));
         }
         for (const key in data) {
-            data[key] = parseDataToAoiLunaStandards(data[key]);
+            data[key] = parseDataToZenethStandards(data[key]);
         }
         return data;
     }
@@ -42,7 +44,7 @@ export function parseDataToAoiLunaStandards(data) {
 }
 export function convertToCamelCase(obj) {
     if (typeof obj !== "object")
-        return parseDataToAoiLunaStandards(obj);
+        return parseDataToZenethStandards(obj);
     if (!obj)
         return obj;
     else if (obj instanceof Array) {

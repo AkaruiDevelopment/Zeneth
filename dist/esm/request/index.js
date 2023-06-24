@@ -1,4 +1,4 @@
-import { AoiLunaError } from '../error/index.js';
+import { ZenethError } from "../error/index.js";
 //@ts-ignore
 import { userAgent } from '../utils/libconstants.js';
 import { Stringify, convertToSnakeCase, createNullObject, } from '../utils/helpers.js';
@@ -65,7 +65,7 @@ export default async function request(data, client, headers) {
                 if (res.ok)
                     resolve(res.json());
                 else {
-                    throw AoiLunaError.apiError((await res.json()).message, data.url, data.route, res.status, data.method);
+                    throw ZenethError.apiError((await res.json()).message, data.url, data.route, res.status, data.method);
                 }
             }, globalQueueData.resetAfter);
         });
@@ -78,7 +78,7 @@ export default async function request(data, client, headers) {
                     if (res.ok)
                         resolve(res.json());
                     else {
-                        throw AoiLunaError.apiError((await res.json()).message, data.url, data.route, res.status, data.method);
+                        throw ZenethError.apiError((await res.json()).message, data.url, data.route, res.status, data.method);
                     }
                 }, queueData.resetAfter);
             });
@@ -88,7 +88,7 @@ export default async function request(data, client, headers) {
             if (res.ok)
                 return res.json();
             else {
-                throw AoiLunaError.apiError((await res.json()).message, data.url, data.route, res.status, data.method);
+                throw ZenethError.apiError((await res.json()).message, data.url, data.route, res.status, data.method);
             }
         }
     }

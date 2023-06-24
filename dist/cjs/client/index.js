@@ -765,7 +765,7 @@ class Client {
         req.route = builtApi.route;
         req.method = builtApi.method;
         const res = await (0, index_js_2.default)(req, this);
-        return (0, helpers_js_1.parseDataToAoiLunaStandards)((0, helpers_js_1.convertToCamelCase)(res));
+        return (0, helpers_js_1.parseDataToZenethStandards)((0, helpers_js_1.convertToCamelCase)(res));
     }
     async modifyGuild(guildId, data, reason) {
         const builtApi = this.api().guilds(guildId).patch();
@@ -1116,7 +1116,10 @@ class Client {
         return (0, helpers_js_1.convertToCamelCase)(await (0, index_js_2.default)(req, this));
     }
     async deleteGuildIntegration(guildId, integrationId, reason) {
-        const builtApi = this.api().guilds(guildId).integrations(integrationId).delete();
+        const builtApi = this.api()
+            .guilds(guildId)
+            .integrations(integrationId)
+            .delete();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1175,7 +1178,7 @@ class Client {
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
-        return (0, helpers_js_1.parseDataToAoiLunaStandards)((0, helpers_js_1.convertToCamelCase)(await (0, index_js_2.default)(req, this)));
+        return (0, helpers_js_1.parseDataToZenethStandards)((0, helpers_js_1.convertToCamelCase)(await (0, index_js_2.default)(req, this)));
     }
     async modifyGuildWelcomeScreen(guildId, data, reason) {
         const builtApi = this.api().guilds(guildId)["welcome-screen"]().patch();
@@ -1185,33 +1188,39 @@ class Client {
         req.auditLogReason = reason;
         req.method = builtApi.method;
         req.params = data;
-        return (0, helpers_js_1.parseDataToAoiLunaStandards)((0, helpers_js_1.convertToCamelCase)(await (0, index_js_2.default)(req, this)));
+        return (0, helpers_js_1.parseDataToZenethStandards)((0, helpers_js_1.convertToCamelCase)(await (0, index_js_2.default)(req, this)));
     }
     async getGuildOnBoarding(guildId) {
-        const builtApi = this.api().guilds(guildId)["onboarding-application"]().get();
+        const builtApi = this.api()
+            .guilds(guildId)["onboarding-application"]()
+            .get();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
-        return (0, helpers_js_1.parseDataToAoiLunaStandards)((0, helpers_js_1.convertToCamelCase)(await (0, index_js_2.default)(req, this)));
+        return (0, helpers_js_1.parseDataToZenethStandards)((0, helpers_js_1.convertToCamelCase)(await (0, index_js_2.default)(req, this)));
     }
     async modifyCurrentUserVoiceState(guildId, data) {
-        const builtApi = this.api().guilds(guildId)["voice-states"]("@me").patch();
+        const builtApi = this.api()
+            .guilds(guildId)["voice-states"]("@me")
+            .patch();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         req.params = data;
-        return (0, helpers_js_1.parseDataToAoiLunaStandards)((0, helpers_js_1.convertToCamelCase)(await (0, index_js_2.default)(req, this)));
+        return (0, helpers_js_1.parseDataToZenethStandards)((0, helpers_js_1.convertToCamelCase)(await (0, index_js_2.default)(req, this)));
     }
     async modifyUserVoiceState(guildId, userId, data) {
-        const builtApi = this.api().guilds(guildId)["voice-states"](userId).patch();
+        const builtApi = this.api()
+            .guilds(guildId)["voice-states"](userId)
+            .patch();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         req.params = data;
-        return (0, helpers_js_1.parseDataToAoiLunaStandards)((0, helpers_js_1.convertToCamelCase)(await (0, index_js_2.default)(req, this)));
+        return (0, helpers_js_1.parseDataToZenethStandards)((0, helpers_js_1.convertToCamelCase)(await (0, index_js_2.default)(req, this)));
     }
     // User
     async getUser(userId) {
@@ -1241,7 +1250,10 @@ class Client {
         await (0, index_js_2.default)(req, this);
     }
     async getOriginalInteractionResponse(token) {
-        const builtApi = this.api().webhooks(this.user.id, token).messages("@original").get();
+        const builtApi = this.api()
+            .webhooks(this.user.id, token)
+            .messages("@original")
+            .get();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1250,7 +1262,10 @@ class Client {
         return new index_js_3.Message(res, this);
     }
     async editOriginalInteractionResponse(token, data) {
-        const builtApi = this.api().webhooks(this.user.id, token).messages("@original").patch();
+        const builtApi = this.api()
+            .webhooks(this.user.id, token)
+            .messages("@original")
+            .patch();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1260,7 +1275,10 @@ class Client {
         return new index_js_3.Message(res, this);
     }
     async deleteOriginalInteractionResponse(token) {
-        const builtApi = this.api().webhooks(this.user.id, token).messages("@original").delete();
+        const builtApi = this.api()
+            .webhooks(this.user.id, token)
+            .messages("@original")
+            .delete();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1278,7 +1296,10 @@ class Client {
         return res && new index_js_3.Message(res, this);
     }
     async getFollowupMessage(token, messageId) {
-        const builtApi = this.api().webhooks(this.user.id, token).messages(messageId).get();
+        const builtApi = this.api()
+            .webhooks(this.user.id, token)
+            .messages(messageId)
+            .get();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1287,7 +1308,10 @@ class Client {
         return res && new index_js_3.Message(res, this);
     }
     async editFollowupMessage(token, messageId, data) {
-        const builtApi = this.api().webhooks(this.user.id, token).messages(messageId).patch();
+        const builtApi = this.api()
+            .webhooks(this.user.id, token)
+            .messages(messageId)
+            .patch();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1297,7 +1321,10 @@ class Client {
         return res && new index_js_3.Message(res, this);
     }
     async deleteFollowupMessage(token, messageId) {
-        const builtApi = this.api().webhooks(this.user.id, token).messages(messageId).delete();
+        const builtApi = this.api()
+            .webhooks(this.user.id, token)
+            .messages(messageId)
+            .delete();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1312,40 +1339,55 @@ class Client {
         req.method = builtApi.method;
         if (withLocalization)
             req.params = { withLocalization };
-        const res = await (0, index_js_2.default)(req, this);
+        const res = (await (0, index_js_2.default)(req, this));
         return res.map((command) => (0, helpers_js_1.convertToCamelCase)(command));
     }
     async createGlobalApplicationCommand(data) {
-        const builtApi = this.api().applications(this.user.id).commands().post();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .commands()
+            .post();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         req.params = data;
-        const res = await (0, index_js_2.default)(req, this);
-        return res && (0, helpers_js_1.convertToCamelCase)(res);
+        const res = (await (0, index_js_2.default)(req, this));
+        return (res &&
+            (0, helpers_js_1.convertToCamelCase)(res));
     }
     async getGlobalApplicationCommand(commandId) {
-        const builtApi = this.api().applications(this.user.id).commands(commandId).get();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .commands(commandId)
+            .get();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
-        const res = await (0, index_js_2.default)(req, this);
-        return res && (0, helpers_js_1.convertToCamelCase)(res);
+        const res = (await (0, index_js_2.default)(req, this));
+        return (res &&
+            (0, helpers_js_1.convertToCamelCase)(res));
     }
     async editGlobalApplicationCommand(commandId, data) {
-        const builtApi = this.api().applications(this.user.id).commands(commandId).patch();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .commands(commandId)
+            .patch();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         req.params = data;
-        const res = await (0, index_js_2.default)(req, this);
-        return res && (0, helpers_js_1.convertToCamelCase)(res);
+        const res = (await (0, index_js_2.default)(req, this));
+        return (res &&
+            (0, helpers_js_1.convertToCamelCase)(res));
     }
     async deleteGlobalApplicationCommand(commandId) {
-        const builtApi = this.api().applications(this.user.id).commands(commandId).delete();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .commands(commandId)
+            .delete();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1359,51 +1401,74 @@ class Client {
         req.route = builtApi.route;
         req.method = builtApi.method;
         req.params = data;
-        const res = await (0, index_js_2.default)(req, this);
+        const res = (await (0, index_js_2.default)(req, this));
         return res.map((command) => (0, helpers_js_1.convertToCamelCase)(command));
     }
     async getGuildApplicationCommands(guildId, withLocalization) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().get();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands()
+            .get();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         if (withLocalization)
             req.params = { withLocalization };
-        const res = await (0, index_js_2.default)(req, this);
+        const res = (await (0, index_js_2.default)(req, this));
         return res.map((command) => (0, helpers_js_1.convertToCamelCase)(command));
     }
     async createGuildApplicationCommand(guildId, data) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().post();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands()
+            .post();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         req.params = data;
-        const res = await (0, index_js_2.default)(req, this);
-        return res && (0, helpers_js_1.convertToCamelCase)(res);
+        const res = (await (0, index_js_2.default)(req, this));
+        return (res &&
+            (0, helpers_js_1.convertToCamelCase)(res));
     }
     async getGuildApplicationCommand(guildId, commandId) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).get();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands(commandId)
+            .get();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
-        const res = await (0, index_js_2.default)(req, this);
-        return res && (0, helpers_js_1.convertToCamelCase)(res);
+        const res = (await (0, index_js_2.default)(req, this));
+        return (res &&
+            (0, helpers_js_1.convertToCamelCase)(res));
     }
     async editGuildApplicationCommand(guildId, commandId, data) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).patch();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands(commandId)
+            .patch();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         req.params = data;
-        const res = await (0, index_js_2.default)(req, this);
-        return res && (0, helpers_js_1.convertToCamelCase)(res);
+        const res = (await (0, index_js_2.default)(req, this));
+        return (res &&
+            (0, helpers_js_1.convertToCamelCase)(res));
     }
     async deleteGuildApplicationCommand(guildId, commandId) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).delete();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands(commandId)
+            .delete();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1411,17 +1476,26 @@ class Client {
         await (0, index_js_2.default)(req, this);
     }
     async bulkOverwriteGuildApplicationCommands(guildId, data) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().put();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands()
+            .put();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
         req.method = builtApi.method;
         req.params = data;
-        const res = await (0, index_js_2.default)(req, this);
+        const res = (await (0, index_js_2.default)(req, this));
         return res.map((command) => (0, helpers_js_1.convertToCamelCase)(command));
     }
     async getGuildApplicationCommandPermissions(guildId) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().permissions().get();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands()
+            .permissions()
+            .get();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
@@ -1430,7 +1504,12 @@ class Client {
         return res.map((command) => (0, helpers_js_1.convertToCamelCase)(command));
     }
     async getApplicationCommandPermissions(guildId, commandId) {
-        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).permissions().get();
+        const builtApi = this.api()
+            .applications(this.user.id)
+            .guilds(guildId)
+            .commands(commandId)
+            .permissions()
+            .get();
         const req = (0, helpers_js_1.createNullObject)();
         req.url = builtApi.api;
         req.route = builtApi.route;
