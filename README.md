@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://aoi.js.org">
-    <img width="300" src="./.github/assets/Zeneth.png" alt="aoijs">
+    <img width="200" src="./.github/assets/Zeneth.png" alt="aoijs">
   </a>
 </p>
 
