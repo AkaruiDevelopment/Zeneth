@@ -1299,5 +1299,139 @@ export default class Client {
         req.method = builtApi.method;
         await request(req, this);
     }
+    async getGlobalApplicationCommands(withLocalization) {
+        const builtApi = this.api().applications(this.user.id).commands().get();
+        const req = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        if (withLocalization)
+            req.params = { withLocalization };
+        const res = await request(req, this);
+        return res.map((command) => convertToCamelCase(command));
+    }
+    async createGlobalApplicationCommand(data) {
+        const builtApi = this.api().applications(this.user.id).commands().post();
+        const req = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await request(req, this);
+        return res && convertToCamelCase(res);
+    }
+    async getGlobalApplicationCommand(commandId) {
+        const builtApi = this.api().applications(this.user.id).commands(commandId).get();
+        const req = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        const res = await request(req, this);
+        return res && convertToCamelCase(res);
+    }
+    async editGlobalApplicationCommand(commandId, data) {
+        const builtApi = this.api().applications(this.user.id).commands(commandId).patch();
+        const req = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await request(req, this);
+        return res && convertToCamelCase(res);
+    }
+    async deleteGlobalApplicationCommand(commandId) {
+        const builtApi = this.api().applications(this.user.id).commands(commandId).delete();
+        const req = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        await request(req, this);
+    }
+    async bulkOverwriteGlobalApplicationCommands(data) {
+        const builtApi = this.api().applications(this.user.id).commands().put();
+        const req = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await request(req, this);
+        return res.map((command) => convertToCamelCase(command));
+    }
+    async getGuildApplicationCommands(guildId, withLocalization) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().get();
+        const req = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        if (withLocalization)
+            req.params = { withLocalization };
+        const res = await request(req, this);
+        return res.map((command) => convertToCamelCase(command));
+    }
+    async createGuildApplicationCommand(guildId, data) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().post();
+        const req = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await request(req, this);
+        return res && convertToCamelCase(res);
+    }
+    async getGuildApplicationCommand(guildId, commandId) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).get();
+        const req = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        const res = await request(req, this);
+        return res && convertToCamelCase(res);
+    }
+    async editGuildApplicationCommand(guildId, commandId, data) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).patch();
+        const req = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await request(req, this);
+        return res && convertToCamelCase(res);
+    }
+    async deleteGuildApplicationCommand(guildId, commandId) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).delete();
+        const req = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        await request(req, this);
+    }
+    async bulkOverwriteGuildApplicationCommands(guildId, data) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().put();
+        const req = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await request(req, this);
+        return res.map((command) => convertToCamelCase(command));
+    }
+    async getGuildApplicationCommandPermissions(guildId) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().permissions().get();
+        const req = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        const res = (await request(req, this));
+        return res.map((command) => convertToCamelCase(command));
+    }
+    async getApplicationCommandPermissions(guildId, commandId) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).permissions().get();
+        const req = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        const res = (await request(req, this));
+        return convertToCamelCase(res);
+    }
 }
 //# sourceMappingURL=index.js.map

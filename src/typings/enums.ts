@@ -460,3 +460,9 @@ export const Permissions = {
     UseExternalSounds : 1n << 45n,
     SendVoiceMessages : 1n << 46n,  
 } as const;
+
+export enum ApplicationCommandPermissionTypes {
+    Role = 1,
+    User,
+    Channel,
+}

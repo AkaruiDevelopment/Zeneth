@@ -1,5 +1,5 @@
 import { GatewayEventNames, InteractionTypes, MFALevel } from "../typings/enums.js";
-import { ApplicationRoleConnectionMetadata, AutoModerationRule, ClientOptions, CreateChannelInvitePayload, EditChannelPermissionsPayload, GroupDMAddRecipientPayload, MessagePayload, RawApplicationData, RawChannelData, StartThreadInForumPayload, StartThreadPayload, ListArchivedThreadsPayload, CreateGuildEmojiPayload, RawChannelMessageOptions, CreateGuildPayload, RawGuildData, ModifyGuildChannelPositionsPayload, ListGuildMembersPayload, SearchGuildMembersPayLoad, AddGuildMemberPayload, ModifyGuildMemberPayload, CreateGuildBanPayload, GuildRolePayload, GetGuildPruneCountPayload, BeginGuildPrunePayload, ModifyGuildWidgetPayload, ModifyGuildWelcomeScreenPayload, ModifyCurrentUserVoiceStatePayload, ModifyUserVoiceStatePayload, InteractionResponsePayload } from "../typings/interface.js";
+import { ApplicationRoleConnectionMetadata, AutoModerationRule, ClientOptions, CreateChannelInvitePayload, EditChannelPermissionsPayload, GroupDMAddRecipientPayload, MessagePayload, RawApplicationData, RawChannelData, StartThreadInForumPayload, StartThreadPayload, ListArchivedThreadsPayload, CreateGuildEmojiPayload, RawChannelMessageOptions, CreateGuildPayload, RawGuildData, ModifyGuildChannelPositionsPayload, ListGuildMembersPayload, SearchGuildMembersPayLoad, AddGuildMemberPayload, ModifyGuildMemberPayload, CreateGuildBanPayload, GuildRolePayload, GetGuildPruneCountPayload, BeginGuildPrunePayload, ModifyGuildWidgetPayload, ModifyGuildWelcomeScreenPayload, ModifyCurrentUserVoiceStatePayload, ModifyUserVoiceStatePayload, InteractionResponsePayload, CreateApplicationCommandPayload, RawGuildApplicationCommandPermissions } from "../typings/interface.js";
 import { Camelize, ClientEvents, ImageFormat, ImageSize, Snowflake, WidgetImageStyle, integer } from "../typings/types.js";
 import Websocket from "../websocket/index.js";
 import Api from "../utils/api.js";
@@ -159,5 +159,19 @@ export default class Client {
     getFollowupMessage(token: string, messageId: Snowflake): Promise<any>;
     editFollowupMessage(token: string, messageId: Snowflake, data: InteractionResponsePayload): Promise<any>;
     deleteFollowupMessage(token: string, messageId: Snowflake): Promise<void>;
+    getGlobalApplicationCommands(withLocalization?: boolean): Promise<Camelize<RawApplicationData>[]>;
+    createGlobalApplicationCommand(data: CreateApplicationCommandPayload): Promise<Camelize<RawApplicationData> | undefined>;
+    getGlobalApplicationCommand(commandId: Snowflake): Promise<Camelize<RawApplicationData> | undefined>;
+    editGlobalApplicationCommand(commandId: Snowflake, data: Omit<CreateApplicationCommandPayload, 'type'>): Promise<Camelize<RawApplicationData> | undefined>;
+    deleteGlobalApplicationCommand(commandId: Snowflake): Promise<void>;
+    bulkOverwriteGlobalApplicationCommands(data: CreateApplicationCommandPayload[]): Promise<Camelize<RawApplicationData>[]>;
+    getGuildApplicationCommands(guildId: Snowflake, withLocalization?: boolean): Promise<Camelize<RawApplicationData>[]>;
+    createGuildApplicationCommand(guildId: Snowflake, data: CreateApplicationCommandPayload): Promise<Camelize<RawApplicationData> | undefined>;
+    getGuildApplicationCommand(guildId: Snowflake, commandId: Snowflake): Promise<Camelize<RawApplicationData> | undefined>;
+    editGuildApplicationCommand(guildId: Snowflake, commandId: Snowflake, data: Omit<CreateApplicationCommandPayload, 'type'>): Promise<Camelize<RawApplicationData> | undefined>;
+    deleteGuildApplicationCommand(guildId: Snowflake, commandId: Snowflake): Promise<void>;
+    bulkOverwriteGuildApplicationCommands(guildId: Snowflake, data: CreateApplicationCommandPayload[]): Promise<Camelize<RawApplicationData>[]>;
+    getGuildApplicationCommandPermissions(guildId: Snowflake): Promise<Camelize<RawGuildApplicationCommandPermissions>[]>;
+    getApplicationCommandPermissions(guildId: Snowflake, commandId: Snowflake): Promise<Camelize<RawGuildApplicationCommandPermissions>>;
 }
 //# sourceMappingURL=index.d.ts.map

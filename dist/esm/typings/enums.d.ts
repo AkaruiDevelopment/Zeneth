@@ -394,4 +394,9 @@ export declare const Permissions: {
     readonly UseExternalSounds: bigint;
     readonly SendVoiceMessages: bigint;
 };
+export declare enum ApplicationCommandPermissionTypes {
+    Role = 1,
+    User = 2,
+    Channel = 3
+}
 //# sourceMappingURL=enums.d.ts.map

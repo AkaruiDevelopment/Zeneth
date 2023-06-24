@@ -1,7 +1,7 @@
 /// <reference types="node" />
 /// <reference types="node" />
 import { integer, Camelize, snowflake, Snowflake, SweeperType } from './types.js';
-import { ActionTypes, AllowedMentionTypes, ApplicationCommandOptionTypes, ApplicationCommandTypes, ApplicationRoleConnectionMetadataType, ButtonStyles, ChannelTypes, ComponentTypes, DefaultMessageNotifications, ExplicitContentFilterLevel, GatewayEventNames, GatewayOpCodes, GuildFeatures, GuildNSFWLevel, GuildScheduledEventEntityType, GuildScheduledEventPrivacyLevel, GuildScheduledEventStatus, InteractionTypes, InviteTargetTypes, KeywordPresetTypes, Locales, MFALevel, MessageFlags, OverwriteType, PremiumTier, PremiumTypes, Status, SystemChannelFlags, TextInputStyles, ThreadAutoArchiveDuration, VerificationLevel } from './enums.js';
+import { ActionTypes, AllowedMentionTypes, ApplicationCommandOptionTypes, ApplicationCommandTypes, ApplicationRoleConnectionMetadataType, ButtonStyles, ChannelTypes, ComponentTypes, DefaultMessageNotifications, ExplicitContentFilterLevel, GatewayEventNames, GatewayOpCodes, GuildFeatures, GuildNSFWLevel, GuildScheduledEventEntityType, GuildScheduledEventPrivacyLevel, GuildScheduledEventStatus, InteractionTypes, InviteTargetTypes, KeywordPresetTypes, Locales, MFALevel, MessageFlags, OverwriteType, PremiumTier, PremiumTypes, Status, SystemChannelFlags, TextInputStyles, ThreadAutoArchiveDuration, VerificationLevel, ApplicationCommandPermissionTypes } from './enums.js';
 import User from '../classes/User.js';
 import Member from '../classes/Member.js';
 export interface ClientOptions {
@@ -943,5 +943,48 @@ export interface ModalInteractionResponsePayload {
     title: string;
     customId: string;
     components: Camelize<(ActionRow | RawTextInputData)>[];
+}
+export interface CreateApplicationCommandPayload {
+    name: string;
+    nameLocalizations?: Record<Locales, string>;
+    description: string;
+    descriptionLocalizations?: Record<Locales, string>;
+    options?: RawApplicationCommandOptionData[];
+    defaultMemberPermissions?: bigint;
+    dmPermissions?: string;
+    type?: ApplicationCommandTypes;
+    nsfw?: boolean;
+}
+export interface RawApplicationCommandOptionData {
+    type: ApplicationCommandOptionTypes;
+    name: string;
+    nameLocalizations?: Record<Locales, string>;
+    description: string;
+    descriptionLocalizations?: Record<Locales, string>;
+    required?: boolean;
+    choices?: RawApplicationCommandOptionChoiceData[];
+    options?: RawApplicationCommandOptionData[];
+    channelTypes?: ChannelTypes[];
+    minValue?: number;
+    maxValue?: number;
+    minLength?: integer;
+    maxLength?: integer;
+    autocomplete?: boolean;
+}
+export interface RawApplicationCommandOptionChoiceData {
+    name: string;
+    nameLocalizations?: Record<Locales, string>;
+    value: string | integer | number;
+}
+export interface RawGuildApplicationCommandPermissions {
+    id: snowflake;
+    application_id: snowflake;
+    guild_id: snowflake;
+    permissions: RawApplicationCommandPermissions[];
+}
+export interface RawApplicationCommandPermissions {
+    id: snowflake;
+    type: ApplicationCommandPermissionTypes;
+    permission: boolean;
 }
 //# sourceMappingURL=interface.d.ts.map

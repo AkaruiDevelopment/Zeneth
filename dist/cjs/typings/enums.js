@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Permissions = exports.ComponentTypes = exports.InteractionResponseTypes = exports.ApplicationCommandOptionTypes = exports.ApplicationCommandTypes = exports.StickerFormatType = exports.ThreadAutoArchiveDuration = exports.GuildScheduledEventEntityType = exports.GuildScheduledEventStatus = exports.GuildScheduledEventPrivacyLevel = exports.InviteTargetTypes = exports.GuildFeatures = exports.SystemChannelFlags = exports.GuildNSFWLevel = exports.PremiumTier = exports.MFALevel = exports.ExplicitContentFilterLevel = exports.DefaultMessageNotifications = exports.VerificationLevel = exports.OverwriteType = exports.Intents = exports.MessageFlags = exports.AllowedMentionTypes = exports.ActionTypes = exports.KeywordPresetTypes = exports.ApplicationRoleConnectionMetadataType = exports.TextInputStyles = exports.ButtonStyles = exports.ChannelTypes = exports.InteractionTypes = exports.PremiumTypes = exports.Locales = exports.Status = exports.GatewayEventNames = exports.GatewayOpCodes = void 0;
+exports.ApplicationCommandPermissionTypes = exports.Permissions = exports.ComponentTypes = exports.InteractionResponseTypes = exports.ApplicationCommandOptionTypes = exports.ApplicationCommandTypes = exports.StickerFormatType = exports.ThreadAutoArchiveDuration = exports.GuildScheduledEventEntityType = exports.GuildScheduledEventStatus = exports.GuildScheduledEventPrivacyLevel = exports.InviteTargetTypes = exports.GuildFeatures = exports.SystemChannelFlags = exports.GuildNSFWLevel = exports.PremiumTier = exports.MFALevel = exports.ExplicitContentFilterLevel = exports.DefaultMessageNotifications = exports.VerificationLevel = exports.OverwriteType = exports.Intents = exports.MessageFlags = exports.AllowedMentionTypes = exports.ActionTypes = exports.KeywordPresetTypes = exports.ApplicationRoleConnectionMetadataType = exports.TextInputStyles = exports.ButtonStyles = exports.ChannelTypes = exports.InteractionTypes = exports.PremiumTypes = exports.Locales = exports.Status = exports.GatewayEventNames = exports.GatewayOpCodes = void 0;
 var GatewayOpCodes;
 (function (GatewayOpCodes) {
     GatewayOpCodes[GatewayOpCodes["Dispatch"] = 0] = "Dispatch";
@@ -432,4 +432,10 @@ exports.Permissions = {
     UseExternalSounds: 1n << 45n,
     SendVoiceMessages: 1n << 46n,
 };
+var ApplicationCommandPermissionTypes;
+(function (ApplicationCommandPermissionTypes) {
+    ApplicationCommandPermissionTypes[ApplicationCommandPermissionTypes["Role"] = 1] = "Role";
+    ApplicationCommandPermissionTypes[ApplicationCommandPermissionTypes["User"] = 2] = "User";
+    ApplicationCommandPermissionTypes[ApplicationCommandPermissionTypes["Channel"] = 3] = "Channel";
+})(ApplicationCommandPermissionTypes = exports.ApplicationCommandPermissionTypes || (exports.ApplicationCommandPermissionTypes = {}));
 //# sourceMappingURL=enums.js.map

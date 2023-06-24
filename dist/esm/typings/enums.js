@@ -429,4 +429,10 @@ export const Permissions = {
     UseExternalSounds: 1n << 45n,
     SendVoiceMessages: 1n << 46n,
 };
+export var ApplicationCommandPermissionTypes;
+(function (ApplicationCommandPermissionTypes) {
+    ApplicationCommandPermissionTypes[ApplicationCommandPermissionTypes["Role"] = 1] = "Role";
+    ApplicationCommandPermissionTypes[ApplicationCommandPermissionTypes["User"] = 2] = "User";
+    ApplicationCommandPermissionTypes[ApplicationCommandPermissionTypes["Channel"] = 3] = "Channel";
+})(ApplicationCommandPermissionTypes || (ApplicationCommandPermissionTypes = {}));
 //# sourceMappingURL=enums.js.map

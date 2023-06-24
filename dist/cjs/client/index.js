@@ -1304,6 +1304,140 @@ class Client {
         req.method = builtApi.method;
         await (0, index_js_2.default)(req, this);
     }
+    async getGlobalApplicationCommands(withLocalization) {
+        const builtApi = this.api().applications(this.user.id).commands().get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        if (withLocalization)
+            req.params = { withLocalization };
+        const res = await (0, index_js_2.default)(req, this);
+        return res.map((command) => (0, helpers_js_1.convertToCamelCase)(command));
+    }
+    async createGlobalApplicationCommand(data) {
+        const builtApi = this.api().applications(this.user.id).commands().post();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await (0, index_js_2.default)(req, this);
+        return res && (0, helpers_js_1.convertToCamelCase)(res);
+    }
+    async getGlobalApplicationCommand(commandId) {
+        const builtApi = this.api().applications(this.user.id).commands(commandId).get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        const res = await (0, index_js_2.default)(req, this);
+        return res && (0, helpers_js_1.convertToCamelCase)(res);
+    }
+    async editGlobalApplicationCommand(commandId, data) {
+        const builtApi = this.api().applications(this.user.id).commands(commandId).patch();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await (0, index_js_2.default)(req, this);
+        return res && (0, helpers_js_1.convertToCamelCase)(res);
+    }
+    async deleteGlobalApplicationCommand(commandId) {
+        const builtApi = this.api().applications(this.user.id).commands(commandId).delete();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        await (0, index_js_2.default)(req, this);
+    }
+    async bulkOverwriteGlobalApplicationCommands(data) {
+        const builtApi = this.api().applications(this.user.id).commands().put();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await (0, index_js_2.default)(req, this);
+        return res.map((command) => (0, helpers_js_1.convertToCamelCase)(command));
+    }
+    async getGuildApplicationCommands(guildId, withLocalization) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        if (withLocalization)
+            req.params = { withLocalization };
+        const res = await (0, index_js_2.default)(req, this);
+        return res.map((command) => (0, helpers_js_1.convertToCamelCase)(command));
+    }
+    async createGuildApplicationCommand(guildId, data) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().post();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await (0, index_js_2.default)(req, this);
+        return res && (0, helpers_js_1.convertToCamelCase)(res);
+    }
+    async getGuildApplicationCommand(guildId, commandId) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        const res = await (0, index_js_2.default)(req, this);
+        return res && (0, helpers_js_1.convertToCamelCase)(res);
+    }
+    async editGuildApplicationCommand(guildId, commandId, data) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).patch();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await (0, index_js_2.default)(req, this);
+        return res && (0, helpers_js_1.convertToCamelCase)(res);
+    }
+    async deleteGuildApplicationCommand(guildId, commandId) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).delete();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        await (0, index_js_2.default)(req, this);
+    }
+    async bulkOverwriteGuildApplicationCommands(guildId, data) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().put();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await (0, index_js_2.default)(req, this);
+        return res.map((command) => (0, helpers_js_1.convertToCamelCase)(command));
+    }
+    async getGuildApplicationCommandPermissions(guildId) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().permissions().get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        const res = (await (0, index_js_2.default)(req, this));
+        return res.map((command) => (0, helpers_js_1.convertToCamelCase)(command));
+    }
+    async getApplicationCommandPermissions(guildId, commandId) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).permissions().get();
+        const req = (0, helpers_js_1.createNullObject)();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        const res = (await (0, index_js_2.default)(req, this));
+        return (0, helpers_js_1.convertToCamelCase)(res);
+    }
 }
 exports.default = Client;
 //# sourceMappingURL=index.js.map

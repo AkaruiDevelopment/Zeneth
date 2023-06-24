@@ -37,6 +37,9 @@ import {
     ModifyCurrentUserVoiceStatePayload,
     ModifyUserVoiceStatePayload,
     InteractionResponsePayload,
+    CreateApplicationCommandPayload,
+    RawApplicationCommandPermissions,
+    RawGuildApplicationCommandPermissions,
 } from "../typings/interface.js";
 import {
     Camelize,
@@ -1833,4 +1836,151 @@ export default class Client {
         req.method = builtApi.method;
         await request(req, this);
     }
+    async getGlobalApplicationCommands(withLocalization?:boolean) {
+        const builtApi = this.api().applications(this.user.id).commands().get();
+        const req: requestOptions = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        if (withLocalization) req.params = {withLocalization};
+        const res = await request(req, this) as RawApplicationData[];
+        return res.map((command:RawApplicationData) => convertToCamelCase(command) as Camelize<RawApplicationData>);
+    }
+
+    async createGlobalApplicationCommand(data:CreateApplicationCommandPayload) {
+        const builtApi = this.api().applications(this.user.id).commands().post();
+        const req: requestOptions = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await request(req, this) as RawApplicationData | undefined;
+        return res && convertToCamelCase(res) as undefined | Camelize<RawApplicationData>;
+    }
+    async getGlobalApplicationCommand(commandId:Snowflake) {
+        const builtApi = this.api().applications(this.user.id).commands(commandId).get();
+        const req: requestOptions = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        const res = await request(req, this) as RawApplicationData | undefined;
+        return res && convertToCamelCase(res) as undefined | Camelize<RawApplicationData>;
+    }   
+    async editGlobalApplicationCommand(commandId:Snowflake,data:Omit<CreateApplicationCommandPayload,'type'>) {
+        const builtApi = this.api().applications(this.user.id).commands(commandId).patch();
+        const req: requestOptions = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await request(req, this) as RawApplicationData | undefined;
+        return res && convertToCamelCase(res) as undefined | Camelize<RawApplicationData>;
+    }
+    async deleteGlobalApplicationCommand(commandId:Snowflake) {
+        const builtApi = this.api().applications(this.user.id).commands(commandId).delete();
+        const req: requestOptions = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        await request(req, this);
+    }
+    async bulkOverwriteGlobalApplicationCommands(data:CreateApplicationCommandPayload[]) {
+        const builtApi = this.api().applications(this.user.id).commands().put();
+        const req: requestOptions = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await request(req, this) as RawApplicationData[];
+        return res.map((command:RawApplicationData) => convertToCamelCase(command) as Camelize<RawApplicationData>);
+    }
+    async getGuildApplicationCommands(guildId:Snowflake,withLocalization?:boolean) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().get();
+        const req: requestOptions = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        if (withLocalization) req.params = {withLocalization};
+        const res = await request(req, this) as RawApplicationData[];
+        return res.map((command:RawApplicationData) => convertToCamelCase(command) as Camelize<RawApplicationData>);
+    }
+    async createGuildApplicationCommand(guildId:Snowflake,data:CreateApplicationCommandPayload) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().post();
+        const req: requestOptions = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await request(req, this) as RawApplicationData | undefined;
+        return res && convertToCamelCase(res) as undefined | Camelize<RawApplicationData>;
+    }
+    async getGuildApplicationCommand(guildId:Snowflake,commandId:Snowflake) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).get();
+        const req: requestOptions = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        const res = await request(req, this) as RawApplicationData | undefined;
+        return res && convertToCamelCase(res) as undefined | Camelize<RawApplicationData>;
+    }
+    async editGuildApplicationCommand(guildId:Snowflake,commandId:Snowflake,data:Omit<CreateApplicationCommandPayload,'type'>) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).patch();
+        const req: requestOptions = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await request(req, this) as RawApplicationData | undefined;
+        return res && convertToCamelCase(res) as undefined | Camelize<RawApplicationData>;
+    }
+    async deleteGuildApplicationCommand(guildId:Snowflake,commandId:Snowflake) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).delete();
+        const req: requestOptions = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        await request(req, this);
+    }
+    async bulkOverwriteGuildApplicationCommands(guildId:Snowflake,data:CreateApplicationCommandPayload[]) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().put();
+        const req: requestOptions = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;
+        req.params = data;
+        const res = await request(req, this) as RawApplicationData[];
+        return res.map((command:RawApplicationData) => convertToCamelCase(command) as Camelize<RawApplicationData>);
+    }
+    async getGuildApplicationCommandPermissions(guildId:Snowflake) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands().permissions().get();
+        const req: requestOptions = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;        
+        const res = (await request(
+            req,
+            this,
+        )) as RawGuildApplicationCommandPermissions[];
+        return res.map(
+            (command: RawGuildApplicationCommandPermissions) =>
+                convertToCamelCase(
+                    command,
+                ) as Camelize<RawGuildApplicationCommandPermissions>,
+        );
+    }
+    async getApplicationCommandPermissions(guildId:Snowflake,commandId:Snowflake) {
+        const builtApi = this.api().applications(this.user.id).guilds(guildId).commands(commandId).permissions().get();
+        const req: requestOptions = createNullObject();
+        req.url = builtApi.api;
+        req.route = builtApi.route;
+        req.method = builtApi.method;        
+        const res = (await request(
+            req,
+            this,
+        )) as RawGuildApplicationCommandPermissions;
+        return convertToCamelCase(
+            res,
+        ) as Camelize<RawGuildApplicationCommandPermissions>;
+    }
+    
 }
