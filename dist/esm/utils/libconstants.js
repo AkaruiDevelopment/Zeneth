@@ -27,6 +27,7 @@ const pack = {
     devDependencies: {
         '@types/node': '^18.11.18',
         '@types/ws': '^8.5.4',
+        typedoc: '^0.24.8',
         typescript: '^4.9.4'
     },
     dependencies: {
