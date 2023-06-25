@@ -44,7 +44,7 @@ client.on(GatewayEventNames.Ready, () => {
 client.on(GatewayEventNames.MessageCreate, async(message) => {
     if (message.content === "!ping") {
         await client.createMessage(message.channelId, {
-            content: "Pong!",
+            content: `Pong!  ${client.ws.data.ping} ms`,
         });
     }
 });
