@@ -61,8 +61,8 @@ body:
       label: Excepted Output
       description: Please describe your expectations the code you have tried.
 
-    - type: textarea
-    id: excepted
+  - type: textarea
+    id: current
     attributes:
       label: Current Output
       description: Please describe your expectations the code you have tried.
