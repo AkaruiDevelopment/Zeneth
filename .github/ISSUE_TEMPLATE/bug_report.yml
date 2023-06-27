@@ -27,9 +27,9 @@ body:
   - type: textarea
     id: code
     attributes:
-      label: Bugged Function
+      label: reproducible code
       render: js
-      description: Please type usage of your code
+      description: Please send the minimum steps to reproduce this error
     validations:
       required: true
    
@@ -49,9 +49,9 @@ body:
       label: Version of Node.js
       description: Also, what version of Node.js are you using? 
       options:
-        - v16.6.0 (Lowest)
-        - v18.14.0 (LTS)
-        - v19.6.0 (Current)
+        - v18 (LTS)
+        - v19
+        - v20
     validations:
       required: true
       
@@ -60,6 +60,14 @@ body:
     attributes:
       label: Excepted Output
       description: Please describe your expectations the code you have tried.
+
+    - type: textarea
+    id: excepted
+    attributes:
+      label: Current Output
+      description: Please describe your expectations the code you have tried.
+    validations:
+      required: true
       
   - type: textarea
     id: logs
