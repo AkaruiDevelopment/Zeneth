@@ -7,8 +7,9 @@ import {
 import { GatewayOpCodes } from "../typings/enums.js";
 import Client from "../client/index.js";
 import EventManager from "../events/index.js";
-import { canReconnectOnCodes } from "../utils/constants.js";
+import { canReconnectOnCodes, errorCodeMessages } from "../utils/constants.js";
 import { createDebug } from "../utils/helpers.js";
+import { ZenethError } from "../error/index.js";
 
 export default class Websocket {
     ws: ws;
@@ -65,8 +66,8 @@ export default class Websocket {
                 this.#client,
             );
             //@ts-ignore
-            if (canReconnectOnCodes[code]) this.#resume();
-            else this.#reconnect();
+            if (canReconnectOnCodes[code]) this.#reconnect();
+            else throw ZenethError.WebSocketError(errorCodeMessages[code.toString() as keyof typeof errorCodeMessages], code);
         });
 
         this.ws.on("message", (data) => {
@@ -226,6 +227,8 @@ export default class Websocket {
     }
     #reconnect() {
         const url = "wss://gateway.discord.gg/?v=10&encoding=json";
+        this.ws.close();
+        this.ws.removeAllListeners();
         this.ws = new ws(url);
         this.#handleEvents();
         this.data.currentReadyAt = Date.now();

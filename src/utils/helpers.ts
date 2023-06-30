@@ -31,7 +31,9 @@ export function parseDataToZenethStandards(data: any): any {
         return BigInt(data);
     if (typeof data === "string") {
         try {
-            return new Date(data);
+            const d = new Date(data);
+            if (d.toString() !== "Invalid Date") return d;
+            else return data;
         } catch {
             return data;
         }

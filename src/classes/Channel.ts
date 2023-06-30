@@ -121,6 +121,9 @@ export default class Channel {
         this.__priority = 0;
         this.#clean();
     }
+    /**
+     * @example <Channel>.parsedSnowflake()
+     */
     get parsedSnowflake() {
         return parseSnowflake(this.id);
     }

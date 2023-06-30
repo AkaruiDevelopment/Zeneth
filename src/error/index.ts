@@ -18,4 +18,12 @@ export class ZenethError {
     error.method = method;
     throw error;
   }
+
+  static WebSocketError(msg: string, code: number) {
+    const error = new Error(msg);
+    error.name = 'ZenethError -> [WebSocketError]';
+    //@ts-ignore
+    error.code = code;
+    throw error;
+  }
 }
