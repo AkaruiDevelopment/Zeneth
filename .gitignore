@@ -2,6 +2,5 @@ node_modules
 /index.js
 /debug.log
 .idea
-.vscode
-docs
+/.vscode
 /dist
