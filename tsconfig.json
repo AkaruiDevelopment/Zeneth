@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "moduleResolution": "NodeNext",
+        "module": "NodeNext",
         "target": "ESNext",
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
@@ -13,6 +14,7 @@
         "declarationMap": true,
         "resolveJsonModule": true,
         "rootDir": "./src",
-        "removeComments": true,
+        "removeComments": true
     },
+    "exclude": ["./site/**"]
 }

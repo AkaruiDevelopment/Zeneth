@@ -1,0 +1,266 @@
+---
+import Search from "./Search";
+const base = (...path: string[]) => {
+    return path.join("/");
+};
+import Menu from "../components/Menu";
+
+
+const toggleMenu = () => {
+    const menu = document.getElementById("menu");
+    const sidebar = document.querySelector(".sidebar");
+    console.log("hi");
+    if (menu && sidebar) {
+        // @ts-ignore
+        if (sidebar.style.width === "0px") {
+            // @ts-ignore
+            sidebar.style.width = "250px";
+            // @ts-ignore
+            sidebar.style.display = "block";
+        } else {
+            // @ts-ignore
+            sidebar.style.width = "0px";
+            // @ts-ignore
+            sidebar.style.display = "none";
+        }
+    }
+};
+
+
+---
+
+<nav class="navbar">
+    <div class="wrap">
+        <div class="logo">
+            <a href="/"> &lt;Zeneth&gt;</a>
+        </div>
+        <div class="links" id="navlinks">
+            <a class="link" href={base("docs")}>Docs</a>
+            <a class="link" href={base("docs", "guide")}>Guide</a>
+            <a class="link" href={base("github")}>Github</a>
+            <a class="link" href={base("discord")}>Discord</a>
+        </div>
+        <div class="settings">
+            <Search class:list={"search"} client:load />
+            <div id="menu" >
+            <Menu id="aaa" client:only="react" toggleMenu={toggleMenu} />
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="sidebar">
+     <div class="links">
+            <a class="link" href={base("docs")}>Docs</a>
+            <a class="link" href={base("docs", "guide")}>Guide</a>
+            <a class="link" href={base("github")}>Github</a>
+            <a class="link" href={base("discord")}>Discord</a>
+        </div>
+</div>
+
+<style>
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 64px;
+        color: #fff;
+        background-color: transparent;
+        backdrop-filter: blur(400px);
+        z-index:5;
+        position: sticky;
+    }
+
+    .wrap {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        gap: 3rem;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        padding: 1rem;
+    }
+
+    .logo a {
+        color: rgb(8, 11, 26);
+
+        text-decoration: none;
+        position: relative;
+        transition: 500ms;
+        vertical-align: middle;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+
+    .logo a::after {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 0;
+        bottom: 10px;
+        left: 0;
+        height: 2px;
+        background: #00000042;
+        transition: width 500ms, height 500ms ease-in-out 500ms;
+    }
+
+    .logo a:hover::after {
+        width: 100%;
+        height: 8px;
+        background-color: ffffff;
+        box-shadow: 0 0 10px 0 #ffffff61;
+    }
+
+    .logo a:hover {
+        text-shadow: 0 0 10px #ffffff61;
+    }
+
+    .links {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        gap: 2rem;
+        height: 100%;
+        font-size: 1.5rem;
+    }
+    .link {
+        color: #fff;
+        text-decoration: none;
+        position: relative;
+        transition: 500ms;
+        vertical-align: middle;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+
+    .link::after {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 0;
+        bottom: 20px;
+        left: 0;
+        height: 2px;
+        background: #ffffff42;
+        transition: width 500ms, height 500ms ease-in-out 500ms;
+    }
+
+    .link:hover::after {
+        width: 100%;
+        height: 8px;
+        background-color: ffffff;
+        box-shadow: 0 0 10px 0 #ffffff61;
+    }
+
+    .link:hover {
+        text-shadow: 0 0 10px #ffffff61;
+    }
+    .settings {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex: 1;
+        height: 100%;
+        gap: 1rem;
+    }
+
+    #menu {
+        display: none;
+        color: #fff;
+        font-size: 2rem;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 64px;
+        right: 0;
+        width: 0px;
+        height: calc(100vh - 64px);
+        background-color: rgba(13, 17, 30, 0.705);
+        transition: 500ms;
+        z-index: 4;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sidebar .links {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        height: 100%;
+        font-size: 1.5rem;
+    }
+
+    .sidebar .link {
+        color: #fff;
+        text-decoration: none;
+        position: relative;
+        transition: 500ms;
+        vertical-align: middle;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+
+    @media only screen and (max-width:770px) {
+        #navlinks {
+            display: none;
+        }
+
+        #menu {
+            display: block;
+        }
+
+        .logo {
+            font-size: 1rem;
+        }
+
+        .search {
+            display: none;
+        }
+    }
+</style>
+
+<script>
+
+    const menu = document.getElementById("menu");
+    const sidebar = document.querySelector(".sidebar");
+    const links = document.querySelector(".sidebar .links");
+    console.log(menu, sidebar, links)
+    console.log("hi");
+    menu?.addEventListener("click", () => {
+        // @ts-ignore
+        if (sidebar.style.width === "0px" || sidebar.style.width === "" ) {
+            // @ts-ignore
+            sidebar.style.width = "300px";
+            // @ts-ignore
+            links.style.display = "flex";
+        } else {
+            // @ts-ignore
+            sidebar.style.width = "0px";
+            // @ts-ignore
+            links.style.display = "none";
+        }
+    });
+    
+
+</script>

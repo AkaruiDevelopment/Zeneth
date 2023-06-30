@@ -1,0 +1,23 @@
+{
+    "short_name": "Zeneth",
+    "name": "Zeneth: Discord Library",
+    "icons": [
+        {
+            "src": "/images/zeneth512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        },
+        {
+            "src": "/images/zeneth192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        }
+    ],
+    "id": "/?source=pwa",
+    "start_url": "/?source=pwa",
+    "background_color": "#131313",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#131313",
+    "description": "A Discord Library for Discord Bots"
+}

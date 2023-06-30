@@ -4,5 +4,6 @@
    ],
     "out": "docs",
     "tsconfig": "./tsconfig.json",
-    "entryPointStrategy": "resolve"
+    "entryPointStrategy": "resolve",
+    "json": "docs.json",
 }

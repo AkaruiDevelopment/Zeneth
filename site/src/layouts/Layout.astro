@@ -1,0 +1,71 @@
+---
+export interface Props {
+	title: string;
+	meta: {
+
+	}
+}
+
+const { title } = Astro.props;
+import Navbar from '../components/Navbar.astro';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/src/assets/aoijs.webp" />
+  <link rel="manifest" href="/manifest.json">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1a1a1a">
+  <meta name="description" content="A nodejs library that makes interaction with discord api easy">
+  <meta name="thumbnail" content="/src/assets/aoijs.webp">
+  <meta name="keywords"
+    content="aoi.js, aoijs, aoi, api, dbd.js, dbdjs, dbd, bot, akarui, functions, music, aoi.music, bdfd, Bot Designer for Discord, discord, discordbot">
+  <meta name="author" content="Akarui Development">
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow">
+  <meta name="google" content="notranslate">
+  <meta name='copyright' content='Akarui Development'>
+  <meta name='language' content='EN'>
+  <meta name='revised' content='Friday, 28th April, 2023, 9:15 pm'>
+  <meta name='designer' content='USERSATOSHI'>
+  <meta name='publisher' content='Akarui Development'>
+  <meta name='distribution' content='global'>
+  <meta name='Classification' content='Development'>
+  <meta name='owner' content='Akarui Development'>
+
+  <meta property="og:title" content="Akarui Development | Zeneth">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/images/aoijsbanner.webp">
+  <meta property="og:description" content="A nodejs library that makes interaction with discord api easy">
+  <meta property="og:site_name" content="Akarui Development">
+  <meta name="twitter:card" content="summary_large_image">
+  <link type="application/json+oembed" href="./oembed.json" />
+		<title>{title}</title>
+	</head>
+	<body>
+		<Navbar />
+		<slot />
+	</body>
+</html>
+<style is:global>
+	*, *::before, *::after {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		font-family:monospace;
+	}
+
+	html,body {
+		width: 100%;
+		height: 100%;
+		background-color: rgb(6,11,28);
+	}
+
+  *::selection {
+    background-color: #f492f1a2;
+    color: rgb(6,11,28);
+  }
+	
+</style>
