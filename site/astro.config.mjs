@@ -18,4 +18,6 @@ export default defineConfig({
     experiments: {
         redirects: true,
     },
+    site: "https://akaruidevelopment.github.io",
+    base: "/Zeneth/new"
 });
