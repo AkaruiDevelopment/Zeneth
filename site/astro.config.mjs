@@ -19,5 +19,5 @@ export default defineConfig({
         redirects: true,
     },
     site: "https://akaruidevelopment.github.io",
-    base: "/Zeneth"
+    base: "/Zeneth/site/"
 });
