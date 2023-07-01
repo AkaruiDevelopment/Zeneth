@@ -1,12 +1,12 @@
 import MenuIcon from '@mui/icons-material/Menu';
-import type { MouseEventHandler } from 'react';
-import { useState } from 'react';
+import React from 'react';
+
 
 const Menu = (props: {
-    id: string | undefined; toggleMenu: MouseEventHandler<SVGSVGElement> | undefined; 
+    id: string | undefined;
 }) => {
 
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
     
     window.addEventListener('resize', () => {
         setWindowWidth(window.innerWidth);
@@ -19,7 +19,7 @@ const Menu = (props: {
             zIndex: 1000,
             cursor: 'pointer',
             display: windowWidth > 770 ? 'none' : 'block'
-        }} onClick={props.toggleMenu}
+        }} 
         id={props.id}
          />
     );

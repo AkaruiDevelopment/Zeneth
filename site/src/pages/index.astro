@@ -1,8 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image } from "@astrojs/image/components"
+import * as A from "@astrojs/image/components"
 import Copy from "../components/Copy";
 import Stars from "../components/Stars.astro";
+
+export const prerender = true;
 ---
 
 <Layout
@@ -19,7 +21,7 @@ import Stars from "../components/Stars.astro";
 			<div class="glowball2" id="b2"></div>
 			<div class="overlay">
 				<div class="container">
-					<Image
+					<A.Image
 						src="/images/ZenethBanner.png"
 						alt="Zeneth"
 						aspectRatio={16 / 5}
@@ -43,7 +45,7 @@ import Stars from "../components/Stars.astro";
 							}}>{">"}</p>
 						<pre><code class="language-javascript">{" npm i zeneth"}</code></pre>
 						</div>
-						<Copy text="npm i zeneth" client:load />
+						<Copy text="npm i zeneth" client:only="react" />
 					</div>
 				</div>
 			</div>

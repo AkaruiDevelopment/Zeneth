@@ -1,10 +1,10 @@
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DoneIcon from "@mui/icons-material/Done";
 
-import { useState } from "react";
+import React from "react";
 
 const Copy = ({ text }: { text: string }) => {
-    const [copied, setCopied] = useState(false);
+    const [copied, setCopied] = React.useState(false);
     const copy = () => {
         navigator.clipboard.writeText(text);
         setCopied(true);

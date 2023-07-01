@@ -1,32 +1,6 @@
 ---
 import Search from "./Search";
-const base = (...path: string[]) => {
-    return path.join("/");
-};
 import Menu from "../components/Menu";
-
-
-const toggleMenu = () => {
-    const menu = document.getElementById("menu");
-    const sidebar = document.querySelector(".sidebar");
-    console.log("hi");
-    if (menu && sidebar) {
-        // @ts-ignore
-        if (sidebar.style.width === "0px") {
-            // @ts-ignore
-            sidebar.style.width = "250px";
-            // @ts-ignore
-            sidebar.style.display = "block";
-        } else {
-            // @ts-ignore
-            sidebar.style.width = "0px";
-            // @ts-ignore
-            sidebar.style.display = "none";
-        }
-    }
-};
-
-
 ---
 
 <nav class="navbar">
@@ -35,25 +9,25 @@ const toggleMenu = () => {
             <a href="/"> &lt;Zeneth&gt;</a>
         </div>
         <div class="links" id="navlinks">
-            <a class="link" href={base("docs")}>Docs</a>
-            <a class="link" href={base("docs", "guide")}>Guide</a>
-            <a class="link" href={base("github")}>Github</a>
-            <a class="link" href={base("discord")}>Discord</a>
+            <a class="link" href="/docs">Docs</a>
+            <a class="link" href="/docs/guide">Guide</a>
+            <a class="link" href="/github">Github</a>
+            <a class="link" href="/discord">Discord</a>
         </div>
         <div class="settings">
             <Search class:list={"search"} client:load />
             <div id="menu" >
-            <Menu id="aaa" client:only="react" toggleMenu={toggleMenu} />
+            <Menu id="aaa" client:only="react"/>
             </div>
         </div>
     </div>
 </nav>
 <div class="sidebar">
      <div class="links">
-            <a class="link" href={base("docs")}>Docs</a>
-            <a class="link" href={base("docs", "guide")}>Guide</a>
-            <a class="link" href={base("github")}>Github</a>
-            <a class="link" href={base("discord")}>Discord</a>
+            <a class="link" href="/docs">Docs</a>
+            <a class="link" href="/docs/guide">Guide</a>
+            <a class="link" href="/github">Github</a>
+            <a class="link" href="/discord">Discord</a>
         </div>
 </div>
 

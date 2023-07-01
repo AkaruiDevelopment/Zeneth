@@ -1,11 +1,11 @@
 import SearchIcon from "@mui/icons-material/Search";
-import type { MouseEventHandler } from "react";
-import { useState } from "react";
+
+import React from "react";
 
 const SearchIco = (props: {
-    toggleSearch: MouseEventHandler<SVGSVGElement> | undefined;
+    toggleSearch: React.MouseEventHandler<SVGSVGElement> | undefined;
 }) => {
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
 
     window.addEventListener("resize", () => {
         setWindowWidth(window.innerWidth);
