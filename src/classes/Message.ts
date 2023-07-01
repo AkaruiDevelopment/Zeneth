@@ -113,7 +113,7 @@ export default class Message {
       roles: data.mention_roles.map((x) => BigInt(x)) ?? [],
       users: data.mentions.map(x => new User(x,this.#client)) ?? [],
       channels:
-        <Camelize<RawChannelMentionData>[] | undefined>(
+        <Camelize<RawChannelMentionData>[] | undefined><unknown>(
           convertToCamelCase(data.mention_channels)
         ) ?? [],
     };

@@ -14,7 +14,7 @@
         "declarationMap": true,
         "resolveJsonModule": true,
         "rootDir": "./src",
-        "removeComments": true
+        "removeComments": true,
     },
     "exclude": ["./site/**"]
 }
