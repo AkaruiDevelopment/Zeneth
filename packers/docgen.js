@@ -33,7 +33,9 @@ function walk(base) {
                     if (match.startsWith('href="https://')) return match;
                     if (match.startsWith('href="http://')) return match;
                     if (match.startsWith('href="../'))
-                        return `href="/Zeneth/${match.replaceAll('../','').slice(6)}`.replaceAll(".html","");
+                        return `href="/Zeneth/docs/${ZenethPkg.version}/${match
+                            .replaceAll("../", "")
+                            .slice(6)}`.replaceAll(".html", "");
                     const category = base.split("/").pop();
                     return `href="/Zeneth/docs/${
                         ZenethPkg.version
