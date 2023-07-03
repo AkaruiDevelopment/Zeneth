@@ -1,31 +1,25 @@
 import { defineConfig } from 'astro/config';
-import node from "@astrojs/node";
 import image from "@astrojs/image";
 import react from "@astrojs/react";
 
+import sitemap from "@astrojs/sitemap";
+
 // https://astro.build/config
 export default defineConfig({
-    output: "static",
-    adapter: node({
-        mode: "standalone",
-    }),
-    integrations: [
-        react(),
-        image({
-            serviceEntryPoint: "@astrojs/image/sharp",
-        }),
-    ],
-    experiments: {
-        redirects: true,
+  output: "static",
+  integrations: [react(), image({
+    serviceEntryPoint: "@astrojs/image/sharp"
+  }), sitemap()],
+  experiments: {
+    redirects: true
+  },
+  site: "https://akaruidevelopment.github.io",
+  base: "/Zeneth/",
+  markdown: {
+    shikiConfig: {
+      theme: 'dracula',
+      wrap: true
     },
-    site: "https://akaruidevelopment.github.io",
-    base: "/Zeneth/",
-    markdown: {
-        shikiConfig: {
-            theme: 'dracula',
-            wrap: true,
-        },
-        gfm: true,
-        
-    }
+    gfm: true
+  }
 });
