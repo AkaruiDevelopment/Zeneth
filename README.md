@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://aoi.js.org">
-    <img width="200" src="./.github/assets/Zeneth.png" alt="aoijs">
+  <a href="https://akaruidevelopment.github.io/Zeneth">
+    <img width="200" src="https://cdn.discordapp.com/attachments/983797852008497164/1125422710072287252/Zeneth.png" alt="Zeneth">
   </a>
 </p>
 
@@ -53,17 +53,17 @@ client.on(GatewayEventNames.MessageCreate, async(message) => {
 ## Structure
 
 ```mermaid
-graph LR
+graph LR;
 
-A[Zeneth] --> B[Classes]
-A --> C[Client]
-A --> D[Error]
-A --> E[Events]
-A --> F[Plugins]
-A --> G[Request]
-A --> H[Typings]
-A --> I[Utils]
-A --> J[Websocket]
+A[Zeneth] --> B[Classes];
+A --> C[Client];
+A --> D[Error];
+A --> E[Events];
+A --> F[Plugins];
+A --> G[Request];
+A --> H[Typings];
+A --> I[Utils];
+A --> J[Websocket];
 ```
 
 ## LICENSE

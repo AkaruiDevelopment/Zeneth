@@ -19,5 +19,13 @@ export default defineConfig({
         redirects: true,
     },
     site: "https://akaruidevelopment.github.io",
-    base: "/Zeneth/site/"
+    base: "/Zeneth/",
+    markdown: {
+        shikiConfig: {
+            theme: 'dracula',
+            wrap: true,
+        },
+        gfm: true,
+        
+    }
 });

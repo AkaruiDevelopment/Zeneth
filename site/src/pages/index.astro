@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import * as A from "@astrojs/image/components"
+import * as A from "@astrojs/image/components";
 import Copy from "../components/Copy";
 import Stars from "../components/Stars.astro";
 
@@ -22,7 +22,7 @@ export const prerender = true;
 			<div class="overlay">
 				<div class="container">
 					<A.Image
-						src="/images/ZenethBanner.png"
+						src="Zeneth/images/ZenethBanner.png"
 						alt="Zeneth"
 						aspectRatio={16 / 5}
 						width={800}
@@ -36,14 +36,18 @@ export const prerender = true;
 
 					<div class="codeblock">
 						<div class="display">
-							<p style={{
-								color: "#f492f0",
-								fontSize: "2rem",
-								margin: "0",
-								marginRight: "1rem",
-							}}
-							}}>{">"}</p>
-						<pre><code class="language-javascript">{" npm i zeneth"}</code></pre>
+							<p
+								style={{
+									color: "#f492f0",
+									fontSize: "2rem",
+									margin: "0",
+									marginRight: "1rem",
+								}}
+								}}
+							>
+								{">"}
+							</p>
+							<pre><code class="language-javascript">{" npm i zeneth"}</code></pre>
 						</div>
 						<Copy text="npm i zeneth" client:only="react" />
 					</div>
@@ -55,7 +59,7 @@ export const prerender = true;
 
 <style>
 	main {
-		height: calc( 100% - 64px );
+		height: calc(100% - 64px);
 		width: 100%;
 	}
 	.hero {
@@ -72,13 +76,25 @@ export const prerender = true;
 		filter: blur(300px);
 		background: hsla(302, 82%, 76%, 1);
 
-background: linear-gradient(0deg, hsla(302, 82%, 76%, 1) 0%, hsla(258, 40%, 68%, 1) 100%);
+		background: linear-gradient(
+			0deg,
+			hsla(302, 82%, 76%, 1) 0%,
+			hsla(258, 40%, 68%, 1) 100%
+		);
 
-background: -moz-linear-gradient(0deg, hsla(302, 82%, 76%, 1) 0%, hsla(258, 40%, 68%, 1) 100%);
+		background: -moz-linear-gradient(
+			0deg,
+			hsla(302, 82%, 76%, 1) 0%,
+			hsla(258, 40%, 68%, 1) 100%
+		);
 
-background: -webkit-linear-gradient(0deg, hsla(302, 82%, 76%, 1) 0%, hsla(258, 40%, 68%, 1) 100%);
+		background: -webkit-linear-gradient(
+			0deg,
+			hsla(302, 82%, 76%, 1) 0%,
+			hsla(258, 40%, 68%, 1) 100%
+		);
 
-filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F492F0", endColorstr="#A18DCE", GradientType=1 );
+		filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F492F0", endColorstr="#A18DCE", GradientType=1 );
 	}
 
 	.glowball2 {
@@ -110,7 +126,7 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F492F0", en
 		flex-direction: column;
 		justify-content: space-around;
 		align-items: center;
-		gap:1rem;
+		gap: 1rem;
 	}
 
 	.display {
@@ -125,10 +141,9 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F492F0", en
 	}
 
 	.hero-image {
-		filter: drop-shadow( 0px 0px 10px #f492f12e );
+		filter: drop-shadow(0px 0px 10px #f492f12e);
 		user-select: none;
 	}
-
 
 	.hero-title:hover {
 		color: #f492f0;
@@ -145,7 +160,7 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F492F0", en
 		padding-right: 2rem;
 		border-radius: 1rem;
 		font-size: 1.2rem;
-		width:50%;
+		width: 50%;
 		min-width: 300px;
 		text-align: left;
 		border: 1px solid #f492f0;
@@ -171,7 +186,6 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F492F0", en
 			width: 100%;
 			height: auto;
 		}
-		
 	}
 
 	html {
@@ -180,13 +194,22 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F492F0", en
 </style>
 
 <script>
-	const b1 = document.getElementById( "b1" );
-	const b2 = document.getElementById( "b2" );
+	const b1 = document.getElementById("b1");
+	const b2 = document.getElementById("b2");
 
-	window.addEventListener( "mousemove", ( e ) => {
-		if(b1)
-			b1.style.transform = `translate(${e.clientX-200}px, ${e.clientY-200}px)`;
-		if(b2)
-			b2.style.transform = `translate(${e.clientX-25}px, ${e.clientY-90}px)`;
-	} );
+	window.addEventListener("mousemove", (e) => {
+		if (b1)
+			b1.style.transform = `translate(${e.clientX - 200}px, ${
+				e.clientY - 200
+			}px)`;
+		if (b2)
+			b2.style.transform = `translate(${e.clientX - 25}px, ${
+				e.clientY - 90
+			}px)`;
+	});
 </script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MMQBNKF4Z1"
+></script>
+
+

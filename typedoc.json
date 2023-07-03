@@ -1,9 +1,18 @@
 {
-   "entryPoints": [
-    "./src/index.ts"
-   ],
-    "out": "docs",
+    "entryPoints": [
+        "./src/index.ts"
+    ],
+    "out": "./site/src/pages/docs/0.0.1",
     "tsconfig": "./tsconfig.json",
     "entryPointStrategy": "resolve",
-    "json": "docs.json",
+    "json": "ignoredir/typedoc.json",
+    "commentStyle": "all",
+    "jsDocCompatibility": true,
+    "theme": "default",
+    "includeVersion": true,
+    "customCss": "./packers/custom.css",
+    "categorizeByGroup": true,
+    "darkHighlightTheme": "dark-plus",
+    "navigation": true,
+    "titleLink": "/Zeneth/"
 }

@@ -1,0 +1,88 @@
+*,*::after,*::before {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+   --dark-color-background: rgb(6,11,28) !important;
+}
+
+a {
+    color: #f492f1;
+    text-decoration: none;
+    position: relative;
+    transition: 500ms;
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #f492f1;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: 500ms
+}
+
+a:hover::after {
+    transform: scaleX(1);
+}
+
+.current {
+    color: hsla(258, 40%, 68%, 1);
+}
+
+a:hover {
+    color: hsla(258, 40%, 68%, 1);
+}
+
+* a:hover {
+    text-decoration: none !important;
+}
+
+.tsd-checkbox-background {
+    fill: rgb(43, 43, 43) !important;
+}
+
+.tsd-filter-input svg {
+    border-radius: 100% !important;
+}
+
+@keyframes open {
+  0% { opacity: 0; height: 0 }
+  100% { opacity: 1; height: auto }
+}
+
+/* closing animation */
+@keyframes close {
+  0% { height: auto; opacity: 1 }
+  100% { opacity: 0; height: 0 }
+}
+
+details[open] summary~* {
+  animation: open 1s
+}
+
+/* closing class */
+details.closing summary~* {
+  animation: close 1s
+}
+
+.tsd-generator>p {
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap:16px;
+    width: 100%;
+}
+
+.tsd-generator > p > span {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex:1;
+}
