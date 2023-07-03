@@ -54,7 +54,6 @@ client.on(GatewayEventNames.MessageCreate, async(message) => {
 
 ```mermaid
 graph LR;
-
 A[Zeneth] --> B[Classes];
 A --> C[Client];
 A --> D[Error];

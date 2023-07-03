@@ -92,6 +92,13 @@ function moveAssets() {
 
     for(const file of files) {
         let content = fs.readFileSync(path.join(assetsPath, file)).toString();
+
+        if(file === "search.js") {
+            content = content.replaceAll(".html","");
+        }
+        if(file === "main.js") {
+            content = content.replace("n.base",`n.base + "${ZenethPkg.version}/"`);
+        }
         let minified;
         if(file.endsWith(".css")) {
             minified = csso.minify(content).css;
