@@ -33,13 +33,11 @@ function walk(base) {
                     if (match.startsWith('href="https://')) return match;
                     if (match.startsWith('href="http://')) return match;
                     if (match.startsWith('href="../'))
-                        return `href="/Zeneth/docs/${
-                            ZenethPkg.version
-                        }/${match.slice(9)}`;
+                        return `href="/Zeneth/${match.replaceAll('../','').slice(6)}`.replaceAll(".html","");
                     const category = base.split("/").pop();
                     return `href="/Zeneth/docs/${
                         ZenethPkg.version
-                    }/${category}/${match.slice(6)}`;
+                    }/${category}/${match.slice(6)}`.replaceAll(".html","");
                 })
                 .replace(/src=".*?"/g, (match) => {
                     if (match.startsWith('src="/Zeneth/')) return match;
@@ -70,13 +68,13 @@ function walk(base) {
                     if (match.startsWith('href="../'))
                         return `href="/Zeneth/docs/${ZenethPkg.version}/${match
                             .replaceAll("../", "")
-                            .slice(6)}`;
+                            .slice(6)}`.replaceAll(".html","");
                     const category = base.split("/").pop();
                     if(category === ZenethPkg.version)
-                        return `href="/Zeneth/docs/${ZenethPkg.version}/${match.slice(6)}`;
+                        return `href="/Zeneth/docs/${ZenethPkg.version}/${match.slice(6)}`.replaceAll(".html","");
                     return `href="/Zeneth/docs/${
                         ZenethPkg.version
-                    }/${category}/${match.slice(6)}`;
+                    }/${category}/${match.slice(6)}`.replaceAll(".html","");
                 });
 
             fs.writeFileSync(path.join(base, fileordir), replaced);
