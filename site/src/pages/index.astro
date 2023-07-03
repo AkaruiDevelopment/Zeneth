@@ -191,6 +191,12 @@ export const prerender = true;
 	html {
 		overflow: hidden;
 	}
+
+	@media only screen and (max-height: 500px) {
+		main {
+			height: calc( 100% + 128px ) ;
+		}
+	}
 </style>
 
 <script>
