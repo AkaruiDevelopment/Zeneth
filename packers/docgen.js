@@ -96,9 +96,6 @@ function moveAssets() {
         if(file === "search.js") {
             content = content.replaceAll(".html","");
         }
-        if(file === "main.js") {
-            content = content.replace("n.base",`n.base + "${ZenethPkg.version}/"`);
-        }
         let minified;
         if(file.endsWith(".css")) {
             minified = csso.minify(content).css;
