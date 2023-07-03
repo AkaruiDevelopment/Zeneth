@@ -10,11 +10,9 @@ import {
     InteractionResponsePayload,
     RawInteractionData,
     RawInteractionDataData,
-    RawMessageComponentData,
-    SelectOption,
 } from "../typings/interface.js";
 import Client from "../client/index.js";
-import { ComponentTypes, InteractionTypes, Locales } from "../typings/enums.js";
+import { ApplicationCommandOptionTypes, InteractionTypes, Locales } from "../typings/enums.js";
 export default class Interaction {
     appPermissions: string | undefined;
     applicationId: bigint;
@@ -32,10 +30,7 @@ export default class Interaction {
     user: User | undefined;
     version: number;
     #client: Client;
-    components?: Camelize<RawMessageComponentData>[];
-    componentType?: ComponentTypes; 
-    customId: string | undefined;
-    values?: SelectOption[];
+    #replied: boolean = false;
 
     constructor(data: RawInteractionData, client: Client) {
         this.appPermissions = data.app_permissions;
@@ -61,10 +56,6 @@ export default class Interaction {
         this.type = data.type;
         this.user = data.user ? new User(data.user, client) : undefined;
         this.version = data.version;
-        this.components = convertToCamelCase(data.components) as Camelize<RawMessageComponentData>[];
-        this.componentType = data.component_type;
-        this.customId = data.custom_id;
-        this.values = data.values;
         this.#client = client;
 
         this.#clean();
@@ -76,6 +67,66 @@ export default class Interaction {
         return this.id;
     }
     createResponse(type:InteractionTypes,data:InteractionResponsePayload) {
-        this.#client.createInteractionResponse(this.id, this.token, type, data);
+        this.#client.createInteractionResponse(this.id, this.token, type, data).then(e => {
+            this.#replied = true;
+        });
     }
+    get customId() {
+        return this.data.customId;
+    }
+
+    get values() {
+        return this.data.values;
+    }
+
+    get command() {
+        // check command contains subcommandgroup , subcommand and name
+        const obj = {
+            subCommandGroup: undefined,
+            subCommand: undefined,
+            name: this.data.name,
+        } as {
+            subCommandGroup?: string;
+            subCommand?: string;
+            name: string;
+        }
+
+        if (this.data.options) {
+            for (const option of this.data.options) {
+                if (option.type === ApplicationCommandOptionTypes.SubCommandGroup) {
+                    obj.subCommandGroup = option.name;
+                    obj.subCommand = option.options?.[0].name;
+                } else if (option.type === ApplicationCommandOptionTypes.SubCommand) {
+                    obj.subCommand = option.name;
+                }
+            }
+        }
+        return obj;
+    }
+
+    get options() {
+        const options = {} as Record<string, string | number | boolean | undefined>;
+        if (this.data.options) {
+            for (const option of this.data.options) {
+                if(option.type === ApplicationCommandOptionTypes.SubCommand) {
+                    for(const subOption of option.options ?? []) {
+                        options[subOption.name] = subOption.value;
+                    }
+                } else if(option.type === ApplicationCommandOptionTypes.SubCommandGroup) {
+                    for(const subOption of option.options ?? []) {
+                        if(subOption.type === ApplicationCommandOptionTypes.SubCommand)
+                            options[subOption.name] = subOption.value;
+                    }
+                } else {
+                    options[option.name] = option.value;
+                }
+            }
+        }
+        return options;
+    }
+
+    get replied() {
+        return this.#replied;
+    }
+
 }

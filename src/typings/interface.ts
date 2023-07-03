@@ -1024,10 +1024,7 @@ export interface RawInteractionData {
   app_permissions?: string;
   locale?: Locales;
   guild_locale?: Locales;
-  custom_id?: string;
-  component_type?: ComponentTypes;
-  values?: SelectOption[];
-  components?: RawMessageComponentData;
+
 }
 
 export interface SelectOption {
@@ -1043,13 +1040,17 @@ export interface SelectOption {
 }
 
 export interface RawInteractionDataData {
-  id: snowflake;
-  name: string;
-  type: ApplicationCommandTypes;
-  resolved?: RawInteractionApplicationCommandResolvedData;
-  options?: RawApplicationCommandInteractionDataOption[];
-  guild_id?: snowflake;
-  target_id?: snowflake;
+    id: snowflake;
+    name: string;
+    type: ApplicationCommandTypes;
+    resolved?: RawInteractionApplicationCommandResolvedData;
+    options?: RawApplicationCommandInteractionDataOption[];
+    guild_id?: snowflake;
+    target_id?: snowflake;
+    custom_id?: string;
+    component_type?: ComponentTypes;
+    values?: SelectOption[];
+    components?: RawMessageComponentData;
 }
 
 export interface RawInteractionApplicationCommandResolvedData {
