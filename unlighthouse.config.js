@@ -6,6 +6,10 @@ module.exports = defineConfig({
     site: "https://akaruidevelopment.github.io/Zeneth",
     scanner: {
         sitemap: ["/Zeneth/sitemap-index.xml", "/Zeneth/sitemap-0.xml"],
+        dynamicSampling: false,
+        "maxRoutes": false,
+        throttle:false,
+        device: "desktop",
     },
     debug: true,
 });
