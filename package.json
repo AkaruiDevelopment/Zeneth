@@ -1,6 +1,6 @@
 {
   "name": "zeneth",
-  "version": "0.0.1",
+  "version": "1.0.0-dev",
   "description": "A library to interact with discord api easily ",
   "main": "./dist/cjs/index.js",
   "exports": {
