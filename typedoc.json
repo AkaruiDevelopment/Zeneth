@@ -2,7 +2,7 @@
     "entryPoints": [
         "./src/index.ts"
     ],
-    "out": "./site/src/pages/docs/0.0.1",
+    "out": "./site/src/pages/docs/1.0.0-dev",
     "tsconfig": "./tsconfig.json",
     "entryPointStrategy": "resolve",
     "json": "ignoredir/typedoc.json",
