@@ -3,7 +3,7 @@ import { Intents } from "../typings/enums.js";
 const DiscordApi = 'https://discord.com/api/v10';
 const pack = {
   name: 'zeneth',
-  version: '0.0.1',
+  version: '1.0.0-dev',
   description: 'A library to interact with discord api easily ',
   main: './dist/cjs/index.js',
   exports: { import: './dist/esm/index.js', require: './dist/cjs/index.js' },
