@@ -8,11 +8,10 @@
     "json": "ignoredir/typedoc.json",
     "commentStyle": "all",
     "jsDocCompatibility": true,
-    "theme": "default",
     "includeVersion": true,
-    "customCss": "./packers/custom.css",
     "categorizeByGroup": true,
-    "darkHighlightTheme": "dark-plus",
+    "darkHighlightTheme": "material-theme-palenight",
     "navigation": true,
-    "titleLink": "/Zeneth/"
+    "titleLink": "/Zeneth/",
+    "theme": "hierarchy"
 }
