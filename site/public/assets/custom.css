@@ -146,6 +146,12 @@ a {
     background-color: #f492f155;
 }
 
+.tsd-search .results li.current,#tsd-search .results li:hover,#tsd-search.has-focus {
+    background-color: #56337755 !important;
+    transition: 500ms;
+}
+
+
 @media (max-width: 769px) {
 html .col-sidebar {
     width: 90%;
