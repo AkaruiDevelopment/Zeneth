@@ -8,6 +8,110 @@
 <li class="state loading">Preparing search index...</li>
 <li class="state failure">The search index is not available</li></ul><a href="/Zeneth/" class="title">Home</a><a href="#" onclick="window.location.href = window.location.href.split('/').slice(0,6).join('/'); return false;" class="title">Intro</a><a href="/Zeneth/soon" class="title">Guide</a></div>
 <div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="7" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="11" width="14" height="2" fill="var(--color-text)"></rect></svg></a></div></div></header>
+
+
+<div class="cursor" id="c1"></div>
+<div class="cursor2" id="c2"></div>
+
+<style>
+    .cursor {
+        width: 20px;
+        height: 20px;
+        background-color: white;
+        border-radius: 100%;
+        position: fixed;
+        transition: 500ms ease;
+        transition-property: width, height, background-color;
+        pointer-events: none;
+        z-index: 999;
+        mix-blend-mode: exclusion;
+        top:0;
+        left:0;
+    }
+
+    .cursor2 {
+        width: 40px;
+        height: 40px;
+        background-color: transparent;
+        border: 2px solid #f492f0;
+        border-radius: 100%;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        position: fixed;
+        transition: 500ms ease;
+        transition-property: width, height, border;
+        pointer-events: none;
+        z-index: 999;
+        top:0;
+        left:0;
+        mix-blend-mode: exclusion;
+    }
+
+    .cursor2.active {
+        width: 60px;
+        height: 60px;
+        border: 2px solid white;
+    }
+
+    .cursor.active {
+        width: 40px;
+        height: 40px;
+        background-color: #f492f0;
+    }
+</style>
+
+<script>
+    const cursor1 = document.getElementById("c1");
+    const cursor2 = document.getElementById("c2");
+
+    document.onmousemove = (e) => {
+        if (!cursor1 || !cursor2) return;
+        const cursor1Height = cursor1?.offsetHeight ?? 20;
+        const cursor1Width = cursor1?.offsetWidth ?? 20;
+
+        const cursor2Height = cursor2?.offsetHeight ?? 40;
+        const cursor2Width = cursor2?.offsetWidth ?? 40;
+
+        setTimeout(() => {
+            cursor1.style.transform = `translateX(${
+                e.clientX - cursor1Width / 2
+            }px) translateY(${e.clientY - cursor1Height / 2}px)`;
+        }, 50);
+
+        setTimeout(() => {
+            cursor2.style.transform = `translateX(${
+                e.clientX - cursor2Width / 2
+            }px) translateY(${e.clientY - cursor2Height / 2}px)`;
+        }, 100);
+        if (e.target?.tagName === "A" || e.target?.tagName === "BUTTON" || e.target?.tagName === "INPUT" || e.target?.tagName === "TEXTAREA" || e.target?.tagName === "IMG" || e.target.tagName === "svg" || e.target.tagName === "CODE" || e.target.classList.contains("cursor-pointer") || e.target?.parentElement?.tagName === "A" || e.target?.parentElement?.tagName === "BUTTON" || e.target?.parentElement?.tagName === "INPUT" || e.target?.parentElement?.tagName === "TEXTAREA" || e.target?.parentElement?.tagName === "IMG" || e.target?.parentElement?.tagName === "svg" || e.target?.parentElement?.tagName === "CODE" || e.target?.parentElement?.classList.contains("cursor-pointer")) {
+            cursor1.classList.add("active");
+            cursor2.classList.add("active");
+        } else {
+            cursor1.classList.remove("active");
+            cursor2.classList.remove("active");
+        }
+    };
+
+        document.onmousedown = () => {
+        cursor1.classList.add("active");
+        cursor2.classList.add("active");
+    };
+    document.onmouseup = () => {
+        cursor1.classList.remove("active");
+        cursor2.classList.remove("active");
+    };
+
+        /* remove the cursor for mobile */
+
+    if (window.innerWidth < 768) {
+        cursor1?.remove();
+        cursor2?.remove();
+
+        document.onmousemove = null;
+        document.onmousedown = null;
+        document.onmouseup = null;
+    }
+</script>
+
 <div class="container container-main">
 <div class="col-content">
 <div class="tsd-page-title">
@@ -20,7 +124,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">Role</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/classes/Role.ts#L6">src/classes/Role.ts:6</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/classes/Role.ts#L6">src/classes/Role.ts:6</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -69,69 +173,69 @@
 <h5><span class="tsd-kind-parameter">client</span>: <a href="/Zeneth/docs/1.0.0-dev/classes/Client" class="tsd-signature-type tsd-kind-class">Client</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="/Zeneth/docs/1.0.0-dev/classes/Role" class="tsd-signature-type tsd-kind-class">Role</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/classes/Role.ts#L19">src/classes/Role.ts:19</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/classes/Role.ts#L19">src/classes/Role.ts:19</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member tsd-is-private"><a id="_client" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>#client</span><a href="#_client" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">#client</span><span class="tsd-signature-symbol">:</span> <a href="/Zeneth/docs/1.0.0-dev/classes/Client" class="tsd-signature-type tsd-kind-class">Client</a></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/classes/Role.ts#L7">src/classes/Role.ts:7</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/classes/Role.ts#L7">src/classes/Role.ts:7</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="color" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>color</span><a href="#color" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">color</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/classes/Role.ts#L8">src/classes/Role.ts:8</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/classes/Role.ts#L8">src/classes/Role.ts:8</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="hoist" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>hoist</span><a href="#hoist" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">hoist</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/classes/Role.ts#L9">src/classes/Role.ts:9</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/classes/Role.ts#L9">src/classes/Role.ts:9</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="icon" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>icon</span><a href="#icon" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">icon</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">bigint</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/classes/Role.ts#L10">src/classes/Role.ts:10</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/classes/Role.ts#L10">src/classes/Role.ts:10</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="id" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>id</span><a href="#id" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">id</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/classes/Role.ts#L11">src/classes/Role.ts:11</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/classes/Role.ts#L11">src/classes/Role.ts:11</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="managed" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>managed</span><a href="#managed" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">managed</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/classes/Role.ts#L12">src/classes/Role.ts:12</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/classes/Role.ts#L12">src/classes/Role.ts:12</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="mentionable" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>mentionable</span><a href="#mentionable" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">mentionable</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/classes/Role.ts#L13">src/classes/Role.ts:13</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/classes/Role.ts#L13">src/classes/Role.ts:13</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="name" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>name</span><a href="#name" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/classes/Role.ts#L14">src/classes/Role.ts:14</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/classes/Role.ts#L14">src/classes/Role.ts:14</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="permissions" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>permissions</span><a href="#permissions" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">permissions</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/classes/Role.ts#L15">src/classes/Role.ts:15</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/classes/Role.ts#L15">src/classes/Role.ts:15</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="position" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>position</span><a href="#position" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">position</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/classes/Role.ts#L16">src/classes/Role.ts:16</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/classes/Role.ts#L16">src/classes/Role.ts:16</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="tags" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>tags</span><a href="#tags" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">tags</span><span class="tsd-signature-symbol">:</span> <a href="/Zeneth/docs/1.0.0-dev/types/Camelize" class="tsd-signature-type tsd-kind-type-alias">Camelize</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="/Zeneth/docs/1.0.0-dev/interfaces/RawRoleTagsData" class="tsd-signature-type tsd-kind-interface">RawRoleTagsData</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/classes/Role.ts#L17">src/classes/Role.ts:17</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/classes/Role.ts#L17">src/classes/Role.ts:17</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="unicodeEmoji" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>unicode<wbr/>Emoji</span><a href="#unicodeEmoji" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">unicode<wbr/>Emoji</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/classes/Role.ts#L18">src/classes/Role.ts:18</a></li></ul></aside></section></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/classes/Role.ts#L18">src/classes/Role.ts:18</a></li></ul></aside></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Accessors</h2>
 <section class="tsd-panel tsd-member"><a id="_toStringTag_" class="tsd-anchor"></a>
@@ -141,7 +245,7 @@
 <li class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/classes/Role.ts#L37">src/classes/Role.ts:37</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/classes/Role.ts#L37">src/classes/Role.ts:37</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
 <section class="tsd-panel tsd-member tsd-is-private"><a id="_clean" class="tsd-anchor"></a>
@@ -151,7 +255,7 @@
 <li class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/classes/Role.ts#L34">src/classes/Role.ts:34</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/classes/Role.ts#L34">src/classes/Role.ts:34</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -451,7 +555,7 @@
 <p style="line-height: 28px;">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a><br>
             <span id="generation-date"></span>
             <script>
-                window.GENERATION_DATE = 1689449827704;
+                window.GENERATION_DATE = 1689539043652;
 
                 (() => {
                     

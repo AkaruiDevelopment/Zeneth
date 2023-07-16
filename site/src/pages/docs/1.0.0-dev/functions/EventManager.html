@@ -8,6 +8,110 @@
 <li class="state loading">Preparing search index...</li>
 <li class="state failure">The search index is not available</li></ul><a href="/Zeneth/" class="title">Home</a><a href="#" onclick="window.location.href = window.location.href.split('/').slice(0,6).join('/'); return false;" class="title">Intro</a><a href="/Zeneth/soon" class="title">Guide</a></div>
 <div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="7" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="11" width="14" height="2" fill="var(--color-text)"></rect></svg></a></div></div></header>
+
+
+<div class="cursor" id="c1"></div>
+<div class="cursor2" id="c2"></div>
+
+<style>
+    .cursor {
+        width: 20px;
+        height: 20px;
+        background-color: white;
+        border-radius: 100%;
+        position: fixed;
+        transition: 500ms ease;
+        transition-property: width, height, background-color;
+        pointer-events: none;
+        z-index: 999;
+        mix-blend-mode: exclusion;
+        top:0;
+        left:0;
+    }
+
+    .cursor2 {
+        width: 40px;
+        height: 40px;
+        background-color: transparent;
+        border: 2px solid #f492f0;
+        border-radius: 100%;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        position: fixed;
+        transition: 500ms ease;
+        transition-property: width, height, border;
+        pointer-events: none;
+        z-index: 999;
+        top:0;
+        left:0;
+        mix-blend-mode: exclusion;
+    }
+
+    .cursor2.active {
+        width: 60px;
+        height: 60px;
+        border: 2px solid white;
+    }
+
+    .cursor.active {
+        width: 40px;
+        height: 40px;
+        background-color: #f492f0;
+    }
+</style>
+
+<script>
+    const cursor1 = document.getElementById("c1");
+    const cursor2 = document.getElementById("c2");
+
+    document.onmousemove = (e) => {
+        if (!cursor1 || !cursor2) return;
+        const cursor1Height = cursor1?.offsetHeight ?? 20;
+        const cursor1Width = cursor1?.offsetWidth ?? 20;
+
+        const cursor2Height = cursor2?.offsetHeight ?? 40;
+        const cursor2Width = cursor2?.offsetWidth ?? 40;
+
+        setTimeout(() => {
+            cursor1.style.transform = `translateX(${
+                e.clientX - cursor1Width / 2
+            }px) translateY(${e.clientY - cursor1Height / 2}px)`;
+        }, 50);
+
+        setTimeout(() => {
+            cursor2.style.transform = `translateX(${
+                e.clientX - cursor2Width / 2
+            }px) translateY(${e.clientY - cursor2Height / 2}px)`;
+        }, 100);
+        if (e.target?.tagName === "A" || e.target?.tagName === "BUTTON" || e.target?.tagName === "INPUT" || e.target?.tagName === "TEXTAREA" || e.target?.tagName === "IMG" || e.target.tagName === "svg" || e.target.tagName === "CODE" || e.target.classList.contains("cursor-pointer") || e.target?.parentElement?.tagName === "A" || e.target?.parentElement?.tagName === "BUTTON" || e.target?.parentElement?.tagName === "INPUT" || e.target?.parentElement?.tagName === "TEXTAREA" || e.target?.parentElement?.tagName === "IMG" || e.target?.parentElement?.tagName === "svg" || e.target?.parentElement?.tagName === "CODE" || e.target?.parentElement?.classList.contains("cursor-pointer")) {
+            cursor1.classList.add("active");
+            cursor2.classList.add("active");
+        } else {
+            cursor1.classList.remove("active");
+            cursor2.classList.remove("active");
+        }
+    };
+
+        document.onmousedown = () => {
+        cursor1.classList.add("active");
+        cursor2.classList.add("active");
+    };
+    document.onmouseup = () => {
+        cursor1.classList.remove("active");
+        cursor2.classList.remove("active");
+    };
+
+        /* remove the cursor for mobile */
+
+    if (window.innerWidth < 768) {
+        cursor1?.remove();
+        cursor2?.remove();
+
+        document.onmousemove = null;
+        document.onmousedown = null;
+        document.onmouseup = null;
+    }
+</script>
+
 <div class="container container-main">
 <div class="col-content">
 <div class="tsd-page-title">
@@ -28,7 +132,7 @@
 <h5><span class="tsd-kind-parameter">client</span>: <a href="/Zeneth/docs/1.0.0-dev/classes/Client" class="tsd-signature-type tsd-kind-class">Client</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/events/index.ts#L9">src/events/index.ts:9</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/events/index.ts#L9">src/events/index.ts:9</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -328,7 +432,7 @@
 <p style="line-height: 28px;">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a><br>
             <span id="generation-date"></span>
             <script>
-                window.GENERATION_DATE = 1689449828919;
+                window.GENERATION_DATE = 1689539044416;
 
                 (() => {
                     

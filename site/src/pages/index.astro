@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import * as A from "@astrojs/image/components";
 import Copy from "../components/Copy";
 import Stars from "../components/Stars.astro";
+import NpmCard from "../components/Card";
 
 export const prerender = true;
 ---
@@ -54,6 +55,13 @@ export const prerender = true;
 				</div>
 			</div>
 		</div>
+
+		<div class="stats">
+			<div class="head">Statistics</div>
+			<NpmCard client:visible/>
+		</div> 
+
+
 	</main>
 </Layout>
 
@@ -64,8 +72,9 @@ export const prerender = true;
 	}
 	.hero {
 		position: relative;
-		height: 100%;
+		height: calc(100vh - 64px);
 		width: 100%;
+		overflow: hidden;
 	}
 
 	.glowball {
@@ -192,11 +201,28 @@ export const prerender = true;
 		overflow: hidden;
 	}
 
+	.stats {
+		height: 100%;
+		width: 100%;
+		background: rgb(6,11,28);
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.head {
+		font-size: 3rem;
+		color: #f492f0;
+	}
+
 	@media only screen and (max-height: 500px) {
 		main {
 			height: calc( 100% + 128px ) ;
 		}
 	}
+
+
 </style>
 
 <script>

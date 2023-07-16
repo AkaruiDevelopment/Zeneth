@@ -8,6 +8,110 @@
 <li class="state loading">Preparing search index...</li>
 <li class="state failure">The search index is not available</li></ul><a href="/Zeneth/" class="title">Home</a><a href="#" onclick="window.location.href = window.location.href.split('/').slice(0,6).join('/'); return false;" class="title">Intro</a><a href="/Zeneth/soon" class="title">Guide</a></div>
 <div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="7" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="11" width="14" height="2" fill="var(--color-text)"></rect></svg></a></div></div></header>
+
+
+<div class="cursor" id="c1"></div>
+<div class="cursor2" id="c2"></div>
+
+<style>
+    .cursor {
+        width: 20px;
+        height: 20px;
+        background-color: white;
+        border-radius: 100%;
+        position: fixed;
+        transition: 500ms ease;
+        transition-property: width, height, background-color;
+        pointer-events: none;
+        z-index: 999;
+        mix-blend-mode: exclusion;
+        top:0;
+        left:0;
+    }
+
+    .cursor2 {
+        width: 40px;
+        height: 40px;
+        background-color: transparent;
+        border: 2px solid #f492f0;
+        border-radius: 100%;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        position: fixed;
+        transition: 500ms ease;
+        transition-property: width, height, border;
+        pointer-events: none;
+        z-index: 999;
+        top:0;
+        left:0;
+        mix-blend-mode: exclusion;
+    }
+
+    .cursor2.active {
+        width: 60px;
+        height: 60px;
+        border: 2px solid white;
+    }
+
+    .cursor.active {
+        width: 40px;
+        height: 40px;
+        background-color: #f492f0;
+    }
+</style>
+
+<script>
+    const cursor1 = document.getElementById("c1");
+    const cursor2 = document.getElementById("c2");
+
+    document.onmousemove = (e) => {
+        if (!cursor1 || !cursor2) return;
+        const cursor1Height = cursor1?.offsetHeight ?? 20;
+        const cursor1Width = cursor1?.offsetWidth ?? 20;
+
+        const cursor2Height = cursor2?.offsetHeight ?? 40;
+        const cursor2Width = cursor2?.offsetWidth ?? 40;
+
+        setTimeout(() => {
+            cursor1.style.transform = `translateX(${
+                e.clientX - cursor1Width / 2
+            }px) translateY(${e.clientY - cursor1Height / 2}px)`;
+        }, 50);
+
+        setTimeout(() => {
+            cursor2.style.transform = `translateX(${
+                e.clientX - cursor2Width / 2
+            }px) translateY(${e.clientY - cursor2Height / 2}px)`;
+        }, 100);
+        if (e.target?.tagName === "A" || e.target?.tagName === "BUTTON" || e.target?.tagName === "INPUT" || e.target?.tagName === "TEXTAREA" || e.target?.tagName === "IMG" || e.target.tagName === "svg" || e.target.tagName === "CODE" || e.target.classList.contains("cursor-pointer") || e.target?.parentElement?.tagName === "A" || e.target?.parentElement?.tagName === "BUTTON" || e.target?.parentElement?.tagName === "INPUT" || e.target?.parentElement?.tagName === "TEXTAREA" || e.target?.parentElement?.tagName === "IMG" || e.target?.parentElement?.tagName === "svg" || e.target?.parentElement?.tagName === "CODE" || e.target?.parentElement?.classList.contains("cursor-pointer")) {
+            cursor1.classList.add("active");
+            cursor2.classList.add("active");
+        } else {
+            cursor1.classList.remove("active");
+            cursor2.classList.remove("active");
+        }
+    };
+
+        document.onmousedown = () => {
+        cursor1.classList.add("active");
+        cursor2.classList.add("active");
+    };
+    document.onmouseup = () => {
+        cursor1.classList.remove("active");
+        cursor2.classList.remove("active");
+    };
+
+        /* remove the cursor for mobile */
+
+    if (window.innerWidth < 768) {
+        cursor1?.remove();
+        cursor2?.remove();
+
+        document.onmousemove = null;
+        document.onmousedown = null;
+        document.onmouseup = null;
+    }
+</script>
+
 <div class="container container-main">
 <div class="col-content">
 <div class="tsd-page-title">
@@ -16,7 +120,7 @@
 <li><a href="/Zeneth/docs/1.0.0-dev/enums/MessageFlags">MessageFlags</a></li></ul>
 <h1>Enumeration MessageFlags</h1></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/typings/enums.ts#L204">src/typings/enums.ts:204</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/typings/enums.ts#L204">src/typings/enums.ts:204</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -41,52 +145,52 @@
 <h3 class="tsd-anchor-link"><span>Crossposted</span><a href="#Crossposted" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><g stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" id="icon-anchor"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></g></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-enum-member">Crossposted</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">1</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/typings/enums.ts#L206">src/typings/enums.ts:206</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/typings/enums.ts#L206">src/typings/enums.ts:206</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="Ephemeral" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>Ephemeral</span><a href="#Ephemeral" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-enum-member">Ephemeral</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">64</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/typings/enums.ts#L212">src/typings/enums.ts:212</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/typings/enums.ts#L212">src/typings/enums.ts:212</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="FailedToMentionSomeRolesInThread" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>Failed<wbr/>To<wbr/>Mention<wbr/>Some<wbr/>Roles<wbr/>In<wbr/>Thread</span><a href="#FailedToMentionSomeRolesInThread" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-enum-member">Failed<wbr/>To<wbr/>Mention<wbr/>Some<wbr/>Roles<wbr/>In<wbr/>Thread</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">256</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/typings/enums.ts#L214">src/typings/enums.ts:214</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/typings/enums.ts#L214">src/typings/enums.ts:214</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="HasThread" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>Has<wbr/>Thread</span><a href="#HasThread" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-enum-member">Has<wbr/>Thread</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">32</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/typings/enums.ts#L211">src/typings/enums.ts:211</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/typings/enums.ts#L211">src/typings/enums.ts:211</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="IsCrosspost" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>Is<wbr/>Crosspost</span><a href="#IsCrosspost" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-enum-member">Is<wbr/>Crosspost</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">2</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/typings/enums.ts#L207">src/typings/enums.ts:207</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/typings/enums.ts#L207">src/typings/enums.ts:207</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="Loading" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>Loading</span><a href="#Loading" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-enum-member">Loading</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">128</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/typings/enums.ts#L213">src/typings/enums.ts:213</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/typings/enums.ts#L213">src/typings/enums.ts:213</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="SourceMessageDeleted" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>Source<wbr/>Message<wbr/>Deleted</span><a href="#SourceMessageDeleted" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-enum-member">Source<wbr/>Message<wbr/>Deleted</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">8</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/typings/enums.ts#L209">src/typings/enums.ts:209</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/typings/enums.ts#L209">src/typings/enums.ts:209</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="SuppressEmbeds" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>Suppress<wbr/>Embeds</span><a href="#SuppressEmbeds" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-enum-member">Suppress<wbr/>Embeds</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">4</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/typings/enums.ts#L208">src/typings/enums.ts:208</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/typings/enums.ts#L208">src/typings/enums.ts:208</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="SuppressNotifications" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>Suppress<wbr/>Notifications</span><a href="#SuppressNotifications" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-enum-member">Suppress<wbr/>Notifications</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">4096</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/typings/enums.ts#L215">src/typings/enums.ts:215</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/typings/enums.ts#L215">src/typings/enums.ts:215</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="Urgent" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>Urgent</span><a href="#Urgent" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-enum-member">Urgent</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">16</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/typings/enums.ts#L210">src/typings/enums.ts:210</a></li></ul></aside></section></section></div>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/typings/enums.ts#L210">src/typings/enums.ts:210</a></li></ul></aside></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -386,7 +490,7 @@
 <p style="line-height: 28px;">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a><br>
             <span id="generation-date"></span>
             <script>
-                window.GENERATION_DATE = 1689449827153;
+                window.GENERATION_DATE = 1689539043319;
 
                 (() => {
                     

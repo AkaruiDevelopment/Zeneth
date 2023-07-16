@@ -8,6 +8,110 @@
 <li class="state loading">Preparing search index...</li>
 <li class="state failure">The search index is not available</li></ul><a href="/Zeneth/" class="title">Home</a><a href="#" onclick="window.location.href = window.location.href.split('/').slice(0,6).join('/'); return false;" class="title">Intro</a><a href="/Zeneth/soon" class="title">Guide</a></div>
 <div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="7" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="11" width="14" height="2" fill="var(--color-text)"></rect></svg></a></div></div></header>
+
+
+<div class="cursor" id="c1"></div>
+<div class="cursor2" id="c2"></div>
+
+<style>
+    .cursor {
+        width: 20px;
+        height: 20px;
+        background-color: white;
+        border-radius: 100%;
+        position: fixed;
+        transition: 500ms ease;
+        transition-property: width, height, background-color;
+        pointer-events: none;
+        z-index: 999;
+        mix-blend-mode: exclusion;
+        top:0;
+        left:0;
+    }
+
+    .cursor2 {
+        width: 40px;
+        height: 40px;
+        background-color: transparent;
+        border: 2px solid #f492f0;
+        border-radius: 100%;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        position: fixed;
+        transition: 500ms ease;
+        transition-property: width, height, border;
+        pointer-events: none;
+        z-index: 999;
+        top:0;
+        left:0;
+        mix-blend-mode: exclusion;
+    }
+
+    .cursor2.active {
+        width: 60px;
+        height: 60px;
+        border: 2px solid white;
+    }
+
+    .cursor.active {
+        width: 40px;
+        height: 40px;
+        background-color: #f492f0;
+    }
+</style>
+
+<script>
+    const cursor1 = document.getElementById("c1");
+    const cursor2 = document.getElementById("c2");
+
+    document.onmousemove = (e) => {
+        if (!cursor1 || !cursor2) return;
+        const cursor1Height = cursor1?.offsetHeight ?? 20;
+        const cursor1Width = cursor1?.offsetWidth ?? 20;
+
+        const cursor2Height = cursor2?.offsetHeight ?? 40;
+        const cursor2Width = cursor2?.offsetWidth ?? 40;
+
+        setTimeout(() => {
+            cursor1.style.transform = `translateX(${
+                e.clientX - cursor1Width / 2
+            }px) translateY(${e.clientY - cursor1Height / 2}px)`;
+        }, 50);
+
+        setTimeout(() => {
+            cursor2.style.transform = `translateX(${
+                e.clientX - cursor2Width / 2
+            }px) translateY(${e.clientY - cursor2Height / 2}px)`;
+        }, 100);
+        if (e.target?.tagName === "A" || e.target?.tagName === "BUTTON" || e.target?.tagName === "INPUT" || e.target?.tagName === "TEXTAREA" || e.target?.tagName === "IMG" || e.target.tagName === "svg" || e.target.tagName === "CODE" || e.target.classList.contains("cursor-pointer") || e.target?.parentElement?.tagName === "A" || e.target?.parentElement?.tagName === "BUTTON" || e.target?.parentElement?.tagName === "INPUT" || e.target?.parentElement?.tagName === "TEXTAREA" || e.target?.parentElement?.tagName === "IMG" || e.target?.parentElement?.tagName === "svg" || e.target?.parentElement?.tagName === "CODE" || e.target?.parentElement?.classList.contains("cursor-pointer")) {
+            cursor1.classList.add("active");
+            cursor2.classList.add("active");
+        } else {
+            cursor1.classList.remove("active");
+            cursor2.classList.remove("active");
+        }
+    };
+
+        document.onmousedown = () => {
+        cursor1.classList.add("active");
+        cursor2.classList.add("active");
+    };
+    document.onmouseup = () => {
+        cursor1.classList.remove("active");
+        cursor2.classList.remove("active");
+    };
+
+        /* remove the cursor for mobile */
+
+    if (window.innerWidth < 768) {
+        cursor1?.remove();
+        cursor2?.remove();
+
+        document.onmousemove = null;
+        document.onmousedown = null;
+        document.onmouseup = null;
+    }
+</script>
+
 <div class="container container-main">
 <div class="col-content">
 <div class="tsd-page-title">
@@ -20,7 +124,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">RawChannelMessageOptions</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/typings/interface.ts#L911">src/typings/interface.ts:911</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/typings/interface.ts#L911">src/typings/interface.ts:911</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -39,22 +143,22 @@
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>after</span><a href="#after" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><g stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" id="icon-anchor"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></g></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">after</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">bigint</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/typings/interface.ts#L915">src/typings/interface.ts:915</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/typings/interface.ts#L915">src/typings/interface.ts:915</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="around" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>around</span><a href="#around" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">around</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">bigint</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/typings/interface.ts#L913">src/typings/interface.ts:913</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/typings/interface.ts#L913">src/typings/interface.ts:913</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="before" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>before</span><a href="#before" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">before</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">bigint</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/typings/interface.ts#L914">src/typings/interface.ts:914</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/typings/interface.ts#L914">src/typings/interface.ts:914</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="limit" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>limit</span><a href="#limit" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">limit</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/af6b77d/src/typings/interface.ts#L916">src/typings/interface.ts:916</a></li></ul></aside></section></section></div>
+<li>Defined in <a href="https://github.com/AkaruiDevelopment/Zeneth/blob/b7983ea/src/typings/interface.ts#L916">src/typings/interface.ts:916</a></li></ul></aside></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -354,7 +458,7 @@
 <p style="line-height: 28px;">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a><br>
             <span id="generation-date"></span>
             <script>
-                window.GENERATION_DATE = 1689449828282;
+                window.GENERATION_DATE = 1689539044021;
 
                 (() => {
                     

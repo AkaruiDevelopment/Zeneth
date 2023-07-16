@@ -1,0 +1,57 @@
+.card {
+    width:100%;
+}
+
+.box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 16px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.weekly,.allTime {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color:white;
+    padding:16px;
+}
+
+.number {
+    font-family: monospace;
+    font-size: 50px;
+    font-weight: 900;
+    text-align: center;
+}
+
+.text {
+    font-family: monospace;
+    font-size: 25px;
+    font-weight: 700;
+    color: #ababab;
+    text-align: center;
+
+}
+
+@media only screen and (max-width: 600px) {
+    .box {
+        flex-direction: column;
+    }
+
+    .number {
+        font-size: 30px;
+    }
+
+    .text {
+        font-size: 15px;
+    }
+}
