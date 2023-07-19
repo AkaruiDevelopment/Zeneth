@@ -362,6 +362,12 @@ function moveAssets() {
         if (file === "search.js") {
             content = content.replaceAll(".html", "");
         }
+        else if(file === "main.js") {
+            content = content.replace(
+                "m.href=n.base+l.url",
+                `m.href= "/"+window.location.href.split("/").slice(3,6).join("/")+"/"+l.url`,
+            );
+        }
         let minified;
         if (file.endsWith(".css")) {
             minified = csso.minify(content).css;
