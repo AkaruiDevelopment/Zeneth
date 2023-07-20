@@ -13,11 +13,11 @@
             "sizes": "192x192"
         }
     ],
-    "id": "/?source=pwa",
-    "start_url": "/?source=pwa",
+    "id": "/Zeneth?source=pwa",
+    "start_url": "/Zeneth?source=pwa",
     "background_color": "#131313",
     "display": "standalone",
-    "scope": "/",
+    "scope": "/Zeneth",
     "theme_color": "#131313",
     "description": "A Discord Library for Discord Bots"
 }
