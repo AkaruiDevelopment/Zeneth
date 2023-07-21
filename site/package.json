@@ -3,11 +3,13 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "npm run addducd && npm run changed3hypertree && astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "addducd": "node ../packers/scripts/addducd.js",
+    "changed3hypertree": "node ../packers/scripts/changed3-hypertree.js"
   },
   "dependencies": {
     "@astrojs/image": "^0.17.1",
@@ -21,10 +23,14 @@
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "astro": "^2.7.2",
+    "d3": "^7.8.5",
+    "d3-hypertree": "^1.1.3",
+    "ducd": "^1.0.9",
     "mermaid": "^10.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "remark-toc": "^8.0.1",
-    "sharp": "^0.32.1"
+    "sharp": "^0.32.1",
+    "stream": "^0.0.2"
   }
 }

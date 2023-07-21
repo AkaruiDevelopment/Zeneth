@@ -16,6 +16,7 @@
     "bundleTsFiles": "node packers/bundle.js",
     "lint": "eslint . --ext .ts --fix --ext .js",
     "docgen": "node ./packers/updateTypeDocConfig.js && npx typedoc --plugin typedoc-theme-hierarchy --plugin typedoc-plugin-mermaid --plugin typedoc-plugin-extras --footerLastModified && node ./packers/docgen.js"
+
   },
   "repository": {
     "type": "git",

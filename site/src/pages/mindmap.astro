@@ -1,0 +1,100 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Zeneth from "../components/mindmap";
+---
+
+<Layout 
+    title="AkaruiDevelopment | Zeneth"
+    meta={{
+        description:
+            "A nodejs library to make interaction with discord api easier.",
+    }}
+>
+    <Zeneth client:only="react" />
+</Layout>
+
+<style is:inline>
+
+    .back {
+        position: absolute;
+        top: 100px;
+        left: 0;
+        color: #fff;
+        text-decoration: none;
+        font-size: 20px;
+        width:50px;
+        height:50px;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        background: #f75cf779;
+        border-radius: 4px;
+        box-shadow: 0 0 10px #00000099;
+        padding: 16px;
+        z-index: 10;
+    }
+</style>
+    
+<script>
+
+    const url = new URL(window.location.href);
+    const node = url.searchParams.get("node");
+    console.log(node)
+    if(node) {
+        const back = document.createElement("div");
+        const nodes = node.split("/");
+        let href = "?node=" + nodes.slice(0, nodes.length - 1).join("/");
+            if(href.trim() == "?node=") href = "/";
+            back.onclick = () => {
+                window.history.back();
+            }
+        back.innerText = "<";
+        back.id = "back";
+        back.classList.add("back");
+        // add at top of document
+        document.body.prepend(back);
+    }
+
+    // listen for history change
+    window.addEventListener("popstate", () => {
+        const url = new URL(window.location.href);
+        const node = url.searchParams.get("node");
+        console.log(node)
+        if(node) {
+            const back = document.createElement("div");
+            const nodes = node.split("/");
+            let href = "?node=" + nodes.slice(0, nodes.length - 1).join("/");
+            if(href.trim() == "?node=") href = "/";
+            back.onclick = () => {
+                window.history.back();
+            }
+            back.innerText = "<";
+            back.classList.add("back");
+            document.getElementById("back")?.remove();
+            // add at top of document
+            if(href != "/")
+                document.body.prepend(back);
+        }
+    })
+
+    window.addEventListener("pushState",() => {
+        const url = new URL(window.location.href);
+    const node = url.searchParams.get("node");
+    console.log(node)
+    if(node) {
+        const back = document.createElement("div");
+        const nodes = node.split("/");
+        let href = "?node=" + nodes.slice(0, nodes.length - 1).join("/");
+            if(href.trim() == "?node=") href = "/";
+            back.onclick = () => {
+                window.history.back();
+            }
+        back.innerText = "<";
+        back.id = "back";
+        back.classList.add("back");
+        // add at top of document
+        document.body.prepend(back);
+    }
+    })
+
+</script>

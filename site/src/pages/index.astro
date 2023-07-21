@@ -4,242 +4,245 @@ import * as A from "@astrojs/image/components";
 import Copy from "../components/Copy";
 import Stars from "../components/Stars.astro";
 import NpmCard from "../components/Card";
+import GitGraph from "../components/GitGraph";
 
 export const prerender = true;
 ---
 
 <Layout
-	title="AkaruiDevelopment | Zeneth"
-	meta={{
-		description:
-			"A nodejs library to make interaction with discord api easier.",
-	}}
+    title="AkaruiDevelopment | Zeneth"
+    meta={{
+        description:
+            "A nodejs library to make interaction with discord api easier.",
+    }}
 >
-	<main>
-		<div class="hero">
-			<Stars />
-			<div class="glowball" id="b1"></div>
-			<div class="glowball2" id="b2"></div>
-			<div class="overlay">
-				<div class="container">
-					<A.Image
-						src="/images/ZenethBanner.png"
-						alt="Zeneth"
-						aspectRatio={16 / 5}
-						width={800}
-						height={250}
-						class={"hero-image"}
-					/>
-					<p class="hero-subtitle">
-						A nodejs library to make interaction with discord api
-						easier.
-					</p>
+    <main>
+        <div class="hero">
+            <Stars />
+            <div class="glowball" id="b1"></div>
+            <div class="glowball2" id="b2"></div>
+            <div class="overlay">
+                <div class="container">
+                    <A.Image
+                        src="/images/ZenethBanner.png"
+                        alt="Zeneth"
+                        aspectRatio={16 / 5}
+                        width={800}
+                        height={250}
+                        class={"hero-image"}
+                    />
+                    <p class="hero-subtitle">
+                        A nodejs library to make interaction with discord api
+                        easier.
+                    </p>
 
-					<div class="codeblock">
-						<div class="display">
-							<p
-								style={{
-									color: "#f492f0",
-									fontSize: "2rem",
-									margin: "0",
-									marginRight: "1rem",
-								}}
-								}}
-							>
-								{">"}
-							</p>
-							<pre><code class="language-javascript">{" npm i zeneth"}</code></pre>
-						</div>
-						<Copy text="npm i zeneth" client:only="react" />
-					</div>
-				</div>
+                    <div class="codeblock">
+                        <div class="display">
+                            <p
+                                style={{
+                                    color: "#f492f0",
+                                    fontSize: "2rem",
+                                    margin: "0",
+                                    marginRight: "1rem",
+                                }}
+                                }}
+                            >
+                                {">"}
+                            </p>
+                            <pre><code class="language-javascript">{" npm i zeneth"}</code></pre>
+                        </div>
+                        <Copy text="npm i zeneth" client:only="react" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="head">Statistics</div>
+            <NpmCard client:visible />
+			<div class="graph">
+            <GitGraph client:visible />
 			</div>
-		</div>
-
-		<div class="stats">
-			<div class="head">Statistics</div>
-			<NpmCard client:visible/>
-		</div> 
-
-
-	</main>
+        </div>
+    </main>
 </Layout>
 
 <style>
-	main {
-		height: calc(100% - 64px);
-		width: 100%;
+    main {
+        height: calc(100% - 64px);
+        width: 100%;
+    }
+    .hero {
+        position: relative;
+        height: calc(100vh - 64px);
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .glowball {
+        position: absolute;
+        height: 400px;
+        width: 400px;
+        border-radius: 100%;
+        filter: blur(300px);
+        background: hsla(302, 82%, 76%, 1);
+
+        background: linear-gradient(
+            0deg,
+            hsla(302, 82%, 76%, 1) 0%,
+            hsla(258, 40%, 68%, 1) 100%
+        );
+
+        background: -moz-linear-gradient(
+            0deg,
+            hsla(302, 82%, 76%, 1) 0%,
+            hsla(258, 40%, 68%, 1) 100%
+        );
+
+        background: -webkit-linear-gradient(
+            0deg,
+            hsla(302, 82%, 76%, 1) 0%,
+            hsla(258, 40%, 68%, 1) 100%
+        );
+
+        filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F492F0", endColorstr="#A18DCE", GradientType=1 );
+    }
+
+    .glowball2 {
+        position: absolute;
+        height: 50px;
+        width: 50px;
+        border-radius: 100%;
+        background: rgba(160, 141, 206, 0.292);
+        filter: blur(30px);
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+    }
+
+    .container {
+        max-width: 800px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .display {
+        display: flex;
+        align-items: center;
+    }
+
+    .hero-title {
+        font-size: 4rem;
+        letter-spacing: 0.2rem;
+        transition: 500ms;
+    }
+
+    .hero-image {
+        filter: drop-shadow(0px 0px 10px #f492f12e);
+        user-select: none;
+    }
+
+    .hero-title:hover {
+        color: #f492f0;
+    }
+
+    .hero-subtitle {
+        font-size: 2rem;
+    }
+
+    .codeblock {
+        background: #1e1e1e;
+        padding: 1rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        border-radius: 1rem;
+        font-size: 1.2rem;
+        width: 50%;
+        min-width: 300px;
+        text-align: left;
+        border: 1px solid #f492f0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 2rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+        }
+
+        .codeblock {
+            font-size: 0.8rem;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    html {
+        overflow: hidden;
+    }
+
+    .stats {
+        height: 100%;
+        width: 100%;
+        background: rgb(6, 11, 28);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+		padding: 16px;
+    }
+
+    .head {
+        font-size: 3rem;
+        color: #f492f0;
+    }
+
+	.graph {
+		width: 100vw;
+		overflow-x: auto;
 	}
-	.hero {
-		position: relative;
-		height: calc(100vh - 64px);
-		width: 100%;
-		overflow: hidden;
-	}
 
-	.glowball {
-		position: absolute;
-		height: 400px;
-		width: 400px;
-		border-radius: 100%;
-		filter: blur(300px);
-		background: hsla(302, 82%, 76%, 1);
-
-		background: linear-gradient(
-			0deg,
-			hsla(302, 82%, 76%, 1) 0%,
-			hsla(258, 40%, 68%, 1) 100%
-		);
-
-		background: -moz-linear-gradient(
-			0deg,
-			hsla(302, 82%, 76%, 1) 0%,
-			hsla(258, 40%, 68%, 1) 100%
-		);
-
-		background: -webkit-linear-gradient(
-			0deg,
-			hsla(302, 82%, 76%, 1) 0%,
-			hsla(258, 40%, 68%, 1) 100%
-		);
-
-		filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F492F0", endColorstr="#A18DCE", GradientType=1 );
-	}
-
-	.glowball2 {
-		position: absolute;
-		height: 50px;
-		width: 50px;
-		border-radius: 100%;
-		background: rgba(160, 141, 206, 0.292);
-		filter: blur(30px);
-	}
-
-	.overlay {
-		position: absolute;
-		top: 0;
-		left: 0;
-		height: 100%;
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		color: white;
-		text-align: center;
-	}
-
-	.container {
-		max-width: 800px;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-around;
-		align-items: center;
-		gap: 1rem;
-	}
-
-	.display {
-		display: flex;
-		align-items: center;
-	}
-
-	.hero-title {
-		font-size: 4rem;
-		letter-spacing: 0.2rem;
-		transition: 500ms;
-	}
-
-	.hero-image {
-		filter: drop-shadow(0px 0px 10px #f492f12e);
-		user-select: none;
-	}
-
-	.hero-title:hover {
-		color: #f492f0;
-	}
-
-	.hero-subtitle {
-		font-size: 2rem;
-	}
-
-	.codeblock {
-		background: #1e1e1e;
-		padding: 1rem;
-		padding-left: 2rem;
-		padding-right: 2rem;
-		border-radius: 1rem;
-		font-size: 1.2rem;
-		width: 50%;
-		min-width: 300px;
-		text-align: left;
-		border: 1px solid #f492f0;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-
-	@media (max-width: 768px) {
-		.hero-title {
-			font-size: 2rem;
-		}
-
-		.hero-subtitle {
-			font-size: 1rem;
-		}
-
-		.codeblock {
-			font-size: 0.8rem;
-		}
-
-		.hero-image {
-			width: 100%;
-			height: auto;
-		}
-	}
-
-	html {
-		overflow: hidden;
-	}
-
-	.stats {
-		height: 100%;
-		width: 100%;
-		background: rgb(6,11,28);
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-	}
-
-	.head {
-		font-size: 3rem;
-		color: #f492f0;
-	}
-
-	@media only screen and (max-height: 500px) {
-		main {
-			height: calc( 100% + 128px ) ;
-		}
-	}
-
-
+    @media only screen and (max-height: 500px) {
+        main {
+            height: calc(100% + 128px);
+        }
+    }
 </style>
 
 <script>
-	const b1 = document.getElementById("b1");
-	const b2 = document.getElementById("b2");
+    const b1 = document.getElementById("b1");
+    const b2 = document.getElementById("b2");
 
-	window.addEventListener("mousemove", (e) => {
-		if (b1)
-			b1.style.transform = `translate(${e.clientX - 200}px, ${
-				e.clientY - 200
-			}px)`;
-		if (b2)
-			b2.style.transform = `translate(${e.clientX - 25}px, ${
-				e.clientY - 90
-			}px)`;
-	});
+    window.addEventListener("mousemove", (e) => {
+        if (b1)
+            b1.style.transform = `translate(${e.clientX - 200}px, ${
+                e.clientY - 200
+            }px)`;
+        if (b2)
+            b2.style.transform = `translate(${e.clientX - 25}px, ${
+                e.clientY - 90
+            }px)`;
+    });
 </script>
-
-
-

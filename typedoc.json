@@ -5,7 +5,7 @@
     "out": "./site/src/pages/docs/1.0.0-dev",
     "tsconfig": "./tsconfig.json",
     "entryPointStrategy": "resolve",
-    "json": "ignoredir/typedoc.json",
+    "json": "site/plublic/data.json",
     "commentStyle": "all",
     "jsDocCompatibility": true,
     "includeVersion": true,
