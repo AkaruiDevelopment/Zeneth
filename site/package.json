@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "npm run addducd && npm run changed3hypertree && astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "npm run addducd && npm run changed3hypertree && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "addducd": "node ../packers/scripts/addducd.js",
