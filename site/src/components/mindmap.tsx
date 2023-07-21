@@ -19,7 +19,10 @@ const getNameAndChildren = (obj:any,url:any) => {
             }
             if(!x.children?.length) {
                 //@ts-ignore
-                res.wiki = `/Zeneth/docs/1.0.0-dev/${url}#${x.name}`
+                if(url.startsWith("functions") || url.startsWith("variables"))
+                    res.wiki = `/Zeneth/docs/1.0.0-dev/${url}/${x.name}`
+                else
+                    res.wiki = `/Zeneth/docs/1.0.0-dev/${url}#${x.name}`
             }
             return res;
         });
