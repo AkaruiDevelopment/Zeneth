@@ -1,10 +1,10 @@
 import HyperTree from "./hypertree";
 import json from "../data/data.json";
-import { useEffect,useState,forceUpdate } from "react";
+import { useState } from "react";
 
 export const prerender = true;
 
-const getNameAndChildren = (obj,url) => {
+const getNameAndChildren = (obj:any,url:any) => {
     const res: { name: string; children: any[], url:string,wiki?:string } = {
         name: "",
         children: [],
