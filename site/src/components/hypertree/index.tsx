@@ -75,7 +75,7 @@ export default function HyperTree({
                     },
                     //@ts-ignore
                     interaction: {
-                        λbounds: [0.3, 1],
+                        λbounds: [0.1, 1.5],
                         onNodeSelect(n) {
                             if (n.precalc.wiki) {
                                 // use history api to change url without reloading
