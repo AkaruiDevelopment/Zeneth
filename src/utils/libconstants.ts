@@ -15,7 +15,7 @@ const pack = {
     addpkg: 'node packers/addpkgjson.js',
     bundleTsFiles: 'node packers/bundle.js',
     lint: 'eslint . --ext .ts --fix --ext .js',
-    docgen: 'node ./packers/updateTypeDocConfig.js && npx typedoc --plugin typedoc-plugin-mermaid --plugin typedoc-plugin-extras --footerLastModified && node ./packers/docgen.js'
+    docgen: 'node ./packers/updateTypeDocConfig.js && npx typedoc --plugin typedoc-theme-hierarchy --plugin typedoc-plugin-mermaid --plugin typedoc-plugin-extras --footerLastModified && node ./packers/docgen.js'
   },
   repository: {
     type: 'git',
@@ -37,6 +37,7 @@ const pack = {
     'typedoc-plugin-extras': '^2.3.3',
     'typedoc-plugin-markdown': '^3.15.3',
     'typedoc-plugin-mermaid': '^1.10.0',
+    'typedoc-theme-hierarchy': '^4.0.0',
     typescript: '^4.9.4',
     'uglify-js': '^3.17.4',
     unlighthouse: '^0.9.0'

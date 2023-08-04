@@ -18,5 +18,6 @@ export * from "./utils/api.js";
 export * from "./utils/constants.js";
 
 import Websocket from "./websocket/index.js";
+import * as Builders from "./plugins/builders/index.js";
 
-export { Client, request, QueueManager, EventManager, Group, createCacheManager, Websocket }
+export { Client, request, QueueManager, EventManager, Group, createCacheManager, Websocket, Builders }

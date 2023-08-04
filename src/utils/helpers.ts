@@ -5,6 +5,8 @@ import { readFile } from "fs/promises";
 import DebugManager from "../events/manager/debugManager.js";
 import Client from "../client/index.js";
 import { GatewayEventNames, GatewayOpCodes } from "../typings/enums.js";
+import { ColorResolve } from "../plugins/builders/type.js";
+import { Colors } from "../plugins/builders/enum.js";
 
 export function ConvertHexToBigInt(hash: string) {
     if (hash.startsWith("a_")) {
@@ -243,4 +245,42 @@ export function isFilePath(path: string) {
     } catch {
         return false;
     }
+}
+
+export function parseColor(color: ColorResolve) {
+    if (typeof color === "number") return color;
+    if (typeof color === "string") {
+        if (color.startsWith("#")) {
+            return parseInt(color.slice(1), 16);
+        } else if (color.startsWith("rgb")) {
+            const [r, g, b] = color
+                .slice(4, -1)
+                .split(",")
+                .map((x) => parseInt(x.trim()));
+            return (r << 16) + (g << 8) + b;
+        } else if (color.startsWith("hsl")) {
+            const [h, s, l] = color
+                .slice(4, -1)
+                .split(",")
+                .map((x) => parseInt(x.trim()));
+            return parseInt(hslToHex(h, s, l).slice(1), 16);
+        } else if (Colors[color as keyof typeof Colors] !== undefined)
+            return Colors[color as keyof typeof Colors];
+    }
+    return 0;
+}
+
+export function hslToHex(h: number, s: number, l: number) {
+    l /= 100;
+    const a = (s * Math.min(l, 1 - l)) / 100;
+
+    const f = (n: number) => {
+        const k = (n + h / 30) % 12;
+        const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+        return Math.round(255 * color)
+            .toString(16)
+            .padStart(2, "0");
+    };
+
+    return `#${f(0)}${f(8)}${f(4)}`;
 }

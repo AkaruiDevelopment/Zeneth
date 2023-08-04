@@ -56,7 +56,7 @@ export default class Websocket {
             );
         });
 
-        this.ws.on("close", (code) => {
+        this.ws.on("close", (code, msg) => {
             createDebug(
                 {
                     message: `Disconnected from Discord Gateway with code ${code}`,
@@ -67,7 +67,24 @@ export default class Websocket {
             );
             //@ts-ignore
             if (canReconnectOnCodes[code]) this.#reconnect();
-            else throw ZenethError.WebSocketError(errorCodeMessages[code.toString() as keyof typeof errorCodeMessages], code);
+            else if (
+                canReconnectOnCodes[
+                    code as keyof typeof canReconnectOnCodes
+                ] === undefined
+            )
+                this.#reconnect();
+            else if (
+                canReconnectOnCodes[
+                    code as keyof typeof canReconnectOnCodes
+                ] === false
+            )
+                throw ZenethError.WebSocketError(
+                    errorCodeMessages[
+                        code as keyof typeof canReconnectOnCodes
+                    ] ?? "Unknown Error",
+                    code,
+                );
+            else throw ZenethError.WebSocketError(msg.toString(), code);
         });
 
         this.ws.on("message", (data) => {
