@@ -39,8 +39,7 @@ const pack = {
     'typedoc-plugin-mermaid': '^1.10.0',
     'typedoc-theme-hierarchy': '^4.0.0',
     typescript: '^4.9.4',
-    'uglify-js': '^3.17.4',
-    unlighthouse: '^0.9.0'
+    'uglify-js': '^3.17.4'
   },
   dependencies: {
     '@akarui/structures': '^2.0.1',

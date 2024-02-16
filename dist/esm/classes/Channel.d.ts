@@ -1,0 +1,118 @@
+import Client from "../client/index.js";
+import { ChannelTypes } from "../typings/enums.js";
+import { CreateChannelInvitePayload, GroupDMAddRecipientPayload, ListArchivedThreadsPayload, MessagePayload, RawChannelData, RawChannelMessageOptions, RawDefaultReactionData, RawOverwriteData, RawTagData, RawThreadMemberData, RawThreadMetadataData, RawUserData, StartThreadInForumPayload, StartThreadPayload } from "../typings/interface.js";
+import { Camelize, Snowflake, snowflake } from "../typings/types.js";
+export default class Channel {
+    #private;
+    videoQualityMode: number | undefined;
+    applicationId: snowflake | undefined;
+    appliedTags: string[] | undefined;
+    availableTags: RawTagData[] | undefined;
+    bitrate: number | undefined;
+    defaultAutoArchiveDuration: number | undefined;
+    defaultForumLayout: number | undefined;
+    defaultReactionEmoji: RawDefaultReactionData[] | undefined;
+    defaultSortOrder: number | undefined;
+    defaultThreadRateLimitPerUser: number | undefined;
+    flags: number | undefined;
+    guildId: bigint | undefined;
+    icon?: bigint;
+    id: bigint;
+    lastMessageId: bigint | undefined;
+    lastPinTimestamp: string | undefined;
+    member: Camelize<RawThreadMemberData> | undefined;
+    memberCount: number | undefined;
+    messageCount: number | undefined;
+    name: string | undefined;
+    nsfw: boolean | undefined;
+    ownerId: bigint | undefined;
+    parentId: bigint | undefined;
+    permissionOverwrites: RawOverwriteData[] | Camelize<RawOverwriteData[] | undefined> | Camelize<RawOverwriteData[] | undefined>[];
+    permissions: string | undefined;
+    position: number | undefined;
+    rateLimitPerUser: number | undefined;
+    recipients: RawUserData[] | undefined;
+    rtcRegion: string | undefined;
+    threadMetadata: RawThreadMetadataData | Camelize<RawThreadMetadataData | undefined> | Camelize<RawThreadMetadataData | undefined>[];
+    topic: string | null | undefined;
+    totalMessageSent: number | undefined;
+    type: ChannelTypes;
+    userLimit: number | undefined;
+    __priority: number;
+    constructor(data: RawChannelData, client: Client, guildId?: snowflake | Snowflake);
+    get parsedSnowflake(): {
+        timestamp: number;
+        date: Date;
+        workerId: bigint;
+        processId: bigint;
+        increment: bigint;
+        binary: string;
+    };
+    get [Symbol.toStringTag](): bigint;
+    updateThis(data: RawChannelData): void;
+    iconUrl(options?: {
+        size: number;
+        format: string;
+        dynamic: boolean;
+    }): string | null;
+    createMessage(message: MessagePayload): Promise<import("./Message.js").default>;
+    get(): Promise<Channel>;
+    update(data: Camelize<RawChannelData>, reason?: string): Promise<any>;
+    delete(reason?: string): Promise<any>;
+    getMessages(options: RawChannelMessageOptions): Promise<import("./Message.js").default[]>;
+    getMessage(messageId: Snowflake): Promise<import("./Message.js").default>;
+    crosspostMessage(messageId: Snowflake, reason?: string): Promise<import("./Message.js").default>;
+    deleteMessage(messageId: Snowflake, reason?: string): Promise<any>;
+    deleteBulkMessages(messageIds: Snowflake[], reason?: string): Promise<any>;
+    editMessage(messageId: Snowflake, data: MessagePayload): Promise<import("./Message.js").default>;
+    createReaction(messageId: Snowflake, emoji: string): Promise<any>;
+    deleteOwnReaction(messageId: Snowflake, emoji: string): Promise<any>;
+    deleteReaction(messageId: Snowflake, userId: Snowflake, emoji: string): Promise<any>;
+    getReactions(messageId: Snowflake, emoji: string, options: {
+        limit?: number;
+        after?: Snowflake;
+    }): Promise<import("./User.js").default[]>;
+    deleteAllReactions(messageId: Snowflake): Promise<any>;
+    deleteAllReactionsForEmoji(messageId: Snowflake, emoji: string): Promise<any>;
+    editPermissions(overwriteId: Snowflake, data: RawOverwriteData, reason?: string): Promise<any>;
+    deletePermission(overwriteId: Snowflake, reason?: string): Promise<any>;
+    triggerTypingIndicator(): Promise<any>;
+    getInvites(): Promise<any>;
+    createInvite(data: CreateChannelInvitePayload, reason?: string): Promise<import("./Invite.js").default>;
+    follow(webhookChannelId: Snowflake): Promise<any>;
+    getPinnedMessages(): Promise<any>;
+    pinMessage(messageId: Snowflake): Promise<any>;
+    unpinMessage(messageId: Snowflake): Promise<any>;
+    groupAddRecipient(userId: Snowflake, data: GroupDMAddRecipientPayload): Promise<any>;
+    groupRemoveRecipient(userId: Snowflake): Promise<any>;
+    startThreadFromMessage(messageId: Snowflake, data: StartThreadPayload, reason?: string): Promise<Channel>;
+    startThreadInForum(data: StartThreadInForumPayload, reason?: string): Promise<Channel>;
+    joinThread(): Promise<any>;
+    addThreadMember(userId: Snowflake): Promise<any>;
+    getThreadMember(userId: Snowflake): Promise<{
+        id: bigint;
+        userId: bigint;
+        joinTimestamp: Date;
+        flags: any;
+        member: import("./Member.js").default | null;
+    }>;
+    leaveThread(): Promise<any>;
+    removeThreadMember(userId: Snowflake): Promise<any>;
+    listThreadMembers(): Promise<any>;
+    listPublicArchives(data: ListArchivedThreadsPayload): Promise<{
+        threads: any;
+        members: any;
+        hasMore: any;
+    }>;
+    listPrivateArchives(data: ListArchivedThreadsPayload): Promise<{
+        threads: any;
+        members: any;
+        hasMore: any;
+    }>;
+    listJoinedPrivateArchives(data: ListArchivedThreadsPayload): Promise<{
+        threads: any;
+        members: any;
+        hasMore: any;
+    }>;
+}
+//# sourceMappingURL=Channel.d.ts.map
